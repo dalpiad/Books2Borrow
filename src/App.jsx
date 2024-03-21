@@ -1,25 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
 import './App.css'
+import Home from './components/Home'
+import AddBook from './components/AddBook'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-function App() {
+export default function App() {
   const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-      <h1>Books 2 Borrow</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <h1>Hello this is test code. Demonstrating how to do a pull request.</h1>
-      </div>
   
-      </div>
+    return (
+    <>
+         
+        <div className="App">
+
+          <Router>
+                <Routes>
+                    <Route
+                        exact
+                        path="/AddBook"
+                        element={<AddBook />}
+                    />
+                </Routes>
+                <Routes>
+                    <Route
+                        exact
+                        path="/"
+                        element={<Home />}
+                    />
+                </Routes>
+            </Router>
+        </div>
     </>
   )
 }
-
-export default App
