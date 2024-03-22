@@ -1,123 +1,153 @@
 package org.launchcode.books2borrow.models;
 
-import jakarta.persistence.OneToOne;
-import jakarta.validation.Valid;
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.util.ArrayList;
 
-import java.util.Date;
 
+@Entity
 public class Book extends AbstractEntity {
 
-    @Size(min = 3, max = 50)
+    @NotBlank
+    private String bookKey;
+
     @NotBlank
     private String title;
 
-    @Size(min = 3, max = 50)
+    @NotBlank
+    private double bookCover;
+
+
     @NotBlank
     private String author;
 
+    @NotBlank
+    private double firstPublishYear;
+
+    @NotBlank
+    private double averageRating;
+
+    @NotBlank
+    private double numberOfReviews;
+
     @Size(min = 3, max = 50)
     @NotBlank
-    private String genre;
+    private ArrayList<String> subject;
 
     @NotBlank
-    private Double isbn;
+    //private Date checkoutDate;
 
     @NotBlank
-    private Date checkoutDate;
+    //private Date returnDate;
 
     @NotBlank
-    private Date returnDate;
-
-    @NotNull
     private boolean isAvailable;
 
-    @OneToOne
-    @Valid
-    private String userEmail;
+    //private boolean isOverdue;
 
 
-    public Book(String title, String author, String genre, Double isbn, Date checkoutDate, Date returnDate, boolean isAvailable, String userEmail) {
+
+
+    public Book(String bookKey, String title, double bookCover, String author, double firstPublishYear,
+                double averageRating, double numberOfReviews, ArrayList<String> subject,
+                boolean isAvailable) {
+        super();
+        this.bookKey = bookKey;
         this.title = title;
+        this.bookCover = bookCover;
         this.author = author;
-        this.genre = genre;
-        this.isbn = isbn;
-        this.checkoutDate = checkoutDate;
-        this.returnDate = returnDate;
+        this.firstPublishYear = firstPublishYear;
+        this.averageRating = averageRating;
+        this.numberOfReviews = numberOfReviews;
+        this.subject = subject;
         this.isAvailable = isAvailable;
-        this.userEmail = userEmail;
     }
+
+    public Book () {}
+
 
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "bookKey='" + bookKey + '\'' +
+                ", title='" + title + '\'' +
+                ", bookCover=" + bookCover +
                 ", author='" + author + '\'' +
-                ", genre='" + genre + '\'' +
-                ", isbn=" + isbn +
-                ", checkoutDate=" + checkoutDate +
-                ", returnDate=" + returnDate +
+                ", firstPublishYear=" + firstPublishYear +
+                ", averageRating=" + averageRating +
+                ", numberOfReviews=" + numberOfReviews +
+                ", subject=" + subject +
                 ", isAvailable=" + isAvailable +
-                ", userEmail='" + userEmail + '\'' +
                 '}';
+    }
+
+    public String getBookKey() {
+        return bookKey;
+    }
+
+    public void setBookKey(String bookKey) {
+        this.bookKey = bookKey;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public Double getIsbn() {
-        return isbn;
-    }
-
-    public Date getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public Date getReturnDate() {
-        return returnDate;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public double getBookCover() {
+        return bookCover;
+    }
+
+    public void setBookCover(double bookCover) {
+        this.bookCover = bookCover;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public double getFirstPublishYear() {
+        return firstPublishYear;
     }
 
-    public void setIsbn(Double isbn) {
-        this.isbn = isbn;
+    public void setFirstPublishYear(double firstPublishYear) {
+        this.firstPublishYear = firstPublishYear;
     }
 
-    public void setCheckoutDate(Date checkoutDate) {
-        this.checkoutDate = checkoutDate;
+    public double getAverageRating() {
+        return averageRating;
     }
 
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
+    public void setAverageRating(double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public double getNumberOfReviews() {
+        return numberOfReviews;
+    }
+
+    public void setNumberOfReviews(double numberOfReviews) {
+        this.numberOfReviews = numberOfReviews;
+    }
+
+    public ArrayList<String> getSubject() {
+        return subject;
+    }
+
+    public void setSubject(ArrayList<String> subject) {
+        this.subject = subject;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
     public void setAvailable(boolean available) {

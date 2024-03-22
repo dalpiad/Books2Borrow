@@ -1,5 +1,6 @@
 package org.launchcode.books2borrow.data;
 
+import jakarta.persistence.Entity;
 import org.launchcode.books2borrow.models.Book;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
