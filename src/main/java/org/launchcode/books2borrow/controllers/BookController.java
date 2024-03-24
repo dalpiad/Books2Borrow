@@ -39,9 +39,8 @@ public class BookController {
         }
     }
 
-
     @PostMapping("/add")
-    public void processAddBook(@RequestBody Map<String, String> bookJSON){
+    public void processAddBook(@RequestBody Map<String, Object> bookJSON){
         BookDTO bookDTO = new BookDTO(bookJSON);
         Book newBook = createNewBook(bookDTO);
         bookRepository.save(newBook);
@@ -68,17 +67,13 @@ public class BookController {
     private Book createNewBook(BookDTO bookDTO){
         String bookKey = bookDTO.getBookKey();
         String title = bookDTO.getTitle();
-        int bookCover = Integer.parseInt(bookDTO.getBookCover());
+        int bookCover = bookDTO.getBookCover();
         String author = bookDTO.getAuthor();
-        int firstPublishYear = Integer.parseInt(bookDTO.getFirstPublishYear());
-        double averageRating = Double.parseDouble(bookDTO.getAverageRating());
-        int numberOfReviews = Integer.parseInt(bookDTO.getNumberOfReviews());
-        ArrayList<String> subject = new ArrayList<>();
-        String[] subjectArray = bookDTO.getSubject().split(",");
-        for (String aSubject : subjectArray) {
-            subject.add(aSubject.trim());
-        }
-        boolean isAvailable = Boolean.parseBoolean(bookDTO.getIsAvailable());
+        int firstPublishYear = bookDTO.getFirstPublishYear();
+        double averageRating = bookDTO.getAverageRating();
+        int numberOfReviews = bookDTO.getNumberOfReviews();
+        ArrayList<String> subject = bookDTO.getSubject();
+        boolean isAvailable = bookDTO.getIsAvailable();
 
         return new Book(bookKey, title, bookCover, author, firstPublishYear, averageRating,
                 numberOfReviews, subject, isAvailable);

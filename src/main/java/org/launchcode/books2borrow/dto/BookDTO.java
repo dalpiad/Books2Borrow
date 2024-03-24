@@ -1,6 +1,7 @@
 package org.launchcode.books2borrow.dto;
 
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class BookDTO {
@@ -9,32 +10,31 @@ public class BookDTO {
 
     private String title;
 
-    private String bookCover;
+    private int bookCover;
 
     private String author;
 
-    private String firstPublishYear;
+    private int firstPublishYear;
 
-    private String averageRating;
+    private double averageRating;
 
-    private String numberOfReviews;
+    private int numberOfReviews;
 
-    private String subject;
+    private ArrayList<String> subject;
 
-    private String isAvailable;
+    private boolean isAvailable;
 
-    public BookDTO(Map<String, String> bookJSON) {
+    public BookDTO(Map<String, Object> bookJSON) {
         this.bookKey = (String) bookJSON.get("bookKey");
         this.title = (String) bookJSON.get("title");
-        this.bookCover = (String) bookJSON.get("bookCover");
+        this.bookCover = (int) bookJSON.get("bookCover");
         this.author = (String) bookJSON.get("author");
-        this.firstPublishYear = (String) bookJSON.get("firstPublishYear");
-        this.averageRating = (String) bookJSON.get("averageRating");
-        this.numberOfReviews = (String) bookJSON.get("numberOfReviews");
-        this.subject = (String) bookJSON.get("subject");
-        this.isAvailable = (String) bookJSON.get("isAvailable");
+        this.firstPublishYear = (int) bookJSON.get("firstPublishYear");
+        this.averageRating = (double) bookJSON.get("averageRating");
+        this.numberOfReviews = (int) bookJSON.get("numberOfReviews");
+        this.subject = (ArrayList<String>) bookJSON.get("subject");
+        this.isAvailable = (boolean) bookJSON.get("isAvailable");
     }
-
 
     public String getBookKey() {
         return bookKey;
@@ -52,11 +52,11 @@ public class BookDTO {
         this.title = title;
     }
 
-    public String getBookCover() {
+    public int getBookCover() {
         return bookCover;
     }
 
-    public void setBookCover(String bookCover) {
+    public void setBookCover(int bookCover) {
         this.bookCover = bookCover;
     }
 
@@ -68,43 +68,43 @@ public class BookDTO {
         this.author = author;
     }
 
-    public String getFirstPublishYear() {
+    public int getFirstPublishYear() {
         return firstPublishYear;
     }
 
-    public void setFirstPublishYear(String firstPublishYear) {
+    public void setFirstPublishYear(int firstPublishYear) {
         this.firstPublishYear = firstPublishYear;
     }
 
-    public String getAverageRating() {
+    public double getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(String averageRating) {
+    public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
     }
 
-    public String getNumberOfReviews() {
+    public int getNumberOfReviews() {
         return numberOfReviews;
     }
 
-    public void setNumberOfReviews(String numberOfReviews) {
+    public void setNumberOfReviews(int numberOfReviews) {
         this.numberOfReviews = numberOfReviews;
     }
 
-    public String getSubject() {
+    public ArrayList<String> getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(ArrayList<String> subject) {
         this.subject = subject;
     }
 
-    public String getIsAvailable() {
+    public boolean getIsAvailable() {
         return isAvailable;
     }
 
-    public void setIsAvailable(String isAvailable) {
+    public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
 }

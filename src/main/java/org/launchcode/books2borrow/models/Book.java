@@ -1,6 +1,7 @@
 package org.launchcode.books2borrow.models;
 
 import jakarta.persistence.Entity;
+
 import java.util.ArrayList;
 
 
@@ -8,26 +9,16 @@ import java.util.ArrayList;
 @Entity
 public class Book extends AbstractEntity {
 
-
     private String bookKey;
-
     private String title;
-
     private int bookCover;
-
     private String author;
-
     private int firstPublishYear;
-
     private double averageRating;
-
     private int numberOfReviews;
-
     private ArrayList<String> subject;
-
     private boolean isAvailable;
 
-    //private boolean isOverdue;
 
 
     public Book(String bookKey, String title, int bookCover, String author, int firstPublishYear,
