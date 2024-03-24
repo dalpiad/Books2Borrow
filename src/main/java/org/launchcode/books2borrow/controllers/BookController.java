@@ -39,9 +39,9 @@ public class BookController {
         }
     }
 
+
     @PostMapping("/add")
     public void processAddBook(@RequestBody Map<String, String> bookJSON){
-
         BookDTO bookDTO = new BookDTO(bookJSON);
         Book newBook = createNewBook(bookDTO);
         bookRepository.save(newBook);
@@ -68,11 +68,11 @@ public class BookController {
     private Book createNewBook(BookDTO bookDTO){
         String bookKey = bookDTO.getBookKey();
         String title = bookDTO.getTitle();
-        double bookCover = Double.parseDouble(bookDTO.getBookCover());
+        int bookCover = Integer.parseInt(bookDTO.getBookCover());
         String author = bookDTO.getAuthor();
-        double firstPublishYear = Double.parseDouble(bookDTO.getFirstPublishYear());
+        int firstPublishYear = Integer.parseInt(bookDTO.getFirstPublishYear());
         double averageRating = Double.parseDouble(bookDTO.getAverageRating());
-        double numberOfReviews = Double.parseDouble(bookDTO.getNumberOfReviews());
+        int numberOfReviews = Integer.parseInt(bookDTO.getNumberOfReviews());
         ArrayList<String> subject = new ArrayList<>();
         String[] subjectArray = bookDTO.getSubject().split(",");
         for (String aSubject : subjectArray) {

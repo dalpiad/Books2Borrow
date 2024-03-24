@@ -13,15 +13,15 @@ public class Book extends AbstractEntity {
 
     private String title;
 
-    private double bookCover;
+    private int bookCover;
 
     private String author;
 
-    private double firstPublishYear;
+    private int firstPublishYear;
 
     private double averageRating;
 
-    private double numberOfReviews;
+    private int numberOfReviews;
 
     private ArrayList<String> subject;
 
@@ -30,12 +30,8 @@ public class Book extends AbstractEntity {
     //private boolean isOverdue;
 
 
-
-
-    public Book(String bookKey, String title, double bookCover, String author, double firstPublishYear,
-                double averageRating, double numberOfReviews, ArrayList<String> subject,
-                boolean isAvailable) {
-        super();
+    public Book(String bookKey, String title, int bookCover, String author, int firstPublishYear,
+                double averageRating, int numberOfReviews, ArrayList<String> subject, boolean isAvailable) {
         this.bookKey = bookKey;
         this.title = title;
         this.bookCover = bookCover;
@@ -81,11 +77,11 @@ public class Book extends AbstractEntity {
         this.title = title;
     }
 
-    public double getBookCover() {
+    public int getBookCover() {
         return bookCover;
     }
 
-    public void setBookCover(double bookCover) {
+    public void setBookCover(int bookCover) {
         this.bookCover = bookCover;
     }
 
@@ -97,11 +93,11 @@ public class Book extends AbstractEntity {
         this.author = author;
     }
 
-    public double getFirstPublishYear() {
+    public int getFirstPublishYear() {
         return firstPublishYear;
     }
 
-    public void setFirstPublishYear(double firstPublishYear) {
+    public void setFirstPublishYear(int firstPublishYear) {
         this.firstPublishYear = firstPublishYear;
     }
 
@@ -113,11 +109,11 @@ public class Book extends AbstractEntity {
         this.averageRating = averageRating;
     }
 
-    public double getNumberOfReviews() {
+    public int getNumberOfReviews() {
         return numberOfReviews;
     }
 
-    public void setNumberOfReviews(double numberOfReviews) {
+    public void setNumberOfReviews(int numberOfReviews) {
         this.numberOfReviews = numberOfReviews;
     }
 
