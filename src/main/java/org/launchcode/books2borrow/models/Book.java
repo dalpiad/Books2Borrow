@@ -1,47 +1,30 @@
 package org.launchcode.books2borrow.models;
 
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
+
 
 
 @Entity
 public class Book extends AbstractEntity {
 
-    @NotBlank
+
     private String bookKey;
 
-    @NotBlank
     private String title;
 
-    @NotBlank
     private double bookCover;
 
-
-    @NotBlank
     private String author;
 
-    @NotBlank
     private double firstPublishYear;
 
-    @NotBlank
     private double averageRating;
 
-    @NotBlank
     private double numberOfReviews;
 
-    @Size(min = 3, max = 50)
-    @NotBlank
     private ArrayList<String> subject;
 
-    @NotBlank
-    //private Date checkoutDate;
-
-    @NotBlank
-    //private Date returnDate;
-
-    @NotBlank
     private boolean isAvailable;
 
     //private boolean isOverdue;

@@ -1,14 +1,15 @@
 package org.launchcode.books2borrow.controllers;
 
-import jakarta.validation.Valid;
 import org.launchcode.books2borrow.data.BookRepository;
+import org.launchcode.books2borrow.dto.BookDTO;
 import org.launchcode.books2borrow.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173/", maxAge = 3600)
@@ -39,14 +40,11 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> processAddBook(@RequestBody @Valid Book newBook,
-                                           Errors errors){
-        if(errors.hasErrors()){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public void processAddBook(@RequestBody Map<String, String> bookJSON){
 
+        BookDTO bookDTO = new BookDTO(bookJSON);
+        Book newBook = createNewBook(bookDTO);
         bookRepository.save(newBook);
-        return new ResponseEntity<>(HttpStatus.OK);
     };
 
     @GetMapping("/delete")
@@ -64,6 +62,26 @@ public class BookController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    private Book createNewBook(BookDTO bookDTO){
+        String bookKey = bookDTO.getBookKey();
+        String title = bookDTO.getTitle();
+        double bookCover = Double.parseDouble(bookDTO.getBookCover());
+        String author = bookDTO.getAuthor();
+        double firstPublishYear = Double.parseDouble(bookDTO.getFirstPublishYear());
+        double averageRating = Double.parseDouble(bookDTO.getAverageRating());
+        double numberOfReviews = Double.parseDouble(bookDTO.getNumberOfReviews());
+        ArrayList<String> subject = new ArrayList<>();
+        String[] subjectArray = bookDTO.getSubject().split(",");
+        for (String aSubject : subjectArray) {
+            subject.add(aSubject.trim());
+        }
+        boolean isAvailable = Boolean.parseBoolean(bookDTO.getIsAvailable());
+
+        return new Book(bookKey, title, bookCover, author, firstPublishYear, averageRating,
+                numberOfReviews, subject, isAvailable);
     }
 
 }
