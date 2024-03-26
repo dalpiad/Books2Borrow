@@ -6,13 +6,16 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class User extends AbstractEntity {
 
     @NotBlank (message = "First Name is required")
     private String firstName;
+
     @NotBlank (message = "Zip code is required")
     private Integer zipCode;
 
@@ -20,32 +23,42 @@ public class User extends AbstractEntity {
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
     private String userEmail;
+
     @NotNull
     private String pwHash;
 
-    private String role; //have not decided whether this should be a string "user" or "admin" OR if this should be a boolean isAdmin?
+    private boolean isAdmin;
+
+    //bookLibrary
+    private ArrayList<String> bookLibrary;
+
+    //wishlist
+    private ArrayList<String> wishlist;
 
     // add encoder
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
     // constructors
+
+    //no arg constructor
     public User() {
     }
 
     //constructor with encoder to store pwHash
-    public User(String userEmail, String password) {
-        this.userEmail = userEmail;
-        this.pwHash = encoder.encode(password);
-    }
 
     //constructor without pwHash
-    public User(String firstName, Integer zipCode, String userEmail, String role) {
+
+    public User(String firstName, Integer zipCode, String userEmail, boolean isAdmin, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
         this.firstName = firstName;
         this.zipCode = zipCode;
         this.userEmail = userEmail;
-        this.role = role;
+        this.isAdmin = isAdmin;
+        this.bookLibrary = bookLibrary;
+        this.wishlist = wishlist;
     }
+
+
     //generated toString
 
     @Override
@@ -54,11 +67,14 @@ public class User extends AbstractEntity {
                 "firstName='" + firstName + '\'' +
                 ", zipCode=" + zipCode +
                 ", userEmail='" + userEmail + '\'' +
-                ", role='" + role + '\'' +
+                ", bookLibrary=" + bookLibrary +
+                ", wishlist=" + wishlist +
                 '}';
     }
 
+
     // getters
+
     public String getFirstName() {
         return firstName;
     }
@@ -71,11 +87,24 @@ public class User extends AbstractEntity {
         return userEmail;
     }
 
-    public String getRole() {
-        return role;
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public ArrayList<String> getBookLibrary() {
+        return bookLibrary;
+    }
+
+    public ArrayList<String> getWishlist() {
+        return wishlist;
     }
 
     //setters
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -88,13 +117,18 @@ public class User extends AbstractEntity {
         this.userEmail = userEmail;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setBookLibrary(ArrayList<String> bookLibrary) {
+        this.bookLibrary = bookLibrary;
     }
 
-    // passes entered password to check if password == pwHash -> returns T/F
-    public boolean isMatchingPassword(String password) {
-        return encoder.matches(password, pwHash);
+    public void setWishlist(ArrayList<String> wishlist) {
+        this.wishlist = wishlist;
     }
+
+
+    // passes entered password to check if password == pwHash -> returns T/F
+//    public boolean isMatchingPassword(String password) {
+//        return encoder.matches(password, pwHash);
+//    }
 }
 
