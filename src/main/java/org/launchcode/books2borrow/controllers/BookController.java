@@ -39,12 +39,26 @@ public class BookController {
         }
     }
 
+    @GetMapping("home")
+    public ResponseEntity<?> getUniqueBooks() {
+        List<Book> allBooks = (List<Book>) bookRepository.findAll();
+        List<Book> uniqueBooks = new ArrayList<>();
+        for (Book aBook : allBooks) {
+            boolean containsBook = uniqueBooks.stream().anyMatch(book -> book.getBookKey().equals(aBook.getBookKey()));
+            if (!containsBook) {
+                uniqueBooks.add(aBook);
+            }
+        }
+        return new ResponseEntity<>(uniqueBooks, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public void processAddBook(@RequestBody Map<String, Object> bookJSON){
         BookDTO bookDTO = new BookDTO(bookJSON);
         Book newBook = createNewBook(bookDTO);
         bookRepository.save(newBook);
     };
+
 
     @GetMapping("/delete")
     public ResponseEntity<?> displayUserBooks(){
