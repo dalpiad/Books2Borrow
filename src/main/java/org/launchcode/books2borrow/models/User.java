@@ -15,7 +15,6 @@ public class User extends AbstractEntity {
 
     @NotBlank (message = "First Name is required")
     private String firstName;
-
     @NotBlank (message = "Zip code is required")
     private Integer zipCode;
 
@@ -23,16 +22,10 @@ public class User extends AbstractEntity {
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
     private String userEmail;
-
     @NotNull
     private String pwHash;
-
     private boolean isAdmin;
-
-    //bookLibrary
     private ArrayList<String> bookLibrary;
-
-    //wishlist
     private ArrayList<String> wishlist;
 
     // add encoder
@@ -47,12 +40,13 @@ public class User extends AbstractEntity {
 
     //constructor with encoder to store pwHash
 
-    //constructor without pwHash
+    //all arg constructor
 
-    public User(String firstName, Integer zipCode, String userEmail, boolean isAdmin, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
+    public User(String firstName, Integer zipCode, String userEmail, String pwHash, boolean isAdmin, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
         this.firstName = firstName;
         this.zipCode = zipCode;
         this.userEmail = userEmail;
+        this.pwHash = pwHash;
         this.isAdmin = isAdmin;
         this.bookLibrary = bookLibrary;
         this.wishlist = wishlist;
