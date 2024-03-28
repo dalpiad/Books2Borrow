@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
             //custom security configuration for authenticating and whitelisting routes
             http.authorizeHttpRequests((requests) -> requests
-                            .dispatcherTypeMatchers(DispatcherType.ASYNC, DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
+                            .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                             .requestMatchers("/testing").authenticated()
                             .requestMatchers("/hello").permitAll())
                     .formLogin(Customizer.withDefaults())
