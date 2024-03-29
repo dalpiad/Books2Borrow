@@ -11,7 +11,8 @@ function DiplayBooks() {
     const [books, setBooks] = useState([]);
     const [records, setRecords]=useState(books);
     const Filter= (event)=>{
-        setRecords(books.filter(f=>f.title.toLowerCase().includes(event.target.value.toLowerCase())))
+        setRecords(books.filter(f=>(f.title.toLowerCase().includes(event.target.value.toLowerCase()) 
+        ||(f.author.toLowerCase().includes(event.target.value.toLowerCase()) ) )))
     }
     
       
