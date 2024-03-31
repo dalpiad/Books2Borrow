@@ -4,7 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class User extends AbstractEntity {
@@ -13,23 +17,41 @@ public class User extends AbstractEntity {
     private String firstName;
     @NotBlank (message = "Zip code is required")
     private Integer zipCode;
+
+    //userEmail will serve as userName for login
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
     private String userEmail;
-    @NotBlank(message = "Password is required")
-    @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
-    private String password;
+    @NotNull
+    private String pwHash;
+    private boolean isAdmin;
+    private ArrayList<String> bookLibrary;
+    private ArrayList<String> wishlist;
 
-    private String role; //have not decided whether this should be a string "user" or "admin" OR if this should be a boolean isAdmin?
+    // add encoder
+//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    // constructor
-    public User(String firstName, Integer zipCode, String userEmail, String password, String role) {
+
+    // constructors
+
+    //no arg constructor
+    public User() {
+    }
+
+    //constructor with encoder to store pwHash
+
+    //all arg constructor
+
+    public User(String firstName, Integer zipCode, String userEmail, String pwHash, boolean isAdmin, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
         this.firstName = firstName;
         this.zipCode = zipCode;
         this.userEmail = userEmail;
-        this.password = password;
-        this.role = role;
+        this.pwHash = pwHash;
+        this.isAdmin = isAdmin;
+        this.bookLibrary = bookLibrary;
+        this.wishlist = wishlist;
     }
+
 
     //generated toString
 
@@ -39,42 +61,68 @@ public class User extends AbstractEntity {
                 "firstName='" + firstName + '\'' +
                 ", zipCode=" + zipCode +
                 ", userEmail='" + userEmail + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+                ", bookLibrary=" + bookLibrary +
+                ", wishlist=" + wishlist +
                 '}';
     }
 
-    // getters and setters
+
+    // getters
+
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public Integer getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Integer zipCode) {
-        this.zipCode = zipCode;
-    }
-
     public String getUserEmail() {
         return userEmail;
+    }
+
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public ArrayList<String> getBookLibrary() {
+        return bookLibrary;
+    }
+
+    public ArrayList<String> getWishlist() {
+        return wishlist;
+    }
+
+    //setters
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setZipCode(Integer zipCode) {
+        this.zipCode = zipCode;
     }
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public void setBookLibrary(ArrayList<String> bookLibrary) {
+        this.bookLibrary = bookLibrary;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setWishlist(ArrayList<String> wishlist) {
+        this.wishlist = wishlist;
     }
+
+
+    // passes entered password to check if password == pwHash -> returns T/F
+//    public boolean isMatchingPassword(String password) {
+//        return encoder.matches(password, pwHash);
+//    }
 }
 
