@@ -15,11 +15,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
             //custom security configuration for authenticating and whitelisting routes
             http.authorizeHttpRequests((requests) -> requests
-                            .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                            .requestMatchers("/testing").authenticated()
+
+                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                    .requestMatchers("/testing","/api/books/**").authenticated()
                             .requestMatchers("/hello").permitAll())
                     .formLogin(Customizer.withDefaults())
-                    .httpBasic(Customizer.withDefaults());
+                    .httpBasic(Customizer.withDefaults())
+                    .csrf((csrf) -> csrf.disable());;
             return http.build();
         }
     }
