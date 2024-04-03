@@ -21,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
                             .requestMatchers("/hello").permitAll())
                     .formLogin(Customizer.withDefaults())
                     .httpBasic(Customizer.withDefaults())
-                    .csrf((csrf) -> csrf.disable());;
+                    .csrf((csrf) -> csrf.disable());;  //I think we should remove this line becuase my understanding is it should be enabled.
             return http.build();
         }
     }
