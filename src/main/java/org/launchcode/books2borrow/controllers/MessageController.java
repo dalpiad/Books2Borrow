@@ -6,12 +6,10 @@ import org.launchcode.books2borrow.data.UserRepository;
 import org.launchcode.books2borrow.models.Message;
 import org.launchcode.books2borrow.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -31,15 +29,13 @@ public class MessageController {
     }
 
     @GetMapping("/{senderId}/{receiverId}")
-    public ResponseEntity<List<Message>> getMessages(@PathVariable Long senderId, @PathVariable Long receiverId) {
+    public ResponseEntity<List<Message>> getMessages(@PathVariable int senderId, @PathVariable int receiverId) {
         User sender = userRepository.findById(senderId).orElse(null);
         User receiver = userRepository.findById(receiverId).orElse(null);
         if (sender != null && receiver != null) {
             List<Message> messages = messageRepository.findBySenderAndReceiver(sender, receiver);
             return ResponseEntity.ok(messages);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        } else return ResponseEntity.notFound().build();
     }
 
 
