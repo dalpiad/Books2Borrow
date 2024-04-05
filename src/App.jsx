@@ -4,6 +4,7 @@ import { useState } from 'react'
 import './App.css'
 import Home from './components/Home'
 import AddBook from './components/AddBook'
+import BookView from './components/BookView'
 import {
   BrowserRouter as Router,
   Routes,
@@ -34,6 +35,14 @@ export default function App() {
                         element={<Home />}
                     />
                 </Routes>
+                <Routes>
+                    <Route
+                        exact
+                        path="BookDetails/:id"
+                        element={<BookView />}
+                    />
+                </Routes>
+
             </Router>
         </div>
     </>
