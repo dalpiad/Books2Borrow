@@ -5,8 +5,15 @@
   font-family: "Reem Kufi", sans-serif !important;
 }
 img {
-  max-width: 20%;
+  width: 300px;
+  height: 300px;
+  transition: all 0.3s ease;
+}
+
+.bookimg {
+  width: 20%;
   height: auto;
+  transition: all 0.3s ease;
 }
 .App {
   min-height: 100vh;
@@ -95,5 +102,106 @@ nav {
   .App {
     max-width: 95vw;
   }
+}
+  
+.card-grid  {
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-left: 120px;
+    padding-top: 50px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    
+  }
+
+  .card-image{
+    max-width: 180vh;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .card-image img{
+    height: 200px;
+    width: 200px;
+    transition: all 0.2s ease;
+
+  }
+
+  .card-image :hover{
+    transform: scale(1.1);
+  }
+
+  
+  .card-content {
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0x 10px;
+    padding: 1em;
+    object-fit: cover;
+    font-size: 10px;
+  }
+
+.book-details{
+  min-height: 8vh;
+  float: left;
+  width:55%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 0%;
+  text-align: center;  
+ 
+}
+.book-content{
+  display: flex;
+ padding-left: 5px;
+
+}
+
+
+
+.second-btn{
+  text-decoration: none;
+  display: inline-block;
+
+   padding: 0.9rem 1.75rem;
+  background-color: purple;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.third-btn{
+  padding: 0.9rem 1.75rem;
+  background-color: blue;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+
+}
+
+.fourth-btn{
+
+  padding: 0.9rem 1.75rem;
+  background-color: green;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
 
 }
