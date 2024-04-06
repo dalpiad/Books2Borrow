@@ -24,6 +24,7 @@ public class Customer extends AbstractEntity {
     @NotBlank
     private String pwHash;
     @NotNull
+    @NotBlank
     private String role;
     private ArrayList<String> bookLibrary;
     private ArrayList<String> wishlist;
