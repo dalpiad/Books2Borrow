@@ -4,9 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Customer extends AbstractEntity {
@@ -16,22 +16,19 @@ public class Customer extends AbstractEntity {
     @NotNull (message = "Zip code is required")
     private Integer zipCode;
 
-    //userEmail will serve as userName for login
+    //email will serve as userName for login
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
     private String email;
     @NotNull
     @NotBlank
+    @Size(min = 6, max = 2147483647)
     private String pwHash;
     @NotNull
     @NotBlank
     private String role;
     private ArrayList<String> bookLibrary;
     private ArrayList<String> wishlist;
-
-    // add encoder
-//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 
     // constructors
 
@@ -120,10 +117,9 @@ public class Customer extends AbstractEntity {
         this.wishlist = wishlist;
     }
 
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
+    }
 
-    // passes entered password to check if password == pwHash -> returns T/F
-//    public boolean isMatchingPassword(String password) {
-//        return encoder.matches(password, pwHash);
-//    }
 }
 
