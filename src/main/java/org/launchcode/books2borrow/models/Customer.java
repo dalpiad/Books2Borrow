@@ -1,30 +1,31 @@
 package org.launchcode.books2borrow.models;
 
 import jakarta.persistence.Entity;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-public class User extends AbstractEntity {
+public class Customer extends AbstractEntity {
 
     @NotBlank (message = "First Name is required")
     private String firstName;
-    @NotBlank (message = "Zip code is required")
+    @NotNull (message = "Zip code is required")
     private Integer zipCode;
 
     //userEmail will serve as userName for login
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
-    private String userEmail;
+    private String email;
     @NotNull
+    @NotBlank
     private String pwHash;
-    private boolean isAdmin;
+    @NotNull
+    @NotBlank
+    private String role;
     private ArrayList<String> bookLibrary;
     private ArrayList<String> wishlist;
 
@@ -35,19 +36,19 @@ public class User extends AbstractEntity {
     // constructors
 
     //no arg constructor
-    public User() {
+    public Customer() {
     }
 
     //constructor with encoder to store pwHash
 
     //all arg constructor
 
-    public User(String firstName, Integer zipCode, String userEmail, String pwHash, boolean isAdmin, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
+    public Customer(String firstName, Integer zipCode, String email, String pwHash, String role, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
         this.firstName = firstName;
         this.zipCode = zipCode;
-        this.userEmail = userEmail;
+        this.email = email;
         this.pwHash = pwHash;
-        this.isAdmin = isAdmin;
+        this.role = role;
         this.bookLibrary = bookLibrary;
         this.wishlist = wishlist;
     }
@@ -57,10 +58,10 @@ public class User extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Customer{" +
                 "firstName='" + firstName + '\'' +
                 ", zipCode=" + zipCode +
-                ", userEmail='" + userEmail + '\'' +
+                ", email='" + email + '\'' +
                 ", bookLibrary=" + bookLibrary +
                 ", wishlist=" + wishlist +
                 '}';
@@ -77,16 +78,16 @@ public class User extends AbstractEntity {
         return zipCode;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public String getEmail() {
+        return email;
     }
 
     public String getPwHash() {
         return pwHash;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public String getRole() {
+        return role;
     }
 
     public ArrayList<String> getBookLibrary() {
@@ -107,8 +108,8 @@ public class User extends AbstractEntity {
         this.zipCode = zipCode;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setBookLibrary(ArrayList<String> bookLibrary) {
