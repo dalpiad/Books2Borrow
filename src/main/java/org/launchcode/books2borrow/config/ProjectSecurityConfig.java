@@ -17,9 +17,10 @@ import javax.sql.DataSource;
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests((requests)->requests
-                        .requestMatchers("/testing","/api/books/**").authenticated()
-                        .requestMatchers("/hello", "/register").permitAll())
+                        .requestMatchers("/testing").authenticated()
+                        .requestMatchers("/hello", "/register", "/api/books/**").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
