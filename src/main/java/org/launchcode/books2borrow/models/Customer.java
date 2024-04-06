@@ -13,7 +13,7 @@ public class Customer extends AbstractEntity {
 
     @NotBlank (message = "First Name is required")
     private String firstName;
-    @NotBlank (message = "Zip code is required")
+    @NotNull (message = "Zip code is required")
     private Integer zipCode;
 
     //userEmail will serve as userName for login
@@ -21,6 +21,7 @@ public class Customer extends AbstractEntity {
     @NotBlank (message = "Email is required")
     private String email;
     @NotNull
+    @NotBlank
     private String pwHash;
     @NotNull
     private String role;

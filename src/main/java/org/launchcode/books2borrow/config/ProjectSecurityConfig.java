@@ -14,21 +14,16 @@ import javax.sql.DataSource;
 @Configuration
     public class ProjectSecurityConfig {
 
-        @Bean
-        SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
-            //custom security configuration for authenticating and whitelisting routes
-            http.authorizeHttpRequests((requests) -> requests
-
-                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                    .requestMatchers("/testing","/api/books/**").authenticated()
-                            .requestMatchers("/hello").permitAll())
-                    .formLogin(Customizer.withDefaults())
-                    .httpBasic(Customizer.withDefaults())
-                    .csrf((csrf) -> csrf.disable());;
-            return http.build();
-        }
-
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests((requests)->requests
+                        .requestMatchers("/testing","/api/books/**").authenticated()
+                        .requestMatchers("/hello", "/register").permitAll())
+                .formLogin(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults());
+        return http.build();
+    }
 
         @Bean
         public PasswordEncoder passwordEncoder() {
