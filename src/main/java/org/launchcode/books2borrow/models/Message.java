@@ -11,14 +11,14 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private User sender;
+    private Customer sender;
     @ManyToOne
-    private User receiver;
+    private Customer receiver;
     private String content;
     private LocalDateTime sentAt;
 
 
-    public Message(Long id, User sender, User receiver, String content, LocalDateTime sentAt) {
+    public Message(Long id, Customer sender, Customer receiver, String content, LocalDateTime sentAt) {
         this.id = id;
         this.sender = sender;
         this.receiver = receiver;
@@ -58,19 +58,19 @@ public class Message {
         this.id = id;
     }
 
-    public User getSender() {
+    public Customer getSender() {
         return sender;
     }
 
-    public void setSender(User sender) {
+    public void setSender(Customer sender) {
         this.sender = sender;
     }
 
-    public User getReceiver() {
+    public Customer getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(Customer receiver) {
         this.receiver = receiver;
     }
 
