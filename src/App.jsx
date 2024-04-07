@@ -1,6 +1,3 @@
-import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './components/Home'
 import AddBook from './components/AddBook'
@@ -13,39 +10,18 @@ import {
 } from "react-router-dom";
 
 export default function App() {
-  const [count, setCount] = useState(0)
   
     return (
     <>
-         
-       
-
-          <Router>
-          <div className="App">
-                <Routes>
-                    <Route
-                        exact
-                        path="/AddBook"
-                        element={<AddBook />}
-                    />
-                </Routes>
-                <Routes>
-                    <Route
-                        exact
-                        path="/"
-                        element={<Home />}
-                    />
-                </Routes>
-                <Routes>
-                    <Route
-                        exact
-                        path="BookDetails/:id"
-                        element={<BookView />}
-                    />
-                </Routes>
-                </div>
-            </Router>
-       
+      <Router>
+        <div className="App">
+        <Routes >
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="AddBook" element={<AddBook />} />
+          <Route exact path="BookDetails/:id" element={<BookView />} />
+        </Routes>
+        </div>
+      </Router>
     </>
   )
 }

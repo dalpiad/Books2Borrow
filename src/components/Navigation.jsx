@@ -52,7 +52,7 @@ const Navigation = () => {
         <a href="">About</a>
         <a href="">Register</a>
         <a href="">Contact</a>
-        <a href="/AddBook">AddBook</a>
+        <a href="AddBook">AddBook</a>
         <button className="primary-button">Login</button>
       </div>
       
