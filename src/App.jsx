@@ -1,6 +1,7 @@
 import './App.css'
 import Home from './components/Home'
 import AddBook from './components/AddBook'
+import BookView from './components/BookView'
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,12 +16,12 @@ export default function App() {
       <Router>
         <div className="App">
         <Routes >
-          <Route path="/" element={<Home />} />
-          <Route path="/AddBook" element={<AddBook />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="AddBook" element={<AddBook />} />
+          <Route exact path="BookDetails/:id" element={<BookView />} />
         </Routes>
         </div>
       </Router>
-        
     </>
   )
 }

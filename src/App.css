@@ -145,6 +145,7 @@ nav {
     font-size: 10px;
   }
 
+
 .book-details{
   min-height: 8vh;
   float: left;
@@ -154,21 +155,18 @@ nav {
   justify-content: space-evenly;
   padding-top: 0%;
   text-align: center;  
- 
 }
+
 .book-content{
   display: flex;
- padding-left: 5px;
-
+  padding-left: 5px;
 }
-
 
 
 .second-btn{
   text-decoration: none;
   display: inline-block;
-
-   padding: 0.9rem 1.75rem;
+  padding: 0.9rem 1.75rem;
   background-color: purple;
   outline: none;
   border: none;
@@ -178,6 +176,7 @@ nav {
   font-weight: 600;
   transition: 0.2s;
 }
+
 
 .third-btn{
   padding: 0.9rem 1.75rem;
@@ -189,11 +188,9 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
-
 }
 
 .fourth-btn{
-
   padding: 0.9rem 1.75rem;
   background-color: green;
   outline: none;
@@ -203,5 +200,4 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
-
 }

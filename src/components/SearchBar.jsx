@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
+
+
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
