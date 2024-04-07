@@ -18,9 +18,10 @@ export default function App() {
     return (
     <>
          
-        <div className="App">
+       
 
           <Router>
+          <div className="App">
                 <Routes>
                     <Route
                         exact
@@ -42,9 +43,9 @@ export default function App() {
                         element={<BookView />}
                     />
                 </Routes>
-
+                </div>
             </Router>
-        </div>
+       
     </>
   )
 }

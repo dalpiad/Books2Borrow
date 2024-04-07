@@ -66,9 +66,9 @@ function BookView() {
                             </div>
                             </div>
                             <div className="book-details">
-                            <button class = "second-btn">Add to Wishlist </button>
-                            <button class = "third-btn">Add Books </button>
-                            <button class = "fourth-btn"> Borrow Book</button>
+                            <button className = "second-btn">Add to Wishlist </button>
+                            <button className = "third-btn">Add Books </button>
+                            <button className= "fourth-btn"> Borrow Book</button>
                             </div>
                            
           </div>

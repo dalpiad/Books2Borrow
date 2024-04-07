@@ -77,13 +77,19 @@ function DiplayBooks() {
           
             /* here we map over the element and display each item as a card  */
             <div className="wrapper">
-                <tr>
+              <table>
+                  <thead>
+                    <tr>
+                      <td>
+                
                 <Select
               options={options}
               value={selectedOption}
               onChange={(selectedOption) => setSelectedOption(selectedOption)}
               placeholder="Select an option..."
             />
+                 </td>
+                      <td>
             <TextField
             id="outlined-basic"
             label="Search"
@@ -96,7 +102,9 @@ function DiplayBooks() {
             right: 350,
             }}
             />
-            </tr>
+                </td>
+                    </tr>
+                  </thead></table>
             <div className="card-grid">
                 {records.map((book) => (
                     
