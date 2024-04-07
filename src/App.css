@@ -205,3 +205,22 @@ nav {
   transition: 0.2s;
 
 }
+
+button {
+  color: black;
+}
+
+h3 {
+  color: black;
+}
+
+.BooksButton {
+  color: black;
+  background-color: green;
+  padding: 0.9rem 1.75rem;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
