@@ -2,6 +2,7 @@ package org.launchcode.books2borrow.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -14,8 +15,8 @@ public class Customer extends AbstractEntity {
     @NotBlank (message = "First Name is required")
     private String firstName;
     @NotNull (message = "Zip code is required")
-//    @Pattern(regexp = "^\\d{5}$")
-    private Integer zipCode;
+    @Pattern(regexp = "^\\d{5}$", message = "Zip Code must be 5 digits.")
+    private String zipCode;
 
     //email will serve as userName for login
     @Email(message = "Invalid email. Try again")
@@ -41,7 +42,7 @@ public class Customer extends AbstractEntity {
 
     //all arg constructor
 
-    public Customer(String firstName, Integer zipCode, String email, String pwHash, String role, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
+    public Customer(String firstName, String zipCode, String email, String pwHash, String role, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
         this.firstName = firstName;
         this.zipCode = zipCode;
         this.email = email;
@@ -72,7 +73,7 @@ public class Customer extends AbstractEntity {
         return firstName;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
@@ -102,7 +103,7 @@ public class Customer extends AbstractEntity {
         this.firstName = firstName;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
