@@ -1,10 +1,10 @@
 package org.launchcode.books2borrow.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import java.util.ArrayList;
 
@@ -14,15 +14,16 @@ public class Customer extends AbstractEntity {
     @NotBlank (message = "First Name is required")
     private String firstName;
     @NotNull (message = "Zip code is required")
+//    @Pattern(regexp = "^\\d{5}$")
     private Integer zipCode;
 
     //email will serve as userName for login
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
+    @Column(unique=true)
     private String email;
     @NotNull
     @NotBlank
-    @Size(min = 6, max = 2147483647)
     private String pwHash;
     @NotNull
     @NotBlank
