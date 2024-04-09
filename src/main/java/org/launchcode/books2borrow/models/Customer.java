@@ -1,12 +1,13 @@
 package org.launchcode.books2borrow.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import java.util.ArrayList;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Customer extends AbstractEntity {
@@ -14,11 +15,13 @@ public class Customer extends AbstractEntity {
     @NotBlank (message = "First Name is required")
     private String firstName;
     @NotNull (message = "Zip code is required")
-    private Integer zipCode;
+    @Pattern(regexp = "^\\d{5}$", message = "Zip Code must be 5 digits.")
+    private String zipCode;
 
-    //userEmail will serve as userName for login
+    //email will serve as userName for login
     @Email(message = "Invalid email. Try again")
     @NotBlank (message = "Email is required")
+    @Column(unique=true)
     private String email;
     @NotNull
     @NotBlank
@@ -28,10 +31,6 @@ public class Customer extends AbstractEntity {
     private String role;
     private ArrayList<String> bookLibrary;
     private ArrayList<String> wishlist;
-
-    // add encoder
-//    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 
     // constructors
 
@@ -43,7 +42,7 @@ public class Customer extends AbstractEntity {
 
     //all arg constructor
 
-    public Customer(String firstName, Integer zipCode, String email, String pwHash, String role, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
+    public Customer(String firstName, String zipCode, String email, String pwHash, String role, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
         this.firstName = firstName;
         this.zipCode = zipCode;
         this.email = email;
@@ -74,7 +73,7 @@ public class Customer extends AbstractEntity {
         return firstName;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
@@ -104,7 +103,7 @@ public class Customer extends AbstractEntity {
         this.firstName = firstName;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
@@ -120,10 +119,9 @@ public class Customer extends AbstractEntity {
         this.wishlist = wishlist;
     }
 
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
+    }
 
-    // passes entered password to check if password == pwHash -> returns T/F
-//    public boolean isMatchingPassword(String password) {
-//        return encoder.matches(password, pwHash);
-//    }
 }
 
