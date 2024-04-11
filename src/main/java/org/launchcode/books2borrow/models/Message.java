@@ -13,25 +13,26 @@ public class Message {
     @ManyToOne
     private Customer sender;
     @ManyToOne
-    private Customer receiver;
+    private Customer recipient;
     private String content;
     private LocalDateTime sentAt;
 
 
-    public Message(Long id, Customer sender, Customer receiver, String content, LocalDateTime sentAt) {
-        this.id = id;
+    public Message(Customer sender, Customer recipient, String content, LocalDateTime sentAt) {
         this.sender = sender;
-        this.receiver = receiver;
+        this.recipient = recipient;
         this.content = content;
         this.sentAt = sentAt;
     }
+
+    public Message() {};
 
     @Override
     public String toString() {
         return "Message{" +
                 "id=" + id +
                 ", sender=" + sender +
-                ", receiver=" + receiver +
+                ", recipient=" + recipient +
                 ", content='" + content + '\'' +
                 ", sentAt=" + sentAt +
                 '}';
@@ -42,36 +43,32 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return Objects.equals(id, message.id) && Objects.equals(sender, message.sender) && Objects.equals(receiver, message.receiver) && Objects.equals(content, message.content) && Objects.equals(sentAt, message.sentAt);
+        return Objects.equals(id, message.id) && Objects.equals(sender, message.sender) && Objects.equals(recipient, message.recipient) && Objects.equals(content, message.content) && Objects.equals(sentAt, message.sentAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sender, receiver, content, sentAt);
+        return Objects.hash(id, sender, recipient, content, sentAt);
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Customer getSender() {
-        return sender;
+    public String getSender() {
+        return sender.getEmail();
     }
 
     public void setSender(Customer sender) {
         this.sender = sender;
     }
 
-    public Customer getReceiver() {
-        return receiver;
+    public String getRecipient() {
+        return recipient.getEmail();
     }
 
-    public void setReceiver(Customer receiver) {
-        this.receiver = receiver;
+    public void setRecipient(Customer recipient) {
+        this.recipient = recipient;
     }
 
     public String getContent() {
