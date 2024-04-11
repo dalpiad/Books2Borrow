@@ -1,9 +1,13 @@
 import React from "react"
 
-const addBookButton = () => {
+const AddBookButton = (props) => {
     const handleClick = () => {
         alert("You clicked me!");
-        const {data} = this.props;
+        const data = props.book;
+        console.log("this is data!");
+        console.log(data);
+        console.log("This is props!");
+        console.log(props);
 
         fetch('http://localhost:8080/api/books/add', {
             method: "POST",
@@ -25,10 +29,10 @@ const addBookButton = () => {
     }
     return (
         <div className="BooksButton">
-            <Button onClick={this.handleClick}> {this.props.children} Add Book</Button>
+            <button onClick={handleClick}> Add Book</button>
         </div>
         
     )
 }
 
-export default addBookButton;
+export default AddBookButton;

@@ -26,7 +26,7 @@ const Navigation = () => {
             icon: <HomeIcon />,
           },
           {
-            text: "About",
+            text: "MyBooks",
             icon: <InfoIcon />,
           },
           {
@@ -49,10 +49,10 @@ const Navigation = () => {
       </div>
       <div className="navbar-links-container">
         <a href="/">Home</a>
-        <a href="">About</a>
+        <a href="/MyBooks">MyBooks</a>
         <a href="">Register</a>
         <a href="">Contact</a>
-        <a href="AddBook">AddBook</a>
+        <a href="/AddBook">AddBook</a>
         <button className="primary-button">Login</button>
       </div>
       

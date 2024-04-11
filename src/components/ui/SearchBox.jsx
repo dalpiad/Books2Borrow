@@ -1,39 +1,48 @@
 import React from "react";
-import { useState } from "react";
-import FetchComp from "./Fetch";
-import Button from "./Button";
+import { useState, useEffect } from "react";
+import ButtonComp from "./ButtonComp";
+import FetchComponent from "./FetchComponent";
 
 
-const SearchBox = ()=>{
-    const [searchTerm, setSearchTerm] = useState("");
+
+const SearchBox = ({getBooks})=>{
+    const [searchTerm, setSearchTerm] = useState();
     const [searchResults, SetSearchResults] = useState([]);
 
-    const handleSearch = (searchTerm) => {
-        const apiURL = `http://openlibrary.org/search.json?q=${searcchTerm}`;
-    
-        setSearchTerm(searchTerm);
-        SetSearchResults([]);
-    };
+   
+    const fetchedData = (data) => {
+        SetSearchResults(data);
+    }
 
     const handleClick = () => {
         setSearchTerm(document.getElementById("outlined-basic").value);
       };
 
-    const fetchedData = (data) => {
-        SetSearchResults(data);
-    }
+      useEffect(() => {
+        getBooks(searchResults);
+      }, [searchResults]);
 
     return (
         <div>
+            <div>
             <input
                 id="outlined-basic"
                 type="text"
-                value={searchTerm}
-                onChange={(e) => handleSearch(e.target.value)}
+                label="Search"
+                style={{
+                    color: "black",
+                    backgroundColor: "white",
+                    position: "absolute",
+                    top: 100,
+                    left: 100,
+                    right: 350,
+                    }}
             />
-            <Button onClick={handleClick}/>
-            <FetchComp url={apiURL} fetchedData={fetchedData}/>
-            
+            <ButtonComp handle={handleClick} name="Search"/>
+            </div>
+            <div>
+            <FetchComponent searchTerm={searchTerm} fetchedData={fetchedData} />
+            </div>
         </div>
     )
 
