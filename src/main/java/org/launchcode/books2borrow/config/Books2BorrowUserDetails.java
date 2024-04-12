@@ -24,7 +24,7 @@ public class Books2BorrowUserDetails implements UserDetailsService {
         String userName, password;
         List<GrantedAuthority> authorities;
         List<Customer> customer = customerRepository.findByEmail(username);
-        if (customer.size() == 0) {
+        if (customer.isEmpty()) {
             throw new UsernameNotFoundException("User details not found for the user : " + username);
         } else{
             userName = customer.get(0).getEmail();

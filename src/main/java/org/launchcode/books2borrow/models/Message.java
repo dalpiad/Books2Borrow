@@ -10,11 +10,17 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
+    @JoinColumn(name = "sender_id")
     private Customer sender;
+
     @ManyToOne
+    @JoinColumn(name = "recipient_id")
     private Customer recipient;
+
     private String content;
+
     private LocalDateTime sentAt;
 
 

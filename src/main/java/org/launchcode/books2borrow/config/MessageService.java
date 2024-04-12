@@ -13,16 +13,13 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
 
     @Autowired
     private MessageRepository messageRepository;
 
 
-    public List<Message> getMessagesBetweenUsers(Customer sender, Customer recipient) {
-        // Retrieve messages between sender and receiver
-        return messageRepository.findBySenderAndReceiver(sender, recipient);
+    public List<Message> getMessages(Customer sender, Customer recipient) {
+        return messageRepository.findBySenderOrRecipient(sender, recipient);
     }
 
     public Message sendMessage(Customer sender, Customer recipient, String content) {

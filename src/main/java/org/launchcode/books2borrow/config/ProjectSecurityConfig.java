@@ -28,7 +28,7 @@ public class ProjectSecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/testing", "/chat/**").authenticated()
-                        .requestMatchers("/hello", "/register", "/api/books/**").permitAll())
+                        .requestMatchers("/hello", "/register", "/api/books/**", "Login").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
