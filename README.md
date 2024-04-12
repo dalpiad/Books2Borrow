@@ -1,2 +1,13 @@
-Added a simple "dashboard".  Currently, it has four tabs: Status Tracker, My Library, My Wishlist, and Chat.  Tested and we will be able to import components into each tab, we just need the components to be completed.  
+<<<<<<< HEAD
+# g2g
+# g2g
+=======
+# React + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+>>>>>>> a62cc77 (initial commit)
