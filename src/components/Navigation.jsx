@@ -49,9 +49,9 @@ const Navigation = () => {
       </div>
       <div className="navbar-links-container">
         <a href="/">Home</a>
-        <a href="">About</a>
-        <a href="">Register</a>
-        <a href="">Contact</a>
+        {/* <a href="">About</a> */}
+        <a href="/register">Register</a>
+        {/* <a href="">Contact</a> */}
         <a href="AddBook">AddBook</a>
         <button className="primary-button">Login</button>
       </div>
