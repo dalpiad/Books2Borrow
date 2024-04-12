@@ -1,127 +1,101 @@
 package org.launchcode.books2borrow.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
-public class Customer extends AbstractEntity {
+public class Customer {
 
-    @NotBlank (message = "First Name is required")
-    private String firstName;
-    @NotNull (message = "Zip code is required")
-    @Pattern(regexp = "^\\d{5}$", message = "Zip Code must be 5 digits.")
-    private String zipCode;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GenericGenerator(name = "native",strategy = "native")
+    @Column(name = "customer_id")
+    private int id;
 
-    //email will serve as userName for login
-    @Email(message = "Invalid email. Try again")
-    @NotBlank (message = "Email is required")
-    @Column(unique=true)
+    private String name;
+
     private String email;
-    @NotNull
-    @NotBlank
-    private String pwHash;
-    @NotNull
-    @NotBlank
+
+    @Column(name = "mobile_number")
+    private String mobileNumber;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String pwd;
+
     private String role;
-    private ArrayList<String> bookLibrary;
-    private ArrayList<String> wishlist;
 
-    // constructors
+    @Column(name = "create_dt")
+    private String createDt;
 
-    //no arg constructor
-    public Customer() {
+    @JsonIgnore
+    @OneToMany(mappedBy="customer",fetch=FetchType.EAGER)
+    private Set<Authority> authorities;
+
+    public int getId() {
+        return id;
     }
 
-    //constructor with encoder to store pwHash
-
-    //all arg constructor
-
-    public Customer(String firstName, String zipCode, String email, String pwHash, String role, ArrayList<String> bookLibrary, ArrayList<String> wishlist) {
-        this.firstName = firstName;
-        this.zipCode = zipCode;
-        this.email = email;
-        this.pwHash = pwHash;
-        this.role = role;
-        this.bookLibrary = bookLibrary;
-        this.wishlist = wishlist;
+    public void setId(int id) {
+        this.id = id;
     }
 
-
-    //generated toString
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", zipCode=" + zipCode +
-                ", email='" + email + '\'' +
-                ", bookLibrary=" + bookLibrary +
-                ", wishlist=" + wishlist +
-                '}';
+    public String getName() {
+        return name;
     }
 
-
-    // getters
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getZipCode() {
-        return zipCode;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getPwHash() {
-        return pwHash;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 
     public String getRole() {
         return role;
     }
 
-    public ArrayList<String> getBookLibrary() {
-        return bookLibrary;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public ArrayList<String> getWishlist() {
-        return wishlist;
+    public String getCreateDt() {
+        return createDt;
     }
 
-    //setters
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setCreateDt(String createDt) {
+        this.createDt = createDt;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
-
-    public void setBookLibrary(ArrayList<String> bookLibrary) {
-        this.bookLibrary = bookLibrary;
-    }
-
-    public void setWishlist(ArrayList<String> wishlist) {
-        this.wishlist = wishlist;
-    }
-
-    public void setPwHash(String pwHash) {
-        this.pwHash = pwHash;
-    }
-
 }
-
