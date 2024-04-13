@@ -53,10 +53,9 @@ const Navigation = () => {
       </div>
       <div className="navbar-links-container">
         <a href="/">Home</a>
-        <a href="/MyBooks">MyBooks</a>
+        <a href="/AddBook">Add Book</a>
         <a href="">Register</a>
         <a href="">Contact</a>
-        <a href="/AddBook">AddBook</a>
         <a href="SimpleUserDashboard">Profile</a>
         <button className="primary-button">Login</button>
       </div>
