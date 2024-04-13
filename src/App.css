@@ -146,6 +146,7 @@ nav {
     font-size: 10px;
   }
 
+
 .book-details{
   min-height: 8vh;
   float: left;
@@ -155,12 +156,11 @@ nav {
   justify-content: space-evenly;
   padding-top: 0%;
   text-align: center;  
- 
 }
+
 .book-content{
   display: flex;
- padding-left: 5px;
-
+  padding-left: 5px;
 }
 
 
@@ -168,8 +168,7 @@ nav {
 .second-btn{
   text-decoration: none;
   display: inline-block;
-
-   padding: 0.9rem 1.75rem;
+  padding: 0.9rem 1.75rem;
   background-color: purple;
   outline: none;
   border: none;
@@ -180,7 +179,7 @@ nav {
   transition: 0.2s;
 }
 
-/* Add Books */
+
 .third-btn{
   padding: 0.9rem 1.75rem;
   background-color: blue;
@@ -191,12 +190,10 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
-
 }
 
 /* Borrow Book */
 .fourth-btn{
-
   padding: 0.9rem 1.75rem;
   background-color: green;
   outline: none;
@@ -206,7 +203,6 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
-
 }
 
 h1 {
@@ -232,5 +228,6 @@ div {
   font-weight: 600;
   transition: 0.2s;
 }
+
 
 
