@@ -54,7 +54,7 @@ const SearchBox = (handleClickTwo) => {
           <div>
             <Button variant="contained" onClick={handleClick} style={{
                   position: "right",
-                  top: 10,
+                  top: -15,
                   left: 1210,
                   right: 250,
                   }}>
@@ -86,7 +86,7 @@ const SearchBox = (handleClickTwo) => {
           <div>
             <Button variant="contained" onClick={handleClick} style={{
                   position: "right",
-                  top: 10,
+                  top: -15,
                   left: 1210,
                   right: 250,
                   }}>
