@@ -3,8 +3,13 @@ package org.launchcode.books2borrow.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Set;
 
 @Entity
@@ -16,14 +21,17 @@ public class Customer {
     @Column(name = "customer_id")
     private int id;
 
+    @NotBlank (message = "First Name is required")
     private String name;
 
+    @Email(message = "Invalid email. Try again")
+    @NotBlank(message = "Email is required")
+    @Column(unique=true)
     private String email;
 
-    @Column(name = "mobile_number")
-    private String mobileNumber;
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotNull
+    @NotBlank
     private String pwd;
 
     private String role;
@@ -34,6 +42,9 @@ public class Customer {
     @JsonIgnore
     @OneToMany(mappedBy="customer",fetch=FetchType.EAGER)
     private Set<Authority> authorities;
+
+    private ArrayList<String> bookLibrary;
+    private ArrayList<String> wishlist;
 
     public int getId() {
         return id;
@@ -57,14 +68,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
     }
 
     public String getPwd() {
@@ -97,5 +100,21 @@ public class Customer {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public ArrayList<String> getBookLibrary() {
+        return bookLibrary;
+    }
+
+    public void setBookLibrary(ArrayList<String> bookLibrary) {
+        this.bookLibrary = bookLibrary;
+    }
+
+    public ArrayList<String> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(ArrayList<String> wishlist) {
+        this.wishlist = wishlist;
     }
 }
