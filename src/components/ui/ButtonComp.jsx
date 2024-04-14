@@ -7,7 +7,7 @@ const ButtonComp = (props)=> {
    }
     return (
         <div>
-            <button className="BooksButton" onClick={props.handle}>{props.name}</button>
+            <button className="BasicButton" onClick={props.handle}>{props.name}</button>
         </div>
         
     )

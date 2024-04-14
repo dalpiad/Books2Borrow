@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-
+import DeleteBookButton from "./ui/DeleteBookButton";
 
 
 const MyLibrary = () => {
+    const [selectedId, setSelectedId] = useState(null);
     const { data: myBooks, isLoading } = useQuery({
         queryFn: async () => {
           const response = await axios.get(
@@ -18,16 +19,26 @@ const MyLibrary = () => {
 
       console.log(myBooks);
 
+    const handleToggle = () => {
+      // will need to update to it's own component later
+
+
+    }
+
+    const handleSelected = (id) => {
+      setSelectedId(id);
+    }
+
 
       if (isLoading) {
         return <div>Loading...</div>;
       }
     
       return (
+        <>
         <table style={{ width: "100%" }}>
           <thead>
             <tr>
-              <th>Select</th>
               <th>isAvailable</th>
               <th>Book ID</th>
               <th>Title</th>
@@ -36,13 +47,19 @@ const MyLibrary = () => {
               <th>Rating</th>
               <th>Reviews</th>
               <th>Genres</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             {myBooks?.map((book) => (
               <tr key={book.id}>
-                <td></td>
-                <td>{book.available ? "true" : "false"}</td>
+                <td>
+                <td>
+                  <label>
+                  <input type="checkbox" checked={book.available} />
+                </label>
+                </td>
+                </td>
                 <td>{book.id}</td>
                 <td>{book.title}</td>
                 <td>{book.author}</td>
@@ -50,10 +67,17 @@ const MyLibrary = () => {
                 <td>{book.averageRating}</td>
                 <td>{book.numberOfReviews}</td>
                 <td>{book.subject}</td>
+                <td>
+                  <label>
+                  <input type="checkbox" onChange={()=>{handleSelected(book.id)}} />
+                </label>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <DeleteBookButton id={selectedId} />
+        </>
       );
     };
     
