@@ -12,7 +12,7 @@ public class Book extends AbstractEntity {
     private String bookKey;
     private String title;
     private int bookCover;
-    private String author;
+    private ArrayList<String> author;
     private int firstPublishYear;
     private double averageRating;
     private int numberOfReviews;
@@ -21,7 +21,7 @@ public class Book extends AbstractEntity {
 
 
 
-    public Book(String bookKey, String title, int bookCover, String author, int firstPublishYear,
+    public Book(String bookKey, String title, int bookCover, ArrayList<String> author, int firstPublishYear,
                 double averageRating, int numberOfReviews, ArrayList<String> subject, boolean isAvailable) {
         this.bookKey = bookKey;
         this.title = title;
@@ -76,11 +76,11 @@ public class Book extends AbstractEntity {
         this.bookCover = bookCover;
     }
 
-    public String getAuthor() {
+    public ArrayList<String> getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(ArrayList<String> author) {
         this.author = author;
     }
 
