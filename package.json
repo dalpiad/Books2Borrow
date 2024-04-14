@@ -1,6 +1,7 @@
 {
   "name": "books2borrowreact",
   "private": true,
+  "proxy": "http://localhost8080",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

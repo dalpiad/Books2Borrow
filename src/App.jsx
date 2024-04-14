@@ -3,6 +3,7 @@ import Home from './components/Home'
 import AddBook from './components/AddBook'
 import BookView from './components/BookView'
 import Register from './components/Register'
+import Testing from './components/Testing'
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,6 +24,8 @@ export default function App() {
           <Route exact path="BookDetails/:id" element={<BookView />} />
           <Route exact path="Register" element={<Register />} />
           <Route exact path="Login" element={<Login />} />
+          <Route exact path="Testing" element={<Testing />} />
+
         </Routes>
         </div>
       </Router>
