@@ -56,7 +56,7 @@ const Navigation = () => {
         <a href="/AddBook">Add Book</a>
         <a href="">Register</a>
         <a href="">Contact</a>
-        <a href="SimpleUserDashboard">Profile</a>
+        <a href="/SimpleUserDashboard">Profile</a>
         <button className="primary-button">Login</button>
       </div>
       

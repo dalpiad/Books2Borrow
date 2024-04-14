@@ -5,47 +5,41 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ButtonComp from "./ui/ButtonComp";
 import AddBookButton from "./ui/AddBookButton";
+import BookDetails from "./BookDetails";
 
 
-const MyBooks = () =>{
-    const [books, setBooks] = useState([]);
-    console.log(books);
-    
-    const getBooks = (data) => {
-        setBooks(data);
-    
+const AddBook = () =>{
+    const [ isSearching, setIsSearching] = useState(true);
+    const [ isClicked, setIsClicked ] = useState(false);
+    const [clickedBook, setClickedBook] = useState(null);
+
+  // Define a click handler function
+  const handleClickTwo = (obj) => {
+    setClickedBook(obj);
+    setIsClicked(true);
+    setIsSearching(false);
+  };
+   
+    if (isSearching) {
+    return (
+        < div>
+            <Navigation />
+            <br/>
+            <SearchBox handleClickTwo ={handleClickTwo} />
+        </div>
+    )
     }
 
-    return (
-        <>
+
+
+    if(isClicked) {
+    return(
         <div>
             <Navigation />
             <br/>
-            <SearchBox getBooks={getBooks}/>
+            <BookDetails clickedBook={clickedBook}/>
         </div>
-        <div className="wrapper">
-              <ul className="card-grid">
-                  {books.map((book) => (
-                    <div className="card" key={book.bookkey}>
-                        <div className="card-image">
-                            <Link to={"/AddBook/book-details/" + books.indexOf(book) + "-" + book.title}>
-                                <img src={"https://covers.openlibrary.org/b/id/" + book.bookCover + "-M.jpg"} alt={book.title} />
-                            </Link>
-                        </div>
-                        <div className="card-content">
-                            <h3 className="card-name">{book.title}</h3>
-                        </div>
-                            <Link to={"/AddBook/book-details/" + books.indexOf(book) + "-" + book.title}>   
-                                <ButtonComp name="View Details"/>
-                            </Link>
-                        
-                        <AddBookButton book ={book}/>
-                        
-                    </div>
-                  ))}
-              </ul>
-            </div>
-       </>
     )
-}
-export default MyBooks;
+    }
+};
+export default AddBook;

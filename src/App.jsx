@@ -5,7 +5,13 @@ import SimpleUserDashboard from './components/SimpleUserDashboard'
 import AddBook from './components/AddBook'
 import BookDetails from './components/BookDetails'
 import TestPage from './components/TestPage'
-
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
 
 import {
   BrowserRouter as Router,
@@ -14,10 +20,14 @@ import {
   Navigate,
 } from "react-router-dom";
 
+
+const queryClient = new QueryClient();
+
 export default function App() {
   
     return (
     <>
+      <QueryClientProvider client={queryClient}>
       <Router>  
         <div className="App">
         <Routes >
@@ -30,6 +40,7 @@ export default function App() {
         </Routes>
         </div>
       </Router>
+      </QueryClientProvider>
     </>
   )
 }
