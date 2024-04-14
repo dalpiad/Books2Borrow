@@ -12,14 +12,16 @@ const AddBookButton = (props) => {
     const password = '12345';
     const encodedCredentials = btoa(`${username}:${password}`);
 
-    const config = {
-        headers: {
-            'Authorization': `Basic ${encodedCredentials}`
-        }
-    };
+    // const config = {
+    //     headers: {
+    //         'Authorization': `Basic ${encodedCredentials}`
+    //     }
+    // };
 
 
-    axios.post('http://localhost:8080/api/books/add', data, config,).then(response => {
+    axios.post('http://localhost:8080/api/books/add', data, {headers: {
+        'Content-Type': 'application/json'
+      }}).then(response => {
         if (response.ok) {
             alert('Successfully Added to "My Books."');
         } else {

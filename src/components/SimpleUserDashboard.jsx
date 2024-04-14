@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Navigation from './Navigation';
+import MyLibrary from './MyLibrary';
 
 
 function CustomTabPanel(props) {
@@ -76,7 +77,7 @@ const SimpleUserDashboard = () => {
                 Status Tracker
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                My Library
+                <MyLibrary />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 My WishList

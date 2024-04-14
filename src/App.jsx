@@ -4,7 +4,6 @@ import BookView from './components/BookView'
 import SimpleUserDashboard from './components/SimpleUserDashboard'
 import AddBook from './components/AddBook'
 import BookDetails from './components/BookDetails'
-import TestPage from './components/TestPage'
 import {
   useQuery,
   useMutation,
@@ -36,7 +35,6 @@ export default function App() {
           <Route exact path="BookDetails/:id" element={<BookView />} />
           <Route exact path="SimpleUserDashboard" element={<SimpleUserDashboard />} />
           <Route path="/AddBook/book-details/:title" element={<BookDetails />}/>
-          <Route path="/TestPage" element={<TestPage />}/>
         </Routes>
         </div>
       </Router>

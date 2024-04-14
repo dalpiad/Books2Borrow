@@ -26,7 +26,7 @@ const SearchBox = (handleClickTwo) => {
         firstPublishYear: first_publish_year,
         averageRating: ratings_average,
         numberOfReviews: ratings_count,
-        subject,
+        subject: subject,
         isAvailable: true
       }));
       return booksArray;

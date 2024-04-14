@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import Navigation from "./Navigation";
 import SearchBox from "./ui/SearchBox";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import ButtonComp from "./ui/ButtonComp";
-import AddBookButton from "./ui/AddBookButton";
 import BookDetails from "./BookDetails";
 
 
@@ -13,7 +10,6 @@ const AddBook = () =>{
     const [ isClicked, setIsClicked ] = useState(false);
     const [clickedBook, setClickedBook] = useState(null);
 
-  // Define a click handler function
   const handleClickTwo = (obj) => {
     setClickedBook(obj);
     setIsClicked(true);
