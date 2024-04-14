@@ -49,6 +49,7 @@ nav {
 .primary-button {
   padding: 0.9rem 1.75rem;
   background-color: white;
+  color: black;
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -163,6 +164,7 @@ nav {
 }
 
 
+/* Add to wishlist */
 .second-btn{
   text-decoration: none;
   display: inline-block;
@@ -190,6 +192,7 @@ nav {
   transition: 0.2s;
 }
 
+/* Borrow Book */
 .fourth-btn{
   padding: 0.9rem 1.75rem;
   background-color: green;
@@ -201,3 +204,30 @@ nav {
   font-weight: 600;
   transition: 0.2s;
 }
+
+h1 {
+  color: black;
+}
+
+h3 {
+  color: black;
+}
+
+div {
+  color: black;
+}
+
+.BooksButton {
+  color: black;
+  background-color: white;
+  outline: black;
+  padding: 0.9rem 1.75rem;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+
+
