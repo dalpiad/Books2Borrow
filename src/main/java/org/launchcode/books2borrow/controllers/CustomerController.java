@@ -20,4 +20,7 @@ public class CustomerController {
 
     @GetMapping("/testing")
     public String testRouteSayHello() {return "This should only be visible if Spring Security username and password works!"; }
+
+    @GetMapping("/register")
+    public String registerTest() {return "This is a get mapping test registration route."; }
 }
