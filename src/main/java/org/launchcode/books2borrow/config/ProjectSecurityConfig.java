@@ -32,7 +32,7 @@ public class ProjectSecurityConfig {
 //                    @Override
 //                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
 //                        CorsConfiguration config = new CorsConfiguration();
-////                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+//                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
 //                        config.setAllowedMethods(Collections.singletonList("*"));
 //                        config.setAllowCredentials(true);
 //                        config.setAllowedHeaders(Collections.singletonList("*"));
@@ -55,8 +55,8 @@ public class ProjectSecurityConfig {
 ////                        .requestMatchers("/testing").hasAnyRole("USER","ADMIN")
 //                        .requestMatchers("/myLoans").hasRole("USER")
 //                        .requestMatchers("/myCards").hasRole("USER")
-                        .requestMatchers("/user", "/testing", "api/books/add", "api/books/{id}", "api/books/delete", "api/books/delete/{id}").authenticated()
-                        .requestMatchers("/register","/hello", "api/books/home").permitAll())
+                        .requestMatchers("/user", "/testing", "api/books/add", "api/books/delete", "api/books/delete/{id}").authenticated()
+                        .requestMatchers("/register","/hello", "api/books/home", "api/books/{id}").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
