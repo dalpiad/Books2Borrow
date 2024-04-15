@@ -46,6 +46,26 @@ public class Customer {
     private ArrayList<String> bookLibrary;
     private ArrayList<String> wishlist;
 
+
+    //custom toString
+
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", role='" + role + '\'' +
+                ", createDt='" + createDt + '\'' +
+                ", authorities=" + authorities +
+                ", bookLibrary=" + bookLibrary +
+                ", wishlist=" + wishlist +
+                '}';
+    }
+
+    // getters and setters
     public int getId() {
         return id;
     }
