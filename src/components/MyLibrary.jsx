@@ -36,38 +36,36 @@ const MyLibrary = () => {
     
       return (
         <>
-        <table style={{ width: "100%" }}>
-          <thead>
-            <tr>
-              <th>isAvailable</th>
-              <th>Book ID</th>
-              <th>Title</th>
-              <th>Author</th>
-              <th>Published</th>
-              <th>Rating</th>
-              <th>Reviews</th>
-              <th>Genres</th>
-              <th>Delete</th>
+        <table className="myBooksTable" style={{ width: "100%" }}>
+          <thead className="myBooksTable">
+            <tr className="myBooksTable">
+              <th className="myBooksTable">isAvailable</th>
+              <th className="myBooksTable">Book ID</th>
+              <th className="myBooksTable">Title</th>
+              <th className="myBooksTable">Author</th>
+              <th className="myBooksTable">Published</th>
+              <th className="myBooksTable">Rating</th>
+              <th className="myBooksTable">Reviews</th>
+              <th className="myBooksTable">Genres</th>
+              <th className="myBooksTable">Delete</th>
             </tr>
-          </thead>
-          <tbody>
+          </thead >
+          <tbody className="myBooksTable">
             {myBooks?.map((book) => (
-              <tr key={book.id}>
-                <td>
-                <td>
+              <tr className="myBooksTable" key={book.id}>
+                <td className="myBooksTable">
                   <label>
                   <input type="checkbox" checked={book.available} />
                 </label>
                 </td>
-                </td>
-                <td>{book.id}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{book.firstPublishYear}</td>
-                <td>{book.averageRating}</td>
-                <td>{book.numberOfReviews}</td>
-                <td>{book.subject}</td>
-                <td>
+                <td className="myBooksTable">{book.id}</td>
+                <td className="myBooksTable">{book.title}</td>
+                <td className="myBooksTable">{book.author}</td>
+                <td className="myBooksTable">{book.firstPublishYear}</td>
+                <td className="myBooksTable">{book.averageRating}</td>
+                <td className="myBooksTable">{book.numberOfReviews}</td>
+                <td className="myBooksTable">{book.subject}</td>
+                <td className="myBooksTable">
                   <label>
                   <input type="checkbox" onChange={()=>{handleSelected(book.id)}} />
                 </label>
