@@ -1,6 +1,9 @@
 import React from "react";
 import DeleteCheckoutButton from "./ui/DeleteCheckoutButton";
 import { useState } from "react";
+import { useQuery } from "react-query";
+import axios from "axios";
+
 
 
 const StatusTracker = () => {
@@ -12,10 +15,53 @@ const StatusTracker = () => {
     const [selectedId, setSelectedId] = useState(null);
 
 
-    // setup React Query to fetch checkout record by Borrower ID. 
-    // setup React Query to fetch checkout record by Lender ID.
-    // setup React Query to fetch borrowerID object
-    // setup React Query to fetch lenderID objec
+    // This will call by ID to the Checkout Record Controller. 
+    // This needs to take the logged in users token and get where user is Borrower in checkout Object and isDue is true. 
+    const { data: checkoutBorrowObj, isCheckoutBorrowObjLoading } = useQuery({
+        queryFn: async (id) => {
+          const response = await axios.get(
+            `http://localhost:8080/api/${id}`
+          )
+          console.log(response.data);
+          return response.data;
+        },
+        queryKey: ["checkoutBorrowObj"]
+      });
+
+    // This will call by ID to the Checkout Record Controller.
+    // This needs to take the logged in users token and get where user is lender in checkout Object and isDue is true.  
+    const { data: checkoutLenderObj, isCheckoutLenderObjLoading } = useQuery({
+        queryFn: async (id) => {
+          const response = await axios.get(
+            `http://localhost:8080/api/${id}`
+          )
+          console.log(response.data);
+          return response.data;
+        },
+        queryKey: ["checkoutLenderObj"]
+      });
+    // setup React Query to fetch borrowerID object. This will call by ID to the Customer Controller. 
+    const { data: borrowerObj, isBorrowerObjLoading } = useQuery({
+        queryFn: async (id) => {
+          const response = await axios.get(
+            `http://localhost:8080/api/${id}`
+          )
+          console.log(response.data);
+          return response.data;
+        },
+        queryKey: ["borrowerObj"]
+      });
+    // setup React Query to fetch lenderID object. This will call by ID to the Customer Controller. 
+    const { data: lenderObj, isLenderObjLoading } = useQuery({
+        queryFn: async (id) => {
+          const response = await axios.get(
+            `http://localhost:8080/api/${id}`
+          )
+          console.log(response.data);
+          return response.data;
+        },
+        queryKey: ["lenderObj"]
+      });
 
     // will need an update checkout record button. This will send and update request to checkout controller to update the isDue value to false. 
     // this will likely be it's own button component. 
