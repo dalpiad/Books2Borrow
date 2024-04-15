@@ -32,8 +32,8 @@ const AddBookButton = (props) => {
         }) 
         }
         return (
-            <div className="BooksButton">
-                <button onClick={handleClick}> Add Book</button>
+            <div>
+                <button className="BooksButton" onClick={handleClick}> Add Book</button>
             </div>
         
     )
