@@ -28,19 +28,19 @@ public class ProjectSecurityConfig {
 //        CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
 //        requestHandler.setCsrfRequestAttributeName("_csrf");
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
-//                    @Override
-//                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-//                        CorsConfiguration config = new CorsConfiguration();
-//                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
-//                        config.setAllowedMethods(Collections.singletonList("*"));
-//                        config.setAllowCredentials(true);
-//                        config.setAllowedHeaders(Collections.singletonList("*"));
-//                        config.setExposedHeaders(Arrays.asList("authorization"));
-//                        config.setMaxAge(3600L);
-//                        return config;
-//                    }
-//                }))
+                .cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
+                    @Override
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                        CorsConfiguration config = new CorsConfiguration();
+                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+                        config.setAllowedMethods(Collections.singletonList("*"));
+                        config.setAllowCredentials(true);
+                        config.setAllowedHeaders(Collections.singletonList("*"));
+                        config.setExposedHeaders(Arrays.asList("authorization"));
+                        config.setMaxAge(3600L);
+                        return config;
+                    }
+                }))
 //                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact","/register")
 //                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
 //                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
