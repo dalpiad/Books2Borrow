@@ -261,32 +261,33 @@ div {
   transition: 0.2s;
 }
 
-table {
+.myBooksTable {
   border-collapse: collapse;
   width: 100%;
-}
+} 
 
-th {
+.myBooksTable th {
   background-color: #f2f2f2;
   border: 1px solid #dddddd;
   padding: 8px;
   text-align: left;
-}
+} 
 
-td {
+.myBooksTable td {
   border: 1px solid #dddddd;
   padding: 8px;
-}
+} 
 
-tr:nth-child(odd) {
+.myBooksTable tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-tbody {
+.myBooksTable tbody {
   border: 1px solid #dddddd;
 }
 
-table {
+.myBooksTable {
   border-radius: 8px;
   overflow: hidden;
 }
+
