@@ -1,62 +1,65 @@
-import { useEffect, useState } from "react"
-import ReactDOM from 'react-dom/client';
+// import { useEffect, useState } from "react"
+// import ReactDOM from 'react-dom/client';
+// import axios from 'axios'
 
 
 
 
 
-const Register = () => {
+// const Register = () => {
 
-    const [inputs, setInputs] = useState("");
-     // This variable determines whether password is shown or not
-    const [isShown, setIsSHown] = useState(false);
+//     const [inputs, setInputs] = useState("");
+//      // This variable determines whether password is shown or not
+//     const [isShown, setIsSHown] = useState(false);
 
-  // This function is called when the checkbox is checked or unchecked
-    const togglePassword = () => {
-        setIsSHown((isShown) => !isShown);
-    };
+//   // This function is called when the checkbox is checked or unchecked
+//     const togglePassword = () => {
+//         setIsSHown((isShown) => !isShown);
+//     };
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs(values => ({...values, [name]: value}))
-    }
+//     const handleChange = (event) => {
+//         const name = event.target.name;
+//         const value = event.target.value;
+//         setInputs(values => ({...values, [name]: value}))
+//     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(inputs);
-    }
-
-    useEffect(() => {
-        fetch("http://localhost:8080/register")
-        .then(response => response.text())
-        .then(thing => console.log(thing))
-    }, [])
-    console.log("Gir is Bad!")
+//     const handleSubmit = (event) => {
+//         event.preventDefault();
+//         console.log(inputs);
+//     }
 
 
+    
+//     useEffect(() => {
+//         fetch("http://localhost:8080/register")
+//         .then(response => response.text())
+//         .then(thing => console.log(thing))
+//     }, [])
+//     console.log("Gir is Bad!")
 
 
-    return (
-        <div>
-        <h1>Registration Form</h1>
 
-                <form onSubmit={handleSubmit}>
-                    <label>First Name:</label><br></br>
-                        <input type="text" name="firstName" value={inputs.firstName || ""} onChange={handleChange} /><br></br>
-                    <label>Zip Code:</label><br></br>
-                        <input type="text" name="zipCode" value={inputs.zipCode || ""} onChange={handleChange} /><br></br>
-                    <label>Email:</label><br></br>
-                        <input type="text" name="email" value={inputs.email || ""} onChange={handleChange} /><br></br>
-                    <label>Password:</label><br></br>
-                        <input type={isShown ? "text" : "password"} name="password" value={inputs.password || ""} onChange={handleChange} /><br></br>
-                    <input type="submit" />
-                </form>
-                </div>
-    )
-}
 
-export default Register
+//     return (
+//         <div>
+//         <h1>Registration Form</h1>
+
+//                 <form onSubmit={handleSubmit}>
+//                     <label>First Name:</label><br></br>
+//                         <input type="text" name="firstName" value={inputs.firstName || ""} onChange={handleChange} /><br></br>
+//                     <label>Zip Code:</label><br></br>
+//                         <input type="text" name="zipCode" value={inputs.zipCode || ""} onChange={handleChange} /><br></br>
+//                     <label>Email:</label><br></br>
+//                         <input type="text" name="email" value={inputs.email || ""} onChange={handleChange} /><br></br>
+//                     <label>Password:</label><br></br>
+//                         <input type={isShown ? "text" : "password"} name="password" value={inputs.password || ""} onChange={handleChange} /><br></br>
+//                     <input type="submit" />
+//                 </form>
+//                 </div>
+//     )
+// }
+
+// export default Register
 
 
 
