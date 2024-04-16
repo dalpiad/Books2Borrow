@@ -26,7 +26,7 @@ public class Customer {
 
     @Email(message = "Invalid email. Try again")
     @NotBlank(message = "Email is required")
-    @Column(unique=true)
+    @Column(unique = true)
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
