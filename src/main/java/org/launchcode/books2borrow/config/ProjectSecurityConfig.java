@@ -55,7 +55,7 @@ public class ProjectSecurityConfig {
 ////                        .requestMatchers("/testing").hasAnyRole("USER","ADMIN")
 //                        .requestMatchers("/myLoans").hasRole("USER")
 //                        .requestMatchers("/myCards").hasRole("USER")
-                        .requestMatchers("/user", "/testing", "api/books/add", "api/books/delete", "api/books/delete/{id}").authenticated()
+                        .requestMatchers("/user", "/testing", "api/books/add", "api/books/delete", "api/books/delete/{id}", "wishlist/**").authenticated()
                         .requestMatchers("/register","/hello", "api/books/home", "api/books/{id}").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());

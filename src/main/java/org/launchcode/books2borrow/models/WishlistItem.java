@@ -1,7 +1,6 @@
 package org.launchcode.books2borrow.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -12,8 +11,11 @@ public class WishlistItem {
     @Column(name = "wishlistItem_id")
     private int id;
 
-    @ManyToOne()
-    private Customer customer;
+//    @ManyToOne()
+//    private Customer customer;
+
+    @NotNull
+    private int customerId;
 
     @NotNull
     private String bookKey;
@@ -23,11 +25,19 @@ public class WishlistItem {
 
     private int bookCover;
 
-    @NotBlank
     private boolean isAvailable;
 
-    public WishlistItem(int id, Customer customer, String bookKey, String title, int bookCover, boolean isAvailable) {
-        this.customer = customer;
+//    public WishlistItem(Customer customer, String bookKey, String title, int bookCover, boolean isAvailable) {
+//        this.customer = customer;
+//        this.bookKey = bookKey;
+//        this.title = title;
+//        this.bookCover = bookCover;
+//        this.isAvailable = isAvailable;
+//    }
+
+
+    public WishlistItem(int customerId, String bookKey, String title, int bookCover, boolean isAvailable) {
+        this.customerId = customerId;
         this.bookKey = bookKey;
         this.title = title;
         this.bookCover = bookCover;
@@ -40,12 +50,21 @@ public class WishlistItem {
         return id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
+
+
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getBookKey() {

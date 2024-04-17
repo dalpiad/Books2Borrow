@@ -46,9 +46,9 @@ public class Customer {
 
     private ArrayList<String> bookLibrary;
 
-    @OneToMany
-    @JoinColumn(name = "customer_id")
-    private final List<WishlistItem> wishlist = new ArrayList<>();
+//    @OneToMany
+//    //@JoinColumn(name = "customer_id")
+//    private final List<WishlistItem> wishlist = new ArrayList<>();
 
 
     //custom toString
@@ -65,7 +65,7 @@ public class Customer {
                 ", createDt='" + createDt + '\'' +
                 ", authorities=" + authorities +
                 ", bookLibrary=" + bookLibrary +
-                ", wishlist=" + wishlist +
+           //     ", wishlist=" + wishlist +
                 '}';
     }
 
@@ -134,7 +134,7 @@ public class Customer {
         this.bookLibrary = bookLibrary;
     }
 
-    public List<WishlistItem> getWishlist() {
-        return wishlist;
-    }
+//    public List<WishlistItem> getWishlist() {
+//        return wishlist;
+//    }
 }
