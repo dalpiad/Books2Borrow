@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,7 +45,10 @@ public class Customer {
     private Set<Authority> authorities;
 
     private ArrayList<String> bookLibrary;
-    private ArrayList<String> wishlist;
+
+    @OneToMany
+    @JoinColumn(name = "customer_id")
+    private final List<WishlistItem> wishlist = new ArrayList<>();
 
 
     //custom toString
@@ -130,11 +134,7 @@ public class Customer {
         this.bookLibrary = bookLibrary;
     }
 
-    public ArrayList<String> getWishlist() {
+    public List<WishlistItem> getWishlist() {
         return wishlist;
-    }
-
-    public void setWishlist(ArrayList<String> wishlist) {
-        this.wishlist = wishlist;
     }
 }
