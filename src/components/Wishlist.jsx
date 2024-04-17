@@ -65,6 +65,3 @@ const Wishlist = () => {
 
         
 export default Wishlist;
-
-
-//href={"http://localhost:8080/wishlist/delete" + wishlistItem.id}

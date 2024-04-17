@@ -48,9 +48,9 @@ function CustomTabPanel(props) {
 
 
 
-const SimpleUserDashboard = ( {authToken} ) => {
+const SimpleUserDashboard = () => {
   const [value, setValue] = useState(0);
-  authToken = authToken;
+ 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -80,7 +80,7 @@ const SimpleUserDashboard = ( {authToken} ) => {
                 Status Tracker
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <MyLibrary authToken={authToken}/>
+                <MyLibrary />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 <Wishlist />
