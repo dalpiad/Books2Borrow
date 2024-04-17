@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173/", maxAge = 3600)
@@ -22,7 +21,7 @@ public class BookController {
 
 
     //This needs to be reworked to find only the users book
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<?> getAllBooks() {
         List<Book> books = (List<Book>) bookRepository.findAll();
         return new ResponseEntity<>(books, HttpStatus.OK);
@@ -39,7 +38,7 @@ public class BookController {
         }
     }
 
-    @GetMapping("home")
+    @GetMapping("/home")
     public ResponseEntity<?> getUniqueBooks() {
         List<Book> allBooks = (List<Book>) bookRepository.findAll();
         List<Book> uniqueBooks = new ArrayList<>();
