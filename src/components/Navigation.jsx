@@ -15,7 +15,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import { BiSolidCategoryAlt } from "react-icons/bi";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { BiSolidBookAdd } from "react-icons/bi";
 
 const Navigation = () => {
@@ -26,7 +26,7 @@ const Navigation = () => {
             icon: <HomeIcon />,
           },
           {
-            text: "About",
+            text: "MyBooks",
             icon: <InfoIcon />,
           },
           {
@@ -41,6 +41,10 @@ const Navigation = () => {
             text: "AddBook",
             icon: <BiSolidBookAdd />,
           },
+          {
+            text: "Profile",
+            icon: <AccountBoxIcon />,
+          },
   ];
   return (
     <nav>
@@ -49,10 +53,9 @@ const Navigation = () => {
       </div>
       <div className="navbar-links-container">
         <a href="/">Home</a>
-        {/* <a href="">About</a> */}
         <a href="/register">Register</a>
-        {/* <a href="">Contact</a> */}
-        <a href="AddBook">AddBook</a>
+        <a href="/AddBook">Add Book</a>
+        <a href="/SimpleUserDashboard">Profile</a>
         <button className="primary-button">Login</button>
       </div>
       
