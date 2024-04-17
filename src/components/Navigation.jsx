@@ -56,7 +56,7 @@ const Navigation = () => {
         <a href="/register">Register</a>
         <a href="/AddBook">Add Book</a>
         <a href="/SimpleUserDashboard">Profile</a>
-        <button className="primary-button">Login</button>
+        <a href="/login">Login</a>
       </div>
       
       <div className="navbar-menu-container">

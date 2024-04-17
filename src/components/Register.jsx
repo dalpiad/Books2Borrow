@@ -10,8 +10,8 @@ const Register = () => {
         let something = await axios.post(
             "http://localhost:8080/register",
             {
-                name: event.target.firstName.value,
-                email: event.target.email.value,
+                name: event.target.firstName.value.toLowerCase(),
+                email: event.target.email.value.toLowerCase(),
                 role: "user",
                 pwd: event.target.password.value,
                 createDt: "2024-04-16",
@@ -20,7 +20,7 @@ const Register = () => {
             }
         )
         console.log(something.data)
-        navigate("/")
+        navigate("/login")
     }
     return (
         <div>
