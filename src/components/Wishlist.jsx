@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import Button from "@mui/material/Button";
-
+import { useNavigate } from 'react-router-dom';
 
 const Wishlist = () => {
+  let navigate = useNavigate();
   console.log(localStorage.getItem('jwt'));
   const authHeader = localStorage.getItem('jwt');
   const { data: wishlist, isLoading } = useQuery({
@@ -31,6 +32,7 @@ const Wishlist = () => {
         `http://localhost:8080/wishlist/delete/${wishlistItemId}`, {
       headers: {'Authorization': `${authHeader}`}
     })
+    navigate("/SimpleUserDashboard");
   }
     
   return (
@@ -53,7 +55,7 @@ const Wishlist = () => {
               <td className="myWishlistTableTd" >{wishlistItem.title}</td>
               <td className="myWishlistTableTd" >Borrow</td>
               <td className="myWishlistTableTd">
-                <Button variant="outlined" color="error" onClick={handleClick(wishlistItem.id)}> Delete </Button>
+                <Button variant="outlined" color="error" onClick={() => handleClick(wishlistItem.id)}> Delete </Button>
               </td>
             </tr>
           ))}
