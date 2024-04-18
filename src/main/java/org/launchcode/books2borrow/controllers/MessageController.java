@@ -2,7 +2,6 @@ package org.launchcode.books2borrow.controllers;
 
 import org.launchcode.books2borrow.config.MessageService;
 import org.launchcode.books2borrow.data.CustomerRepository;
-import org.launchcode.books2borrow.models.Book;
 import org.launchcode.books2borrow.models.Customer;
 import org.launchcode.books2borrow.models.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -49,21 +49,31 @@ public class MessageController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         List<Message> userMessages = messageService.getUserMessages(userId);
-        List<Integer> uniqueConversations = getUniqueConversations(userMessages, userId);
+        HashMap<Integer, String> uniqueConversations = getUniqueConversations(userMessages, userId);
         return new ResponseEntity<>(uniqueConversations, HttpStatus.OK);
     }
 
-    private static List<Integer> getUniqueConversations(List<Message> userMessages, int userId) {
-        List<Integer> uniqueConversations = new ArrayList<Integer>();
+    private HashMap<Integer, String> getUniqueConversations(List<Message> userMessages, int userId) {
+        HashMap<Integer, String> uniqueConversations = new HashMap<>();
         for (Message message : userMessages) {
             if (message.getSenderId() != userId) {
-                if (!uniqueConversations.contains(message.getSenderId())) {
-                    uniqueConversations.add(message.getSenderId());
+                if (!uniqueConversations.containsKey(message.getSenderId())) {
+                    Optional<Customer> optionalCustomer = customerRepository.findById(message.getSenderId());
+                    if (optionalCustomer.isPresent()) {
+                        Customer customerName = optionalCustomer.get();
+                        String name = customerName.getName();
+                        uniqueConversations.put(message.getSenderId(), name);
+                    }
                 }
             }
             if (message.getRecipientId() != userId) {
-                if (!uniqueConversations.contains(message.getRecipientId())) {
-                    uniqueConversations.add(message.getRecipientId());
+                if (!uniqueConversations.containsKey(message.getRecipientId())) {
+                    Optional<Customer> optionalCustomer = customerRepository.findById(message.getRecipientId());
+                    if (optionalCustomer.isPresent()) {
+                        Customer customerName = optionalCustomer.get();
+                        String name = customerName.getName();
+                        uniqueConversations.put(message.getRecipientId(), name);
+                    }
                 }
             }
         }
