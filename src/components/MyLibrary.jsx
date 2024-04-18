@@ -5,12 +5,15 @@ import DeleteBookButton from "./ui/DeleteBookButton";
 
 
 const MyLibrary = () => {
+  const token = localStorage.getItem('jwt');
+
     const [selectedId, setSelectedId] = useState(null);
     const { data: myBooks, isLoading } = useQuery({
         queryFn: async () => {
           const response = await axios.get(
-            `http://localhost:8080/api/books/delete`
-          )
+            `http://localhost:8080/api/books/delete`, {headers: {
+              'Authorization': `${token}`
+        }})
           console.log(response.data);
           return response.data;
         },
