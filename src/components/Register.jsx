@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import Navigation from "./Navigation";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -23,18 +24,23 @@ const Register = () => {
         navigate("/login")
     }
     return (
-        <div>
-            <h1>Registration Form</h1>
-                <form onSubmit={handleSubmit}>
-                    <label>First Name:</label><br/>
-                        <input type="text" name="firstName" /><br/>
-                    <label>Email:</label><br/>
-                        <input type="text" name="email" /><br/>
-                    <label>Password:</label><br/>
-                        <input name="password" /><br/>
-                    <input type="submit" />
-                </form>
-        </div>
+        <>
+            <div>
+                <Navigation />
+            </div>
+            <div>
+                <h2 >Please enter registration information:</h2>
+                    <form onSubmit={handleSubmit}>
+                        <label>First Name:</label><br/>
+                            <input type="text" name="firstName" /><br/>
+                        <label>Email:</label><br/>
+                            <input type="text" name="email" /><br/>
+                        <label>Password:</label><br/>
+                            <input type="password" name="password" /><br/>
+                        <input type="submit" />
+                    </form>
+            </div>
+        </>
     )
 }
 export default Register
