@@ -53,7 +53,7 @@ const Wishlist = () => {
               <td className="myWishlistTableTd" >{wishlistItem.title}</td>
               <td className="myWishlistTableTd" >Borrow</td>
               <td className="myWishlistTableTd">
-                <Button variant="outlined" color="error" onClick={handleClick(wishlistItem.id)}> Delete </Button>
+                <Button variant="outlined" color="error" onClick={() => handleClick(wishlistItem.id)}> Delete </Button>
               </td>
             </tr>
           ))}
