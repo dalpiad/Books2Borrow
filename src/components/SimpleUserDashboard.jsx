@@ -2,10 +2,10 @@ import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Navigation from './Navigation';
 import MyLibrary from './MyLibrary';
+import { Container } from 'reactstrap';
 
 
 function CustomTabPanel(props) {
@@ -21,11 +21,13 @@ function CustomTabPanel(props) {
         {...other}
       >
         {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography >{children}</Typography>
+          <Container>
+          <Box  sx={{ p: 3 }}>
+          {children}
           </Box>
+          </Container>
         )}
-      </div>
+     </div>
     );
   }
   
