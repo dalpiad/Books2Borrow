@@ -291,3 +291,21 @@ div {
   overflow: hidden;
 }
 
+
+.myWishlistTableTr {
+  align-items: center;
+  text-align: center;
+}
+
+.myWishlistTableTd {
+  align-items: center;
+  text-align: center;
+}
+
+
+.bookCoverSmall {
+  align-items: right;
+  height: auto;
+  width: 30px;
+}
+

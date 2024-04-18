@@ -2,10 +2,11 @@ import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Navigation from './Navigation';
 import MyLibrary from './MyLibrary';
-import { Container } from 'reactstrap';
+import Wishlist from './Wishlist';
 
 
 function CustomTabPanel(props) {
@@ -22,9 +23,9 @@ function CustomTabPanel(props) {
       >
         {value === index && (
           <Container>
-          <Box  sx={{ p: 3 }}>
-          {children}
-          </Box>
+            <Box  sx={{ p: 3 }}>
+              {children}
+            </Box>
           </Container>
         )}
      </div>
@@ -49,7 +50,7 @@ function CustomTabPanel(props) {
 
 const SimpleUserDashboard = () => {
   const [value, setValue] = useState(0);
-
+ 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -63,7 +64,7 @@ const SimpleUserDashboard = () => {
 
     <div
             style={{
-                marginLeft: "40%",
+                marginLeft: "10%",
             }}
         >
             <h1 style={{textAlign: "center"}}>User Dashboard</h1>
@@ -82,7 +83,7 @@ const SimpleUserDashboard = () => {
                 <MyLibrary />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                My WishList
+                <Wishlist />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
                 Chat
