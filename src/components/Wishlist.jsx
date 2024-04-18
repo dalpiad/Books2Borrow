@@ -1,37 +1,26 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
-
 const Wishlist = () => {
-//  console.log(localStorage.getItem('jwt'));
-  const authHeader = localStorage.getItem('jwt');
-  const { data: wishlist, isLoading } = useQuery({
-      queryFn: async () => {
-        const response = await axios.get(
-          `http://localhost:8080/wishlist/all`, {
-            headers: {'Authorization': `${authHeader}`}
-        })
-        //console.log(response.data);
-        return (response.data);
-      },
-      queryKey: ["wishlist"]
-  });
+  const [wishlist, setWishlist]= useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+      `http://localhost:8080/wishlist/all`, {
+        headers: {'Authorization': `${authHeader}`}
+      })
+      setWishlist(response.data);
+    };
+    fetchData();
+  },[wishlist]);
 
- //     console.log(wishlist);
-
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const handleClick = async (wishlistItemId) => {
-      await axios.delete(
+  const handleClick = (wishlistItemId) => {
+    axios.delete(
         `http://localhost:8080/wishlist/delete/${wishlistItemId}`, {
       headers: {'Authorization': `${authHeader}`}
-    });
-  };
+    })
+  }
     
   return (
     <>
@@ -62,9 +51,5 @@ const Wishlist = () => {
     </>
   );
 };
-
         
 export default Wishlist;
-
-
-//href={"http://localhost:8080/wishlist/delete" + wishlistItem.id}
