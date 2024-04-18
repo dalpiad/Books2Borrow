@@ -15,7 +15,7 @@ const Wishlist = () => {
       setWishlist(response.data);
     };
     fetchData();
-  },[wishlist]);
+  },[]);
 
 
   const handleClick = (wishlistItemId) => {
