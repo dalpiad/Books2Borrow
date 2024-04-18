@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -42,8 +42,27 @@ function a11yProps(index) {
 const MessageInbox = () => {
   console.log(localStorage.getItem('jwt'));
   const authHeader = localStorage.getItem('jwt');
-  const [value, setValue] = React.useState(0);
+  const [conversationList, setConversationList]= useState({});
+  const [value, setValue] = useState(0);
 
+  async function populateConversationList () {
+    useEffect(() => {
+      async function fetchData() {
+        const response = await axios.get(
+        `http://localhost:8080//api/messages/conversation`, {
+          headers: {'Authorization': `${authHeader}`}
+        })
+        setConversationList(response.data);
+      };
+      fetchData();
+    },[]);
+  }
+
+  populateConversationList();
+
+
+
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
