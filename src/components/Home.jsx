@@ -3,10 +3,11 @@ import Navigation from './Navigation'
 import SearchBar from './SearchBar'
 import DiplayBooks from './DiplayBooks'
 
-const Home = () => {
+const Home = ( ) => {
+  console.log(localStorage.getItem('jwt'));
   return (
     <div>
-        <Navigation/>
+        <Navigation />
        
         <DiplayBooks/>
     </div>
