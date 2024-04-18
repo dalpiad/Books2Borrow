@@ -14,7 +14,7 @@ public class MessageService {
     private MessageRepository messageRepository;
 
 
-    public List<Message> getMessagesBetweenUsers(Long senderId, Long recipientId) {
+    public List<Message> getMessagesBetweenUsers(int senderId, int recipientId) {
         return messageRepository.findBySenderIdAndRecipientId(senderId, recipientId);
     }
 

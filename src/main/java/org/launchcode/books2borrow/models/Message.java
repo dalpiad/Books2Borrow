@@ -11,22 +11,20 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id")
-    private Customer sender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipient_id")
-    private Customer recipient;
+    private int senderId;
+
+
+    private int recipientId;
 
     private String content;
 
     private LocalDateTime sentAt;
 
 
-    public Message(Customer sender, Customer recipient, String content, LocalDateTime sentAt) {
-        this.sender = sender;
-        this.recipient = recipient;
+    public Message(int senderId, int recipientId, String content, LocalDateTime sentAt) {
+        this.senderId = senderId;
+        this.recipientId = recipientId;
         this.content = content;
         this.sentAt = sentAt;
     }
@@ -37,8 +35,8 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "id=" + id +
-                ", sender=" + sender +
-                ", recipient=" + recipient +
+                ", senderId=" + senderId +
+                ", recipientId=" + recipientId +
                 ", content='" + content + '\'' +
                 ", sentAt=" + sentAt +
                 '}';
@@ -49,32 +47,32 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return Objects.equals(id, message.id) && Objects.equals(sender, message.sender) && Objects.equals(recipient, message.recipient) && Objects.equals(content, message.content) && Objects.equals(sentAt, message.sentAt);
+        return Objects.equals(id, message.id) && Objects.equals(senderId, message.senderId) && Objects.equals(recipientId, message.recipientId) && Objects.equals(content, message.content) && Objects.equals(sentAt, message.sentAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sender, recipient, content, sentAt);
+        return Objects.hash(id, senderId, recipientId, content, sentAt);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getSender() {
-        return sender.getEmail();
+    public int getSenderId() {
+        return senderId;
     }
 
-    public void setSender(Customer sender) {
-        this.sender = sender;
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 
-    public String getRecipient() {
-        return recipient.getEmail();
+    public int getRecipientId() {
+        return recipientId;
     }
 
-    public void setRecipient(Customer recipient) {
-        this.recipient = recipient;
+    public void setRecipientId(int recipientId) {
+        this.recipientId = recipientId;
     }
 
     public String getContent() {
