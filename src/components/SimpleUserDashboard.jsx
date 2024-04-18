@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Navigation from './Navigation';
 import MyLibrary from './MyLibrary';
 import Wishlist from './Wishlist';
+import MessageInbox from './chatComponents/MessageInbox';
 
 
 function CustomTabPanel(props) {
@@ -48,9 +49,8 @@ function CustomTabPanel(props) {
 
 
 
-const SimpleUserDashboard = ( {authToken} ) => {
+const SimpleUserDashboard = () => {
   const [value, setValue] = useState(0);
-  authToken = authToken;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -80,13 +80,13 @@ const SimpleUserDashboard = ( {authToken} ) => {
                 Status Tracker
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <MyLibrary authToken={authToken}/>
+                <MyLibrary />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 <Wishlist />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
-                Chat
+                <MessageInbox />
             </CustomTabPanel>
         </div>
         </>

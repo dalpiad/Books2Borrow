@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 
 
 const Wishlist = () => {
-  console.log(localStorage.getItem('jwt'));
+//  console.log(localStorage.getItem('jwt'));
   const authHeader = localStorage.getItem('jwt');
   const { data: wishlist, isLoading } = useQuery({
       queryFn: async () => {
@@ -13,25 +13,25 @@ const Wishlist = () => {
           `http://localhost:8080/wishlist/all`, {
             headers: {'Authorization': `${authHeader}`}
         })
-        console.log(response.data);
+        //console.log(response.data);
         return (response.data);
       },
       queryKey: ["wishlist"]
   });
 
-      console.log(wishlist);
+ //     console.log(wishlist);
 
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  const handleClick = (wishlistItemId) => {
-      axios.delete(
+  const handleClick = async (wishlistItemId) => {
+      await axios.delete(
         `http://localhost:8080/wishlist/delete/${wishlistItemId}`, {
       headers: {'Authorization': `${authHeader}`}
-    })
-  }
+    });
+  };
     
   return (
     <>
