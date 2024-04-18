@@ -3,7 +3,9 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 
 const Wishlist = () => {
+  const authHeader = localStorage.getItem('jwt');
   const [wishlist, setWishlist]= useState([]);
+  
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
