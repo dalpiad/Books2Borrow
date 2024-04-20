@@ -1,11 +1,15 @@
 package org.launchcode.books2borrow.controllers;
 
 import org.launchcode.books2borrow.data.BookRepository;
+import org.launchcode.books2borrow.data.CustomerRepository;
 import org.launchcode.books2borrow.dto.BookDTO;
 import org.launchcode.books2borrow.models.Book;
+import org.launchcode.books2borrow.models.Customer;
+import org.launchcode.books2borrow.models.WishlistItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +23,16 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    //This needs to be reworked to find only the users book
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllBooks() {
-        List<Book> books = (List<Book>) bookRepository.findAll();
-        return new ResponseEntity<>(books, HttpStatus.OK);
-    }
+
+    //All mapping might be for a future admin class to access books across all users.
+//    @GetMapping("/all")
+//    public ResponseEntity<?> getAllBooks() {
+//        List<Book> books = (List<Book>) bookRepository.findAll();
+//        return new ResponseEntity<>(books, HttpStatus.OK);
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookById(@PathVariable Integer id) {
@@ -52,24 +59,47 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> processAddBook(@RequestBody BookDTO aBookDTO){
-//        BookDTO bookDTO = new BookDTO(aBookDTO);
-        Book newBook = createNewBook(aBookDTO);
+    public ResponseEntity<?> processAddBook(Authentication authentication, @RequestBody BookDTO aBookDTO){
+        int customerId;
+        List<Customer> customers = customerRepository.findByEmail(authentication.getName());
+        if (!customers.isEmpty()) {
+            customerId = customers.get(0).getId();
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Book newBook = createNewBook(aBookDTO, customerId);
         bookRepository.save(newBook);
         return new ResponseEntity<>(HttpStatus.OK);
     };
 
 
     @GetMapping("/delete")
-    public ResponseEntity<?> displayUserBooks(){
-        List<Book> books = (List<Book>) bookRepository.findAll();
+    public ResponseEntity<?> displayUserBooks(Authentication authentication){
+        int customerId;
+        List<Customer> customers = customerRepository.findByEmail(authentication.getName());
+            if (!customers.isEmpty()) {
+                customerId = customers.get(0).getId();
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        List<Book> books = bookRepository.findByCustomerId(customerId);
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteBook(Authentication authentication, @PathVariable Integer id) {
+        int customerId;
+        List<Customer> customers = customerRepository.findByEmail(authentication.getName());
+        if (!customers.isEmpty()) {
+            customerId = customers.get(0).getId();
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         Optional<Book> bookOptional = bookRepository.findById(id);
-        if (bookOptional.isPresent()) {
+        if (bookOptional.isPresent() && (bookOptional.get().getCustomerId() == customerId)) {
             bookRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
@@ -78,7 +108,7 @@ public class BookController {
     }
 
 
-    private Book createNewBook(BookDTO bookDTO){
+    private Book createNewBook(BookDTO bookDTO, int customerId){
         String bookKey = bookDTO.getBookKey();
         String title = bookDTO.getTitle();
         int bookCover = bookDTO.getBookCover();
@@ -90,6 +120,6 @@ public class BookController {
         boolean isAvailable = bookDTO.getAvailable();
 
         return new Book(bookKey, title, bookCover, author, firstPublishYear, averageRating,
-                numberOfReviews, subject, isAvailable);
+                numberOfReviews, subject, isAvailable, customerId);
     }
 }
