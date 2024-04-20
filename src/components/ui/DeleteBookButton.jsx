@@ -5,8 +5,11 @@ const DeleteBookButton = (props) => {
     const handleClick = () => {
         alert(`Request Sent! Book with ${props.id} will be deleted`);
         const data = props.id;
-
-    axios.delete(`http://localhost:8080/api/books/delete/${data}`).then(response => {
+    
+        const token = localStorage.getItem('jwt');
+    axios.delete(`http://localhost:8080/api/books/delete/${data}`, {headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`}}).then(response => {
         if (response.OK) {
             alert("Book Deleted");
         } else {

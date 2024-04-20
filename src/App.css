@@ -271,18 +271,18 @@ div {
   border: 1px solid #dddddd;
   padding: 8px;
   text-align: left;
-} 
+}  
 
-.myBooksTable td {
+.myBooksTable .myBooksTable td {
   border: 1px solid #dddddd;
   padding: 8px;
-} 
+}  
 
-.myBooksTable tr:nth-child(odd) {
+.myBooksTable .myBooksTable tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-.myBooksTable tbody {
+.myBooksTable .myBooksTable tbody {
   border: 1px solid #dddddd;
 }
 
@@ -290,6 +290,25 @@ div {
   border-radius: 8px;
   overflow: hidden;
 }
+
+
+.myWishlistTableTr {
+  align-items: center;
+  text-align: center;
+}
+
+.myWishlistTableTd {
+  align-items: center;
+  text-align: center;
+}
+
+
+.bookCoverSmall {
+  align-items: right;
+  height: auto;
+  width: 30px;
+}
+
 
 
 
