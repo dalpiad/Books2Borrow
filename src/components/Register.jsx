@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Navigation from "./Navigation";
+import { Alert, AlertTitle } from "@mui/material";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -20,8 +21,16 @@ const Register = () => {
                 wishlist: null
             }
         )
-        console.log(something.data)
-        navigate("/login")
+        console.log(something.data);
+        // if (something.data.length > 0) {
+
+        // }
+        // <Alert severity="success">
+        //                 <AlertTitle>Success</AlertTitle>
+        //                 {/* {something.data.user} */}
+        //                 ALERT BITCHES 
+        //                 </Alert>
+        // navigate("/login")
     }
     return (
         <>
