@@ -23,33 +23,33 @@ import { Link, useNavigate } from "react-router-dom";
 const Navigation = () => {
   const auth = localStorage.getItem('jwt')
   const navigate = useNavigate();
-  const [openMenu, setOpenMenu] = useState(false);
-  const menuOptions = [
-        {
-            text: "Home",
-            icon: <HomeIcon />,
-          },
-          {
-            text: "MyBooks",
-            icon: <InfoIcon />,
-          },
-          {
-            text: "Register",
-            icon: <AppRegistrationIcon />,
-          },
-          {
-            text: "Contact",
-            icon: <PhoneRoundedIcon />,
-          },
-          {
-            text: "AddBook",
-            icon: <BiSolidBookAdd />,
-          },
-          {
-            text: "Profile",
-            icon: <AccountBoxIcon />,
-          },
-  ];
+  // const [openMenu, setOpenMenu] = useState(false);
+  // const menuOptions = [
+  //       {
+  //           text: "Home",
+  //           icon: <HomeIcon />,
+  //         },
+  //         {
+  //           text: "MyBooks",
+  //           icon: <InfoIcon />,
+  //         },
+  //         {
+  //           text: "Register",
+  //           icon: <AppRegistrationIcon />,
+  //         },
+  //         {
+  //           text: "Contact",
+  //           icon: <PhoneRoundedIcon />,
+  //         },
+  //         {
+  //           text: "AddBook",
+  //           icon: <BiSolidBookAdd />,
+  //         },
+  //         {
+  //           text: "Profile",
+  //           icon: <AccountBoxIcon />,
+  //         },
+  // ];
 
   const logout = () =>{
     console.log("auth", auth)
@@ -60,10 +60,10 @@ const Navigation = () => {
   }
 
   return (
-    <nav>
-      <div className="nav-logo-container">
-        <img className="bookimg" src={Logo} alt="" />
-      </div>
+    // <nav>
+    //   <div className="nav-logo-container">
+    //     <img className="bookimg" src={Logo} alt="" />
+    //   </div>
 
 
       <div className="navbar-links-container">
@@ -77,30 +77,30 @@ const Navigation = () => {
       
 
 
-      <div className="navbar-menu-container">
-        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
-      </div>
-      <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={() => setOpenMenu(false)}
-          onKeyDown={() => setOpenMenu(false)}
-        >
-          <List>
-            {menuOptions.map((item) => (
-              <ListItem key={item.text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-        </Box>
-      </Drawer>
-    </nav>
+  //     <div className="navbar-menu-container">
+  //       <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+  //     </div>
+  //     <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
+  //       <Box
+  //         sx={{ width: 250 }}
+  //         role="presentation"
+  //         onClick={() => setOpenMenu(false)}
+  //         onKeyDown={() => setOpenMenu(false)}
+  //       >
+  //         <List>
+  //           {menuOptions.map((item) => (
+  //             <ListItem key={item.text} disablePadding>
+  //               <ListItemButton>
+  //                 <ListItemIcon>{item.icon}</ListItemIcon>
+  //                 <ListItemText primary={item.text} />
+  //               </ListItemButton>
+  //             </ListItem>
+  //           ))}
+  //         </List>
+  //         <Divider />
+  //       </Box>
+  //     </Drawer>
+  //   </nav>
   );
 };
 
