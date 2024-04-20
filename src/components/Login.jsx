@@ -27,6 +27,7 @@ function LoginForm() {
             if (authHeader) {
                 localStorage.setItem('jwt', authHeader);
                 console.log('JWT saved to local storage:', authHeader);
+                console.log(authHeader)
             } else {
                 console.error('Authorization header is missing or improperly formatted.');
             }

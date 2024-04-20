@@ -18,7 +18,6 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { BiSolidBookAdd } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import Alert from '@mui/material/Alert';
 
 
 const Navigation = () => {
@@ -57,8 +56,9 @@ const Navigation = () => {
     console.log("LocalStorage",localStorage)
     localStorage.clear();
     console.log("LocalStorage post clear",localStorage)
-    // navigate("/login")
+    navigate("/login")
   }
+
   return (
     <nav>
       <div className="nav-logo-container">
@@ -72,7 +72,7 @@ const Navigation = () => {
         <Link to="/AddBook">Add Book</Link>
         <Link to="/SimpleUserDashboard">Profile</Link>
         <Link to="/login">Login</Link>
-        <Link onClick={logout} to="/login">Logout</Link>
+        {/* <Link onClick={logout} to="/login">Logout {JSON.parse(auth.name)}</Link> */}
       </div>
       
 

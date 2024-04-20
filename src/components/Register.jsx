@@ -22,15 +22,6 @@ const Register = () => {
             }
         )
         console.log(something.data);
-        // if (something.data.length > 0) {
-
-        // }
-        // <Alert severity="success">
-        //                 <AlertTitle>Success</AlertTitle>
-        //                 {/* {something.data.user} */}
-        //                 ALERT BITCHES 
-        //                 </Alert>
-        // navigate("/login")
     }
     return (
         <>
