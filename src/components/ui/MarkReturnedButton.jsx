@@ -1,14 +1,14 @@
 import React from "react"
 import axios from "axios";
 
-const DeleteCheckoutButton = (props) => {
+const MarkReturnedButton = (props) => {
     const handleClick = () => {
-        alert(`Request Sent! Chekcout ID ${props.id} will be deleted`);
+        confirm(`Mark book ${props.id} as returned? This will close the checkout record`);
         const data = props.id;
 
     // update path to send delete request to Checkout Controller once ready. 
-    axios.delete(`http://localhost:8080/${data}`).then(response => {
-        if (response.OK) {
+    axios.patch(`http://localhost:8080/${data}`).then(response => {
+        if (response.status === 200) {
             alert("Book Returned");
         } else {
             alert("Error returning book")
@@ -18,11 +18,11 @@ const DeleteCheckoutButton = (props) => {
         }) 
         }
         return (
-            <div className="containerDeleteCheckoutButton">
-                <button className="deleteCheckoutButton" onClick={handleClick}> Mark Returned </button>
+            <div className="containerBookReturnedButton">
+                <button className="bookReturnedtButton" onClick={handleClick}> Mark Returned </button>
             </div>
         
     )
 }
 
-export default DeleteCheckoutButton;
+export default MarkReturnedButton;

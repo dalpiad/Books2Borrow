@@ -312,11 +312,11 @@ div {
 
 
 
-.containerDeleteCheckoutButton {
+.containerBookReturnedButton {
   display: flex;
 }
 
-.deleteCheckoutButton {
+.bookReturnedtButton {
   margin-left: auto;
   margin-right: 0px;
   margin-top: 10px;

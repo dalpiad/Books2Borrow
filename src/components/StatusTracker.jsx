@@ -1,5 +1,5 @@
 import React from "react";
-import DeleteCheckoutButton from "./ui/DeleteCheckoutButton";
+import MarkReturnedButton from "./ui/MarkReturnedButton";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -7,11 +7,6 @@ import axios from "axios";
 
 
 const StatusTracker = () => {
-    // setup state variable to hold checkout record by Borrower ID. 
-    // setup state variable to hhold checkout record by Lender ID. 
-    // setup state variable to hold borrowerID object
-    // setup state variable to hold lenderID objec
-    // setup state variable to hold selected checkout records to mark returned. 
     const [selectedId, setSelectedId] = useState(null);
     const [currentDate, setCurrentDate] = useState(null);
     let nowDate;
@@ -19,36 +14,39 @@ const StatusTracker = () => {
     nowDate = new Date(2024, 3, 20);
     console.log(nowDate);
     let nowDateString = nowDate.toUTCString().slice(0,16);
-  
-    
 
 
     // This will call by ID to the Checkout Record Controller. 
     // This needs to take the logged in users token and get where user is Borrower in checkout Object and isDue is true. 
-    /*
-    const { data: checkoutBorrowObj, isCheckoutBorrowObjLoading } = useQuery({
+    
+    const { data: borrowedBooks, isBorrowedBooksLoading } = useQuery({
         queryFn: async (id) => {
           const response = await axios.get(
-            `http://localhost:8080/api/${id}`
+            `http://localhost:9000/checkoutRecords`
           )
           console.log(response.data);
           return response.data;
         },
-        queryKey: ["checkoutBorrowObj"]
+        queryKey: ["borrowedBooks"]
       });
 
     // This will call by ID to the Checkout Record Controller.
     // This needs to take the logged in users token and get where user is lender in checkout Object and isDue is true.  
-    const { data: checkoutLenderObj, isCheckoutLenderObjLoading } = useQuery({
+    const { data: lentBooks, isLentBooksLoading} = useQuery({
         queryFn: async (id) => {
           const response = await axios.get(
-            `http://localhost:8080/api/${id}`
+            `http://localhost:3000/checkoutRecords`
           )
           console.log(response.data);
           return response.data;
         },
-        queryKey: ["checkoutLenderObj"]
+        queryKey: ["lentBooks"]
       });
+
+
+
+//Dont currently have a userController to call to. Could the CheckoutRecord controller just make get request from it?
+    /*
     // setup React Query to fetch borrowerID object. This will call by ID to the Customer Controller. 
     const { data: borrowerObj, isBorrowerObjLoading } = useQuery({
         queryFn: async (id) => {
@@ -71,6 +69,7 @@ const StatusTracker = () => {
         },
         queryKey: ["lenderObj"]
       });
+      */
 
     // will need an update checkout record button. This will send and update request to checkout controller to update the isDue value to false. 
     // this will likely be it's own button component. 
@@ -83,7 +82,6 @@ const StatusTracker = () => {
     const handleCLick = (recordId) => {
         setSelectedId(recordId);
       }
-      */
 
     return (
         <>
@@ -94,12 +92,61 @@ const StatusTracker = () => {
             </div>
 {/* //  Table that displays book that you currently have borrowed. Clickable. */}
             <div>
-                <h1>Table displaying books borrowed</h1>
+            <table>
+                <thead className="myBooksTable">
+                  <tr className="myBooksTable">
+                    <th className="myBooksTable">Book Title</th>
+                    <th className="myBooksTable">Book ID</th>
+                    <th className="myBooksTable">Borrowed From</th>
+                    <th className="myBooksTable">Checkout Date</th>
+                    <th className="myBooksTable">Due Date</th>
+                  </tr>
+                </thead >
+                <tbody className="myBooksTable">
+                  {borrowedBooks?.map((record) => (
+                    <tr className="myBooksTable" onClick={handleCLick} key={record.recordId}>
+                      <td>Not Available</td>
+                      <td className="myBooksTable">{record.bookId}</td>
+                      <td className="myBooksTable">{record.borrowerId}</td>
+                      <td className="myBooksTable">{record.checkoutDate}</td>
+                      <td className="myBooksTable">{record.dueDate}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                </table>
             </div>
+            <br/>
     {/* Table that displays books that you currently have lent out to others. Clickable.  */}
             <div>
-                <h1>Table displaying books lent</h1>
-                <DeleteCheckoutButton id={selectedId} />
+                <table>
+                <thead className="myBooksTable">
+                  <tr className="myBooksTable">
+                    <th className="myBooksTable">Book Title</th>
+                    <th className="myBooksTable">Book ID</th>
+                    <th className="myBooksTable">Lent To</th>
+                    <th className="myBooksTable">Checkout Date</th>
+                    <th className="myBooksTable">Due Date</th>
+                    <th className="myBooksTable">Delete</th>
+                  </tr>
+                </thead >
+                <tbody className="myBooksTable">
+                  {lentBooks?.map((record) => (
+                    <tr className="myBooksTable" onClick={handleCLick} key={record.recordId}>
+                      <td>Not Available</td>
+                      <td className="myBooksTable">{record.bookId}</td>
+                      <td className="myBooksTable">{record.borrowerId}</td>
+                      <td className="myBooksTable">{record.checkoutDate}</td>
+                      <td className="myBooksTable">{record.dueDate}</td>
+                      <td className="myBooksTable">
+                        <label>
+                          <input type="checkbox" onChange={()=>{handleSelected(book.id)}} />
+                        </label>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                </table>
+                <MarkReturnedButton id={selectedId} />
             </div>
     </>
     )

@@ -1,0 +1,49 @@
+{
+    "checkoutRecords" : [
+        {
+            "recordId": 6,
+            "bookId": 6,
+            "lenderId": 2,
+            "borrowerId": 1,
+            "checkoutDate": "2024-04-21T12:30:00Z",
+            "dueDate" : "2024-05-05T12:30:00Z",
+            "isDue" : true
+        },
+        {
+            "recordId": 7,
+            "bookId": 7,
+            "lenderId": 2,
+            "borrowerId": 1,
+            "checkoutDate": "2024-04-18T12:30:00Z",
+            "dueDate" : "2024-05-02T12:30:00Z",
+            "isDue" : true
+        },
+        {
+            "recordId": 8,
+            "bookId": 10,
+            "lenderId": 2,
+            "borrowerId": 1,
+            "checkoutDate": "2024-04-15T12:30:00Z",
+            "dueDate" : "2024-04-29T12:30:00Z",
+            "isDue" : true
+        },
+        {
+            "recordId": 9,
+            "bookId": 11,
+            "lenderId": 2,
+            "borrowerId": 1,
+            "checkoutDate": "2024-04-20T12:30:00Z",
+            "dueDate" : "2024-05-04T12:30:00Z",
+            "isDue" : true
+        },
+        {
+            "recordId": 10,
+            "bookId": 5,
+            "lenderId": 2,
+            "borrowerId": 1,
+            "checkoutDate": "2024-04-21T12:30:00Z",
+            "dueDate" : "2024-05-05T12:30:00Z",
+            "isDue" : false
+        }
+    ]
+}
