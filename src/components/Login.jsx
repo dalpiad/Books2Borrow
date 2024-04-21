@@ -43,6 +43,7 @@ function LoginForm() {
         <>
             <Navigation />
             <h2>Login</h2>
+            <div className="form">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Email:</label>
@@ -54,6 +55,7 @@ function LoginForm() {
                     </div>
                     <button type="submit">Login</button>
                 </form>
+            </div>
         </>
     );
 }
