@@ -13,8 +13,6 @@ const MessageInbox = () => {
   const [conversationList, setConversationList]= useState({});
   const [messageList, setMessageList]= useState({});
   const [value, setValue] = useState(0);
-  const [messageContent, setMessageContent] = useState("");
-  const formatter = new Intl.DateTimeFormat('en-US', {dateStyle: 'full', timeStyle: 'short'});
 
   useEffect(() => {
     async function fetchData() {
@@ -96,7 +94,7 @@ const MessageInbox = () => {
       </Tabs>
       <Box sx={{maxHeight: 500, overflow: 'auto', minWidth: '85%'}}>
         {Object.keys(conversationList).map((key, index) => (
-          <TabContentPanel value={value} index={index} variant="scrollable"  >
+          <TabContentPanel value={value} index={index} variant="scrollable" key={key+index}  >
             {messageList.map((message) => {
               if (key == message.recipientId ) {
                 return (
@@ -113,8 +111,7 @@ const MessageInbox = () => {
                   </div>
                 )
               }
-            }
-            )}
+            })}
             <Box className="messageInput">
               <TextField id="message-field" label="Type your message here" variant="outlined" ></TextField>
               <Button id="send-button" variant='contained' color='success' onClick={() => {
