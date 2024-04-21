@@ -331,3 +331,10 @@ div {
   font-weight: 600;
   transition: 0.2s;
 }
+
+.backButton {
+  margin-left: 10px;
+  margin-top: 10px;
+  color: white;
+  background-color: #1565c0;
+}

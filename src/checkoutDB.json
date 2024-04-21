@@ -1,0 +1,10 @@
+{
+    "checkoutRecords" : [
+        {
+            "bookId": 5,
+            "lenderId": 1,
+            "borrowerId": 2,
+            "createdDate": null
+        }
+    ]
+}

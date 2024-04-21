@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { ReactNotifications, Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 
-const BookDetails = (clickedBook) => {
+const BookDetails = ({clickedBook, handleClickTwo}) => {
 
    let navigate = useNavigate();
    const authHeader = localStorage.getItem('jwt');
    console.log(authHeader);
    
-   const book = clickedBook.clickedBook;
+   const book = clickedBook;
 
     function processCleanBook(book) {
         const defaultValues = {
@@ -73,10 +73,12 @@ const BookDetails = (clickedBook) => {
 
       
    const cleanBook = processCleanBook(book);
-   console.log(book);
-   console.log(cleanBook);
     return(
         <>
+            <div>
+              <button className="backButton" onClick={handleClickTwo}>Back</button>
+            </div>
+            <br/>
             <div>
                 <ReactNotifications />
             <div className="book-details">

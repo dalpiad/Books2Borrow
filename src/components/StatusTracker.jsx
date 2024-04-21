@@ -13,10 +13,19 @@ const StatusTracker = () => {
     // setup state variable to hold lenderID objec
     // setup state variable to hold selected checkout records to mark returned. 
     const [selectedId, setSelectedId] = useState(null);
+    const [currentDate, setCurrentDate] = useState(null);
+    let nowDate;
+
+    nowDate = new Date(2024, 3, 20);
+    console.log(nowDate);
+    let nowDateString = nowDate.toUTCString().slice(0,16);
+  
+    
 
 
     // This will call by ID to the Checkout Record Controller. 
     // This needs to take the logged in users token and get where user is Borrower in checkout Object and isDue is true. 
+    /*
     const { data: checkoutBorrowObj, isCheckoutBorrowObjLoading } = useQuery({
         queryFn: async (id) => {
           const response = await axios.get(
@@ -74,13 +83,14 @@ const StatusTracker = () => {
     const handleCLick = (recordId) => {
         setSelectedId(recordId);
       }
+      */
 
     return (
         <>
 {/* //  on lcick display that displayes a countdown of when the book is due back. Default behavior to show the most recent book due back. 
 //  Can display both books you need to return to others as well as books due back to you and who you lent them out to.  */}
             <div>
-                <h1>Click to display component</h1>
+                <h1>{nowDateString}</h1>
             </div>
 {/* //  Table that displays book that you currently have borrowed. Clickable. */}
             <div>
