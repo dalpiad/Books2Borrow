@@ -42,14 +42,7 @@ const MessageInbox = () => {
     setValue(newValue);
   };
 
-  function assignInterlocutor(key) {
-    const interlocutorId = key;
-    console.log(interlocutorId);
-  };
-
-  const handleSearch = (interlocutorId, message) => {
-    // setMessageContent(document.getElementById("message-field").value);
-   // console.log(message);
+  const handleSend = (interlocutorId, message) => {
       axios.post(
       `http://localhost:8080/api/messages/send`, {
         "recipientId": interlocutorId,
@@ -101,45 +94,36 @@ const MessageInbox = () => {
           <Tab key={index} label={conversationList[key]} />
         ))}
       </Tabs>
-      {Object.keys(conversationList).map((key, index) => (
-        <TabContentPanel value={value} index={index} variant="scrollable" overflow='auto' height='500px' >
-          {messageList.map((message) => {
-            if (key == message.recipientId ) {
-              return (
-                <div key={message.id} >
-                <p className="sentMessages"> {message.content} </p>
-                <p className="sentInfo"> Sent: {message.sentAt} </p>
-                </div>
-              )
-            } else if (key == message.senderId) {
-              return (
-                <div key={message.id} >
-                <p className="recievedMessages" > {message.content} </p>
-                <p className="recievedInfo"> Recieved: {message.sentAt} </p>
-                </div>
-              )
+      <Box sx={{maxHeight: 500, overflow: 'auto', minWidth: '85%'}}>
+        {Object.keys(conversationList).map((key, index) => (
+          <TabContentPanel value={value} index={index} variant="scrollable"  >
+            {messageList.map((message) => {
+              if (key == message.recipientId ) {
+                return (
+                  <div key={message.id} >
+                  <p className="sentMessages"> {message.content} </p>
+                  <p className="sentInfo"> Sent: {message.sentAt} </p>
+                  </div>
+                )
+              } else if (key == message.senderId) {
+                return (
+                  <div key={message.id} >
+                  <p className="recievedMessages" > {message.content} </p>
+                  <p className="recievedInfo"> Recieved: {message.sentAt} </p>
+                  </div>
+                )
+              }
             }
-          }
-          )}
-          <Box className="messageInput">
-            <TextField id="message-field" label="Type your message here" variant="outlined" ></TextField>
-            <Button id="send-button" variant='contained' color='success' onClick={() => {handleSearch(key, document.getElementById("message-field").value)}}>Send</Button>
-          </Box>
-        </TabContentPanel>
-      ))}
-        {/* <div>
-            <TextField
-              id="message-field"
-              label="Search"
-              variant="outlined"
-            />
-          </div>
-          <div>
-            <Button variant="contained" onClick={() => handleSearch(interlocutorId)} style={{
-                  }}>
-              Search
-            </Button>
-          </div> */}
+            )}
+            <Box className="messageInput">
+              <TextField id="message-field" label="Type your message here" variant="outlined" ></TextField>
+              <Button id="send-button" variant='contained' color='success' onClick={() => {
+                handleSend(key, document.getElementById("message-field").value)}}>Send
+              </Button>
+            </Box>
+          </TabContentPanel>
+        ))}
+      </Box>
     </Box>
   );
 
