@@ -19,10 +19,13 @@ public class Book extends AbstractEntity {
     private ArrayList<String> subject;
     private boolean isAvailable;
 
+    private int customerId;
+
 
 
     public Book(String bookKey, String title, int bookCover, ArrayList<String> author, int firstPublishYear,
-                double averageRating, int numberOfReviews, ArrayList<String> subject, boolean isAvailable) {
+                double averageRating, int numberOfReviews, ArrayList<String> subject,
+                boolean isAvailable, int customerId) {
         this.bookKey = bookKey;
         this.title = title;
         this.bookCover = bookCover;
@@ -32,6 +35,7 @@ public class Book extends AbstractEntity {
         this.numberOfReviews = numberOfReviews;
         this.subject = subject;
         this.isAvailable = isAvailable;
+        this.customerId = customerId;
     }
 
     public Book () {}
@@ -122,5 +126,13 @@ public class Book extends AbstractEntity {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }
