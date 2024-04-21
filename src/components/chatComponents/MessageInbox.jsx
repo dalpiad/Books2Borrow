@@ -2,113 +2,135 @@ import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
-
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import axios from "axios";
 
 const MessageInbox = () => {
-  console.log(localStorage.getItem('jwt'));
+
   const authHeader = localStorage.getItem('jwt');
   const [conversationList, setConversationList]= useState({});
+  const [messageList, setMessageList]= useState({});
   const [value, setValue] = useState(0);
+  const [messageContent, setMessageContent] = useState("");
+  const formatter = new Intl.DateTimeFormat('en-US', {dateStyle: 'full', timeStyle: 'short'});
 
-  async function populateConversationList () {
-    useEffect(() => {
-      async function fetchData() {
-        const response = await axios.get(
-        `http://localhost:8080//api/messages/conversation`, {
-          headers: {'Authorization': `${authHeader}`}
-        })
-        setConversationList(response.data);
-      };
-      fetchData();
-    },[]);
-  }
-
-  populateConversationList();
-
-
-
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+      `http://localhost:8080/api/messages/conversations`, {
+        headers: {'Authorization': `${authHeader}`}
+      })
+      setConversationList(response.data);
+    };
+    fetchData();
+  },[]);
   
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+      `http://localhost:8080/api/messages/all`, {
+        headers: {'Authorization': `${authHeader}`}
+      })
+      setMessageList(response.data);
+    };
+    fetchData();
+  },[]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  function assignInterlocutor(key) {
+    const interlocutorId = key;
+    console.log(interlocutorId);
+  };
+
+  const handleSearch = (interlocutorId) => {
+    setMessageContent(document.getElementById("message-field").value);
+      axios.post(
+      `http://localhost:8080/api/messages/send`, {
+        headers: {'Authorization': `${authHeader}`}
+      })
+  };
+
+  function TabContentPanel(props) {
+    const { children, value, index, ...other } = props;
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+        sx={{ borderRight: 1, borderColor: 'divider', minWidth: '85%' }}
+        className='messageStyle'
+      >
+        {value === index && <Box >{children}</Box>}
+      </div>
+    );
+  }
+  
+  TabContentPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
   };
 
   return (
 
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 500 }}
+      sx={{ bgcolor: 'background.paper', display: 'flex', height: 500 }}
     >
       <Tabs
         orientation="vertical"
         variant="scrollable"
+        scrollButtons="auto"
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{ borderRight: 1, borderColor: 'divider', minWidth: '15%' }}
       >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
-        <Tab label="Item Six" {...a11yProps(5)} />
-        <Tab label="Item Seven" {...a11yProps(6)} />
+        {Object.keys(conversationList).map((key, index) => (
+          <Tab key={index} label={key} />
+        ))}
       </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+      {Object.keys(conversationList).map((key, index) => (
+        <TabContentPanel value={value} index={index} variant="scrollable" overflow='auto'>
+          {messageList.map((message) => {
+            if (key == message.recipientId ) {
+              return (
+                <div key={message.id} >
+                <p className="sentMessages"> {message.content} </p>
+                <p className="sentInfo"> Sent: {message.sentAt} </p>
+                </div>
+              )
+            } else if (key == message.senderId) {
+              return (
+                <div key={message.id} >
+                <p className="recievedMessages" > {message.content} </p>
+                <p className="recievedInfo"> Recieved: {message.sentAt} </p>
+                </div>
+              )
+            }
+          }
+          )}
+        </TabContentPanel>
+      ))}
+        {/* <div>
+            <TextField
+              id="message-field"
+              label="Search"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <Button variant="contained" onClick={() => handleSearch(interlocutorId)} style={{
+                  }}>
+              Search
+            </Button>
+          </div> */}
     </Box>
   );
 

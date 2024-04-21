@@ -302,10 +302,62 @@ div {
   text-align: center;
 }
 
+.sentMessages {
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  padding: 5px;
+  text-align: left;
+  margin-left: 45%;
+  margin-right: 5px;
+  margin-top: 5px;
+  max-width:max-content;
+}
+
+.sentInfo {
+  font-size: 0.7em;
+  text-align: right;
+  margin-right: 15px;
+}
+
+.recievedMessages {
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: mediumseagreen;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 45%;
+  margin-top: 5px;
+  max-width:max-content;
+}
+
+.recievedInfo {
+  font-size: 0.7em;
+  text-align: left;
+  margin-left: 15px;
+}
+
+.messageStyle {
+  display: 'flex';
+  min-width: 85%;
+}
 
 .bookCoverSmall {
   align-items: right;
   height: auto;
   width: 30px;
+  background-color: mediumseagreen;
 }
 
+  /* justify-self: flex-end;
+  
+  text-align: left;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: DodgerBlue;
+  padding: 5px;
+  max-width:max-content;
+  width: 300px;
+  margin-left: 45%;
+  margin-right: 5px;
+  margin-top: 5px; */
