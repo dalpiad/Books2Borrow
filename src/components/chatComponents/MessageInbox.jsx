@@ -47,12 +47,17 @@ const MessageInbox = () => {
     console.log(interlocutorId);
   };
 
-  const handleSearch = (interlocutorId) => {
-    setMessageContent(document.getElementById("message-field").value);
+  const handleSearch = (interlocutorId, message) => {
+    // setMessageContent(document.getElementById("message-field").value);
+   // console.log(message);
       axios.post(
       `http://localhost:8080/api/messages/send`, {
+        "recipientId": interlocutorId,
+        "content": message
+      }, {
         headers: {'Authorization': `${authHeader}`}
       })
+      document.getElementById("message-field").value = '';
   };
 
   function TabContentPanel(props) {
@@ -93,11 +98,11 @@ const MessageInbox = () => {
         sx={{ borderRight: 1, borderColor: 'divider', minWidth: '15%' }}
       >
         {Object.keys(conversationList).map((key, index) => (
-          <Tab key={index} label={key} />
+          <Tab key={index} label={conversationList[key]} />
         ))}
       </Tabs>
       {Object.keys(conversationList).map((key, index) => (
-        <TabContentPanel value={value} index={index} variant="scrollable" overflow='auto'>
+        <TabContentPanel value={value} index={index} variant="scrollable" overflow='auto' height='500px' >
           {messageList.map((message) => {
             if (key == message.recipientId ) {
               return (
@@ -116,6 +121,10 @@ const MessageInbox = () => {
             }
           }
           )}
+          <Box className="messageInput">
+            <TextField id="message-field" label="Type your message here" variant="outlined" ></TextField>
+            <Button id="send-button" variant='contained' color='success' onClick={() => {handleSearch(key, document.getElementById("message-field").value)}}>Send</Button>
+          </Box>
         </TabContentPanel>
       ))}
         {/* <div>

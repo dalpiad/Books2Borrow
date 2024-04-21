@@ -337,6 +337,24 @@ div {
   margin-left: 15px;
 }
 
+.messageInput {
+  vertical-align: bottom;
+  align-self: baseline;
+  min-width: 85%;
+}
+
+#message-field {
+  min-width: 70%;
+  width: 530px;
+  
+}
+
+#send-button {
+  align-self: center;
+  margin-left: 2px;
+  margin-top: 10px;
+}
+
 .messageStyle {
   display: 'flex';
   min-width: 85%;
