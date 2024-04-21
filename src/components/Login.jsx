@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { redirect } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navigation from './Navigation';
 
 function LoginForm() {
     let navigate = useNavigate();
@@ -26,6 +27,7 @@ function LoginForm() {
             if (authHeader) {
                 localStorage.setItem('jwt', authHeader);
                 console.log('JWT saved to local storage:', authHeader);
+                console.log(authHeader)
             } else {
                 console.error('Authorization header is missing or improperly formatted.');
             }
@@ -34,21 +36,27 @@ function LoginForm() {
             console.error('Response status:', error.response ? error.response.status : 'No response');
             console.error('Response data:', error.response ? error.response.data : 'No response data');
         }
-        navigate("/")
+        navigate("/SimpleUserDashboard")
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Email:</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <>
+            <Navigation />
+            <h2>Login</h2>
+            <div className="form">
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Email:</label>
+                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
             </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </div>
-            <button type="submit">Login</button>
-        </form>
+        </>
     );
 }
 
