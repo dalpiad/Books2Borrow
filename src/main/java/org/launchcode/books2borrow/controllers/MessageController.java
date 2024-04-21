@@ -22,12 +22,24 @@ public class MessageController {
     @Autowired
     private CustomerRepository customerRepository;
 
-
     @Autowired
     private MessageService messageService;
 
+//    @RequestMapping("/all")
+//    public ResponseEntity<?> getMessagesBetweenUsers(Authentication authentication, @RequestBody int interlocutorId) {
+//        int userId;
+//        List<Customer> customers = customerRepository.findByEmail(authentication.getName());
+//        if (!customers.isEmpty()) {
+//            userId = customers.get(0).getId();
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        List<Message> messages = messageService.getMessagesBetweenUsers(userId, interlocutorId);
+//        return new ResponseEntity<>(messages, HttpStatus.OK);
+//    }
+
     @RequestMapping("/all")
-    public ResponseEntity<?> getMessagesBetweenUsers(Authentication authentication, @RequestBody int interlocutorId) {
+    public ResponseEntity<?> getMessagesBetweenUsers(Authentication authentication) {
         int userId;
         List<Customer> customers = customerRepository.findByEmail(authentication.getName());
         if (!customers.isEmpty()) {
@@ -35,8 +47,8 @@ public class MessageController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        List<Message> messages = messageService.getMessagesBetweenUsers(userId, interlocutorId);
-        return new ResponseEntity<>(messages, HttpStatus.OK);
+        List<Message> userMessages = messageService.getUserMessages(userId);
+        return new ResponseEntity<>(userMessages, HttpStatus.OK);
     }
 
     @RequestMapping("/conversations")
