@@ -11,8 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -55,7 +53,7 @@ public class ProjectSecurityConfig {
 ////                        .requestMatchers("/testing").hasAnyRole("USER","ADMIN")
 //                        .requestMatchers("/myLoans").hasRole("USER")
 //                        .requestMatchers("/myCards").hasRole("USER")
-                        .requestMatchers("/user", "/testing", "api/books/add", "api/books/delete", "api/books/delete/{id}", "wishlist/**","api/borrow/checkout").authenticated()
+                        .requestMatchers("/user", "/testing", "api/books/add", "api/books/delete", "api/books/delete/{id}", "wishlist/**","api/borrow/checkout", "api/messages/**").authenticated()
                         .requestMatchers("/register","/hello", "api/books/home", "api/books/{id}").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
