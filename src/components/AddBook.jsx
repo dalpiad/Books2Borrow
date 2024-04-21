@@ -20,7 +20,6 @@ const AddBook = () =>{
         setIsClicked(!isClicked);
         setIsSearching(!isSearching);
     };
-//marking where SearchBOx was added in. 
     const [searchTerm, setSearchTerm] = useState("Of Mice and Men");
 
   const handleClick = () => {
