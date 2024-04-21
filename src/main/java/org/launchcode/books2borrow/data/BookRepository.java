@@ -12,4 +12,6 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
     List<Book> findByBookKey(String bookKey);
 
     List<Book> findByCustomerId(int customerId);
+
+    Book findById(int id);
 }
