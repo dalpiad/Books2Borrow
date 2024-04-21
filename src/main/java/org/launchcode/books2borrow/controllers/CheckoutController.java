@@ -6,6 +6,7 @@ package org.launchcode.books2borrow.controllers;
         import org.launchcode.books2borrow.filter.AuthoritiesLoggingAtFilter;
         import org.launchcode.books2borrow.models.Book;
         import org.launchcode.books2borrow.models.Checkout;
+        import org.launchcode.books2borrow.models.Customer;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.HttpStatus;
         import org.springframework.http.ResponseEntity;
@@ -32,16 +33,22 @@ public class CheckoutController {
     @PostMapping("/checkout")
     public  ResponseEntity<?>  checkoutBook(@RequestBody CheckoutDTO aCheckoutDTO) {
         LOG.info("Inside Checkout");
-//        CheckoutDTO checkoutDTO = new CheckoutDTO(book,customer,checkoutDate);
-        Checkout newCheckout = createNewCheckout(aCheckoutDTO);
-        checkoutRepository.save(newCheckout);
+        Book book = bookRepository.findById(aCheckoutDTO.getBookId());
+        Customer customer = customerRepository.findById(aCheckoutDTO.getCustomerId());
+        if(book != null && customer != null && book.isAvailable()) {
+            Checkout newCheckout = createNewCheckout(aCheckoutDTO);
+            checkoutRepository.save(newCheckout);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     private Checkout createNewCheckout(CheckoutDTO checkoutDTO ){
         int  bookId = checkoutDTO.getBookId();
         Book book = bookRepository.findById(bookId);
-        if (book != null) {
+        if (book != null && book.isAvailable()) {
             book.setAvailable(false);
             bookRepository.save(book);
         }
