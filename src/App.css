@@ -291,7 +291,6 @@ div {
   overflow: hidden;
 }
 
-
 /* div.form
 {
     display: block;
@@ -302,3 +301,22 @@ div {
   display: inline-block; 
   text-align: left; 
 } */
+
+
+.myWishlistTableTr {
+  align-items: center;
+  text-align: center;
+}
+
+.myWishlistTableTd {
+  align-items: center;
+  text-align: center;
+}
+
+
+.bookCoverSmall {
+  align-items: right;
+  height: auto;
+  width: 30px;
+}
+
