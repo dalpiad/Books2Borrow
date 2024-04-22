@@ -21,7 +21,7 @@ const Register = () => {
                 wishlist: null
             }
         )
-        console.log(something.data);
+        navigate("/")
     }
     return (
         <>
