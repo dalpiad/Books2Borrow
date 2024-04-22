@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const Wishlist = () => {
   const authHeader = localStorage.getItem('jwt');
   const [wishlist, setWishlist]= useState([]);
+  const [bookList, setBookList]= useState([]);
 
   useEffect(() => {
       async function fetchData() {
@@ -18,15 +19,27 @@ const Wishlist = () => {
     fetchData();
   },[]);
 
-  const handleBorrow = (wishlistItem) => {
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+      `http://localhost:8080/api/books/all`, {
+        headers: {'Authorization': `${authHeader}`}
+    })
+    setBookList(response.data);
+  };
+  fetchData();
+},[]);
+
+
+  const handleBorrow = (bookRecord) => {
     axios.post(
     `http://localhost:8080/api/messages/send`, {
-      "recipientId": wishlist.customerId,
-      "content": `I would like to borrow your copy of ${wishilist.title}, please message me if it is available and we can coordinate the exchange.`
+      "recipientId": bookRecord.customerId,
+      "content": `I would like to borrow your copy of ${bookRecord.title}, please message me if it is available and we can coordinate the exchange.`
     }, {
       headers: {'Authorization': `${authHeader}`}
     })
-    .then (handleNotification( `${book.title} added to your wishlist` ));
+    .then (handleNotification( `${bookRecord.title} request is sent.` ));
   };
 
   const handleNotification = (message) => {
@@ -72,10 +85,16 @@ const Wishlist = () => {
                 </td>
                 <td className="myWishlistTableTd" >{wishlistItem.title}</td>
                 <td>
-                  <Button variant="contained" color="secondary" onClick={() => handleBorrow(wishlistItem)}> Borrow </Button>
+                  {() => {
+                    bookRecord = bookList.find(book => ((book.bookKey === bookKey) && book.isAvailable === true))
+                    if (bookRecord.isAvailable) {
+                    <Button variant="contained" color="secondary" onClick={() => handleBorrow(bookRecord)}> Borrow </Button>
+                  } else {
+                    <Button variant="outlined" disabled>Unavailable</Button>
+                  }}}
                 </td>
                 <td>
-                  <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem.id)} startIcon={<DeleteIcon />}> Delete </Button>
+                  <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem.id)} startIcon={<DeleteIcon />}>Delete</Button>
                 </td>
               </tr>
             ))}
