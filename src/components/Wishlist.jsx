@@ -2,6 +2,8 @@ import { React, useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ReactNotifications, Store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 const Wishlist = () => {
   const authHeader = localStorage.getItem('jwt');
@@ -22,9 +24,7 @@ const Wishlist = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(
-      `http://localhost:8080/api/books/all`, {
-        headers: {'Authorization': `${authHeader}`}
-    })
+      `http://localhost:8080/api/books/all`)
     setBookList(response.data);
   };
   fetchData();
@@ -68,6 +68,7 @@ const Wishlist = () => {
     
     return (
       <>
+        <ReactNotifications />
         <table  style={{ width: "100%", backgroundColor: "LightGray" }}>
           <thead className="myWishlistTable">
             <tr className="myWishlistTableTr">
@@ -85,13 +86,15 @@ const Wishlist = () => {
                 </td>
                 <td className="myWishlistTableTd" >{wishlistItem.title}</td>
                 <td>
-                  {() => {
-                    bookRecord = bookList.find(book => ((book.bookKey === bookKey) && book.isAvailable === true))
-                    if (bookRecord.isAvailable) {
-                    <Button variant="contained" color="secondary" onClick={() => handleBorrow(bookRecord)}> Borrow </Button>
+                  <section>
+                  {(() => {
+                    const bookRecord = bookList.find(book => book.bookKey === wishlistItem.bookKey && book.available === true)
+                    if (bookRecord && bookRecord.available) {
+                      return (<Button variant="contained" color="secondary" onClick={() => handleBorrow(bookRecord)}> Borrow </Button>);
                   } else {
-                    <Button variant="outlined" disabled>Unavailable</Button>
-                  }}}
+                    return (<Button variant="outlined" disabled>Unavailable</Button>);
+                  }})()}
+                  </section>
                 </td>
                 <td>
                   <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem.id)} startIcon={<DeleteIcon />}>Delete</Button>
