@@ -27,12 +27,12 @@ public class BookController {
     private CustomerRepository customerRepository;
 
 
-    //All mapping might be for a future admin class to access books across all users.
-//    @GetMapping("/all")
-//    public ResponseEntity<?> getAllBooks() {
-//        List<Book> books = (List<Book>) bookRepository.findAll();
-//        return new ResponseEntity<>(books, HttpStatus.OK);
-//    }
+    //  Using this controller for the borrow function in the wishlist and books details.
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllBooks() {
+        List<Book> books = (List<Book>) bookRepository.findAll();
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookById(@PathVariable Integer id) {
