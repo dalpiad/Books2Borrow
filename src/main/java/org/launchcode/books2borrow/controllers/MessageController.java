@@ -70,22 +70,16 @@ public class MessageController {
         for (Message message : userMessages) {
             if (message.getSenderId() != userId) {
                 if (!uniqueConversations.containsKey(message.getSenderId())) {
-                    Optional<Customer> optionalCustomer = customerRepository.findById(message.getSenderId());
-                    if (optionalCustomer.isPresent()) {
-                        Customer customerName = optionalCustomer.get();
-                        String name = customerName.getName();
-                        uniqueConversations.put(message.getSenderId(), name);
-                    }
+                    Customer customerName = customerRepository.findById(message.getSenderId());
+                    String name = customerName.getName();
+                    uniqueConversations.put(message.getSenderId(), name);
                 }
             }
             if (message.getRecipientId() != userId) {
                 if (!uniqueConversations.containsKey(message.getRecipientId())) {
-                    Optional<Customer> optionalCustomer = customerRepository.findById(message.getRecipientId());
-                    if (optionalCustomer.isPresent()) {
-                        Customer customerName = optionalCustomer.get();
-                        String name = customerName.getName();
-                        uniqueConversations.put(message.getRecipientId(), name);
-                    }
+                    Customer customerName = customerRepository.findById(message.getRecipientId());
+                    String name = customerName.getName();
+                    uniqueConversations.put(message.getRecipientId(), name);
                 }
             }
         }
