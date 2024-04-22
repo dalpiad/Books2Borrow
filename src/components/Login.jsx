@@ -18,16 +18,12 @@ function LoginForm() {
                     'Authorization': `Basic ${authToken}`
                 }
             });
-            console.log('Response:', response.data);
-            console.log('All Headers:', response.headers);
 
             const authHeader = response.headers['authorization'];
-            console.log('Authorization Header:', authHeader);
 
             if (authHeader) {
                 localStorage.setItem('jwt', authHeader);
-                console.log('JWT saved to local storage:', authHeader);
-                console.log(authHeader)
+                console.log('JWT saved to local storage:');
             } else {
                 console.error('Authorization header is missing or improperly formatted.');
             }
