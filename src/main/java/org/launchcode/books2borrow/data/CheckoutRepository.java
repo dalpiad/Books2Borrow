@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface CheckoutRepository extends CrudRepository<Checkout, Integer> {
-
+    List<Checkout> findByCustomerId(int id);
 }

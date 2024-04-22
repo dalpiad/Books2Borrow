@@ -24,6 +24,9 @@ public class Checkout  extends AbstractEntity{
         this.dueDate = dueDate;
     }
 
+    public Checkout() {
+    }
+
     public int getBookId() {
         return bookId;
     }
