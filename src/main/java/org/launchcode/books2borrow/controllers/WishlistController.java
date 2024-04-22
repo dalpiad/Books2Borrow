@@ -1,6 +1,5 @@
 package org.launchcode.books2borrow.controllers;
 
-
 import org.launchcode.books2borrow.data.BookRepository;
 import org.launchcode.books2borrow.data.CustomerRepository;
 import org.launchcode.books2borrow.data.WishlistItemRepository;
@@ -58,9 +57,6 @@ public class WishlistController {
         String title = partialWishlistItem.getTitle();
         int bookCover = partialWishlistItem.getBookCover();
 
-//        String bookKey = wishlistMap.bookKey;
-//        String title = wishlistMap.title;
-//        int bookCover = Integer.valueOf(wishlistMap.bookCover);
         boolean isAvailable = false;
         List<Book> matchingBooks = bookRepository.findByBookKey(bookKey);
             for(int i = 0; i < matchingBooks.size(); i++) {
@@ -91,15 +87,5 @@ public class WishlistController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
-//    Customer user;
-//    List<Customer> customers = customerRepository.findByEmail(authentication.getName());
-//        if (!customers.isEmpty()) {
-//        user = customers.get(0);
-//    } else {
-//        user = null;
-//    }
-
 
 }
