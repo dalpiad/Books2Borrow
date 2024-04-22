@@ -5,7 +5,6 @@ import DeleteBookButton from "./ui/DeleteBookButton";
 
 
 const MyLibrary = () => {
-
   const token = localStorage.getItem('jwt');
 
     const [selectedId, setSelectedId] = useState(null);

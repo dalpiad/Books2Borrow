@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 
 const Wishlist = () => {
   const authHeader = localStorage.getItem('jwt');
-
   const [wishlist, setWishlist]= useState([]);
+
   useEffect(() => {
       async function fetchData() {
         const response = await axios.get(
@@ -16,7 +16,6 @@ const Wishlist = () => {
     };
     fetchData();
   },[]);
-
 
   const handleClick = (wishlistItemId) => {
       axios.delete(
@@ -55,5 +54,4 @@ const Wishlist = () => {
     );
 };
 
-        
 export default Wishlist;

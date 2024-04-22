@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Navigation from './Navigation';
 import MyLibrary from './MyLibrary';
 import Wishlist from './Wishlist';
+import MessageInbox from './chatComponents/MessageInbox';
 
 
 function CustomTabPanel(props) {
@@ -86,7 +87,7 @@ const SimpleUserDashboard = () => {
                 <Wishlist />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
-                Chat
+                <MessageInbox />
             </CustomTabPanel>
         </div>
         </>
