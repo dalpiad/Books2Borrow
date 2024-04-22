@@ -309,6 +309,7 @@ div {
 }
 
 .myWishlistTableTd {
+  font-size: 1.2em;
   align-items: center;
   text-align: center;
 }
