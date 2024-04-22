@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Wishlist = () => {
   const authHeader = localStorage.getItem('jwt');
@@ -17,6 +18,34 @@ const Wishlist = () => {
     fetchData();
   },[]);
 
+  const handleBorrow = (wishlistItem) => {
+    axios.post(
+    `http://localhost:8080/api/messages/send`, {
+      "recipientId": wishlist.customerId,
+      "content": `I would like to borrow your copy of ${wishilist.title}, please message me if it is available and we can coordinate the exchange.`
+    }, {
+      headers: {'Authorization': `${authHeader}`}
+    })
+    .then (handleNotification( `${book.title} added to your wishlist` ));
+  };
+
+  const handleNotification = (message) => {
+    Store.addNotification({
+      title: 'Success!',
+      message: message,
+      type: 'success',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: {
+        duration: 3000,
+        onScreen: true
+      }
+    });
+  }
+
+
   const handleClick = (wishlistItemId) => {
       axios.delete(
         `http://localhost:8080/wishlist/delete/${wishlistItemId}`, {
@@ -26,7 +55,7 @@ const Wishlist = () => {
     
     return (
       <>
-        <table className="myWishlistTableTr" style={{ width: "90%" }}>
+        <table  style={{ width: "100%", backgroundColor: "LightGray" }}>
           <thead className="myWishlistTable">
             <tr className="myWishlistTableTr">
               <th></th>  
@@ -42,9 +71,11 @@ const Wishlist = () => {
                     <img className="bookCoverSmall" src={"https://covers.openlibrary.org/b/id/" + wishlistItem.bookCover + "-S.jpg"} alt="Book Cover" height="58" />
                 </td>
                 <td className="myWishlistTableTd" >{wishlistItem.title}</td>
-                <td className="myWishlistTableTd" >Borrow</td>
-                <td className="myWishlistTableTd">
-                  <Button variant="outlined" color="error" onClick={() => handleClick(wishlistItem.id)}> Delete </Button>
+                <td>
+                  <Button variant="contained" color="secondary" onClick={() => handleBorrow(wishlistItem)}> Borrow </Button>
+                </td>
+                <td>
+                  <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem.id)} startIcon={<DeleteIcon />}> Delete </Button>
                 </td>
               </tr>
             ))}

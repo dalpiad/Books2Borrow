@@ -46,7 +46,7 @@ const BookDetails = (clickedBook) => {
           animationIn: ["animated", "fadeIn"],
           animationOut: ["animated", "fadeOut"],
           dismiss: {
-            duration: 5000,
+            duration: 3000,
             onScreen: true
           }
         });
@@ -55,20 +55,15 @@ const BookDetails = (clickedBook) => {
 
 
     const handleAddToWishlist = () => {
-
-        const bookData = {bookKey : book.bookKey, title : book.title, bookCover : book.bookCover }
-
-        axios.post(
-          `http://localhost:8080/wishlist/addToWishlist`, 
-          bookData, 
-          {
-            headers: {'Authorization': `${authHeader}`}
-          }
-    )
-    .then((response) => {
-        console.log(response.data);
-    })
-    .then (handleNotification( `${book.title} added to your wishlist` ));
+      const bookData = {bookKey : book.bookKey, title : book.title, bookCover : book.bookCover }
+      axios.post(
+        `http://localhost:8080/wishlist/addToWishlist`, 
+        bookData, 
+        {
+          headers: {'Authorization': `${authHeader}`}
+        }
+      )
+      .then (handleNotification( `${book.title} added to your wishlist` ));
     }
 
       
