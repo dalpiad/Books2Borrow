@@ -291,6 +291,17 @@ div {
   overflow: hidden;
 }
 
+/* div.form
+{
+    display: block;
+    text-align: center;
+}
+
+.form { 
+  display: inline-block; 
+  text-align: left; 
+} */
+
 
 .myWishlistTableTr {
   align-items: center;

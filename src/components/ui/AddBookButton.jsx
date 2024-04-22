@@ -1,6 +1,5 @@
 import React from "react"
 import axios from "axios";
-import ButtonComp from "./ButtonComp";
 
 const AddBookButton = (props) => {
     const handleClick = () => {
@@ -8,19 +7,11 @@ const AddBookButton = (props) => {
         const data = props.book;
         console.log(data);
 
-    const username = 'zim@test.com';
-    const password = '12345';
-    const encodedCredentials = btoa(`${username}:${password}`);
-
-    // const config = {
-    //     headers: {
-    //         'Authorization': `Basic ${encodedCredentials}`
-    //     }
-    // };
-
+    const token = localStorage.getItem('jwt');
 
     axios.post('http://localhost:8080/api/books/add', data, {headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
       }}).then(response => {
         if (response.ok) {
             alert('Successfully Added to "My Books."');
