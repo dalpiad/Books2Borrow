@@ -29,7 +29,7 @@ const Register = () => {
                 <Navigation />
             </div>
             <div>
-                <h2 >Please enter registration information:</h2>
+                <h2 >Please enter your information below:</h2>
                     <form onSubmit={handleSubmit}>
                         <label>First Name:</label><br/>
                             <input type="text" name="firstName" /><br/>
