@@ -1,52 +1,39 @@
-import { React, useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ReactNotifications } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
-import handleBorrow from '../util/BorrowFunctions';
+import BorrowButton from '../util/BorrowButton';
 
 const Wishlist = () => {
-  const authHeader = localStorage.getItem('jwt');
-  const [bookList, setBookList]= useState([]);
-  const { data: wishlist, isLoading } = useQuery({
+  const { data: wishlist, isLoading, refetch } = useQuery({
     queryFn: async () => {
       const response = await axios.get(
         `http://localhost:8080/wishlist/all`, {
-          headers: {'Authorization': `${authHeader}`}
+          headers: {'Authorization': `${localStorage.getItem('jwt')}`}
         })
       return response.data;
     },
     queryKey: ["wishlist"]
   });
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await axios.get(
-      `http://localhost:8080/api/books/all`)
-    setBookList(response.data);
-  };
-  fetchData();
-  },[]);
+  const handleClick = async (wishlistItem) => {
+      if (confirm(`You are about to delete ${wishlistItem.title}`)) {
+          await axios.delete(
+            `http://localhost:8080/wishlist/delete/${wishlistItem.id}`, {
+          headers: {'Authorization': `${localStorage.getItem('jwt')}`}
+        })
+        await refetch();
+      } 
+    }
 
-  const handleClick = (wishlistItemId) => {
-      axios.delete(
-        `http://localhost:8080/wishlist/delete/${wishlistItemId}`, {
-      headers: {'Authorization': `${authHeader}`}
-    })
-  }
-
-
-    
 
     if (isLoading) {
       return <div>Loading...</div>;
     }
     return (
       <>
-        <ReactNotifications />
-        <table  style={{ width: "100%", backgroundColor: "LightGray" }}>
+        <table style={{ width: "100%", backgroundColor: "LightGray" }}>
           <thead className="myWishlistTable">
             <tr className="myWishlistTableTr">
               <th></th>  
@@ -63,18 +50,10 @@ const Wishlist = () => {
                 </td>
                 <td className="myWishlistTableTd" >{wishlistItem.title}</td>
                 <td>
-                  <section>
-                  {(() => {
-                    const bookRecord = bookList.find(book => book.bookKey === wishlistItem.bookKey && book.available === true)
-                    if (bookRecord && bookRecord.available) {
-                      return (<Button variant="contained" color="secondary" onClick={() => handleBorrow(bookRecord)}> Borrow </Button>);
-                  } else {
-                    return (<Button variant="outlined" disabled>Unavailable</Button>);
-                  }})()}
-                  </section>
+                  <BorrowButton bookKey={wishlistItem.bookKey} />
                 </td>
                 <td>
-                  <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem.id)} startIcon={<DeleteIcon />}>Delete</Button>
+                  <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem)} startIcon={<DeleteIcon />}>Delete</Button>
                 </td>
               </tr>
             ))}

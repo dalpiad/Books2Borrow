@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import AddBookButton from "./ui/AddBookButton";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import { ReactNotifications } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
-import handleAddToWishlist from '../util/WishlistFunctions';
-import Button from "@mui/material/Button";
+import AddWishlistButton from '../util/AddWishlistButton';
 
 const BookDetails = (clickedBook) => {
 
    let navigate = useNavigate();
    const authHeader = localStorage.getItem('jwt');
    console.log(authHeader);
-   
    const book = clickedBook.clickedBook;
 
     function processCleanBook(book) {
@@ -44,7 +39,7 @@ const BookDetails = (clickedBook) => {
     return(
         <>
             <div>
-                <ReactNotifications />
+
             <div className="book-details">
                             <div >
                            
@@ -76,7 +71,7 @@ const BookDetails = (clickedBook) => {
                             </div>
                             <div className="book-details">
                             <AddBookButton book={cleanBook}/>
-                            <Button id="wishlist-button" variant='contained' color='success'onClick={() => handleAddToWishlist(book)}>Add to Wishlist</Button>
+                            <AddWishlistButton book={book} />
                             </div>
           </div>
         </>

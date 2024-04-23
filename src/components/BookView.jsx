@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
-import Button from "@mui/material/Button";
+import AddWishlistButton from '../util/AddWishlistButton';
+import AddBookButton from "./ui/AddBookButton";
+import BorrowButton from '../util/BorrowButton';
 
 function BookView() {
-    const authHeader = localStorage.getItem('jwt');
     const {id} = useParams();
     const [book , setBook] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [wishlist, setWishlist]= useState([]);
-    const [bookList, setBookList]= useState([]);
 
     useEffect(() => {
         fetch('http://localhost:8080/api/books/'+id)
@@ -70,18 +69,9 @@ function BookView() {
                             </div>
                             </div>
                             <div className="book-details">
-                            <button className = "second-btn">Add to Wishlist </button>
-                            <button className = "third-btn">Add Books </button>
-                            <section>
-                                {(() => {
-                                    const bookRecord = bookList.find(book => book.bookKey === wishlistItem.bookKey && book.available === true)
-                                    if (bookRecord && bookRecord.available) {
-                                    return (<Button variant="contained" color="secondary" onClick={() => handleBorrow(bookRecord)}> Borrow </Button>);
-                                } else {
-                                    return (<Button variant="outlined" disabled>Unavailable</Button>);
-                                }})()}
-                                </section>
-                            <button className= "fourth-btn"> Borrow Book</button>
+                            <AddBookButton book={book}/>
+                            <AddWishlistButton book={book} />
+                            <BorrowButton bookKey={book.bookKey} />
                             </div>
                            
           </div>
