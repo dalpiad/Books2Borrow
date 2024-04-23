@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import AddBookButton from "./ui/AddBookButton";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import { ReactNotifications, Store } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
+import AddWishlistButton from '../util/AddWishlistButton';
 
 const BookDetails = (clickedBook) => {
 
    let navigate = useNavigate();
    const authHeader = localStorage.getItem('jwt');
    console.log(authHeader);
-   
    const book = clickedBook.clickedBook;
 
     function processCleanBook(book) {
@@ -36,44 +33,13 @@ const BookDetails = (clickedBook) => {
         return book;
       }
     
-    const handleNotification = (message) => {
-        Store.addNotification({
-          title: 'Success!',
-          message: message,
-          type: 'success',
-          insert: 'top',
-          container: 'top-right',
-          animationIn: ["animated", "fadeIn"],
-          animationOut: ["animated", "fadeOut"],
-          dismiss: {
-            duration: 3000,
-            onScreen: true
-          }
-        });
-    }
-
-
-
-    const handleAddToWishlist = () => {
-      const bookData = {bookKey : book.bookKey, title : book.title, bookCover : book.bookCover }
-      axios.post(
-        `http://localhost:8080/wishlist/addToWishlist`, 
-        bookData, 
-        {
-          headers: {'Authorization': `${authHeader}`}
-        }
-      )
-      .then (handleNotification( `${book.title} added to your wishlist` ));
-    }
-
-      
    const cleanBook = processCleanBook(book);
    console.log(book);
    console.log(cleanBook);
     return(
         <>
             <div>
-                <ReactNotifications />
+
             <div className="book-details">
                             <div >
                            
@@ -104,8 +70,8 @@ const BookDetails = (clickedBook) => {
                             </div>
                             </div>
                             <div className="book-details">
-                            <button className = "second-btn" onClick={handleAddToWishlist}>Add to Wishlist </button>
                             <AddBookButton book={cleanBook}/>
+                            <AddWishlistButton book={book} />
                             </div>
           </div>
         </>

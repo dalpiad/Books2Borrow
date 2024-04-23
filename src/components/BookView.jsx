@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from './Navigation';
+import AddWishlistButton from '../util/AddWishlistButton';
+import AddBookButton from "./ui/AddBookButton";
+import BorrowButton from '../util/BorrowButton';
 
 function BookView() {
     const {id} = useParams();
@@ -66,9 +69,9 @@ function BookView() {
                             </div>
                             </div>
                             <div className="book-details">
-                            <button className = "second-btn">Add to Wishlist </button>
-                            <button className = "third-btn">Add Books </button>
-                            <button className= "fourth-btn"> Borrow Book</button>
+                            <AddBookButton book={book}/>
+                            <AddWishlistButton book={book} />
+                            <BorrowButton bookKey={book.bookKey} />
                             </div>
                            
           </div>
