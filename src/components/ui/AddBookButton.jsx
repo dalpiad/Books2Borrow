@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios";
+import Button from "@mui/material/Button";
 
 const AddBookButton = (props) => {
     const handleClick = () => {
@@ -24,7 +25,7 @@ const AddBookButton = (props) => {
         }
         return (
             <div>
-                <button className="BooksButton" onClick={handleClick}> Add Book</button>
+                <Button className="BooksButton" variant='contained' onClick={handleClick}> Add Book</Button>
             </div>
         
     )

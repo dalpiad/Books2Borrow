@@ -22,6 +22,7 @@ const Register = () => {
             }
         )
         console.log(something.data);
+        navigate("/");
     }
     return (
         <>

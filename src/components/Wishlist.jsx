@@ -1,25 +1,25 @@
 import { React, useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { ReactNotifications, Store } from 'react-notifications-component';
+import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
+import handleBorrow from '../util/BorrowFunctions';
 
 const Wishlist = () => {
   const authHeader = localStorage.getItem('jwt');
-  const [wishlist, setWishlist]= useState([]);
   const [bookList, setBookList]= useState([]);
-
-  useEffect(() => {
-      async function fetchData() {
-        const response = await axios.get(
+  const { data: wishlist, isLoading } = useQuery({
+    queryFn: async () => {
+      const response = await axios.get(
         `http://localhost:8080/wishlist/all`, {
           headers: {'Authorization': `${authHeader}`}
-      })
-      setWishlist(response.data);
-    };
-    fetchData();
-  },[]);
+        })
+      return response.data;
+    },
+    queryKey: ["wishlist"]
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -28,36 +28,7 @@ const Wishlist = () => {
     setBookList(response.data);
   };
   fetchData();
-},[]);
-
-
-  const handleBorrow = (bookRecord) => {
-    axios.post(
-    `http://localhost:8080/api/messages/send`, {
-      "recipientId": bookRecord.customerId,
-      "content": `I would like to borrow your copy of ${bookRecord.title}, please message me if it is available and we can coordinate the exchange.`
-    }, {
-      headers: {'Authorization': `${authHeader}`}
-    })
-    .then (handleNotification( `${bookRecord.title} request is sent.` ));
-  };
-
-  const handleNotification = (message) => {
-    Store.addNotification({
-      title: 'Success!',
-      message: message,
-      type: 'success',
-      insert: 'top',
-      container: 'top-right',
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"],
-      dismiss: {
-        duration: 3000,
-        onScreen: true
-      }
-    });
-  }
-
+  },[]);
 
   const handleClick = (wishlistItemId) => {
       axios.delete(
@@ -65,7 +36,13 @@ const Wishlist = () => {
       headers: {'Authorization': `${authHeader}`}
     })
   }
+
+
     
+
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
     return (
       <>
         <ReactNotifications />
