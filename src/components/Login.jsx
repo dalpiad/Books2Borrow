@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navigation from './Navigation';
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 function LoginForm() {
     let navigate = useNavigate();
@@ -54,13 +55,12 @@ function LoginForm() {
                 <form onSubmit={handleSubmit}>
                     <div>
                     {error && <p style={{color : "red"}}>{error}</p>}
-                        <label>Email:</label>
-                        
-                        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                        <label>Email:</label><br/>
+                        <TextField id="outlined-basic" variant="outlined" type="email" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
                     <div>
-                        <label>Password:</label>
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        <label>Password:</label><br/>
+                        <TextField id="outlined-basic" variant="outlined" type="password" value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
                     <Button type="submit" variant="contained" color="success"> Login </Button>
                 </form>
