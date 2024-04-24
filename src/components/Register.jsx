@@ -5,6 +5,8 @@ import axios from 'axios'
 import Navigation from "./Navigation";
 import { Alert, AlertTitle } from "@mui/material";
 import { useFormik } from "formik";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField"
 
 const Register = () => {
     const navigate = useNavigate();
@@ -74,18 +76,18 @@ const Register = () => {
                 <h2 >Please enter your information below:</h2>
                     <form onSubmit={handleSubmit}>
                         <label>First Name:</label><br/>
-                            <input type="text" name="firstName" onChange={handleChange}/><br/>
+                            <TextField id="outlined-basic" variant="outlined" type="text" name="firstName" onChange={handleChange}/><br/>
                             {touched.firstName && errors.firstName ? <div style={{color: "red"}}>{errors.firstName}</div> : null}
                         <label>Email:</label><br/>
-                            <input type="text" name="email" onChange={handleChange} /><br/>
+                            <TextField id="outlined-basic" variant="outlined" type="text" name="email" onChange={handleChange} /><br/>
                             {touched.email && errors.email ? <div style={{color: "red"}}>{errors.email}</div> : null}
                         <label>Password:</label><br/>
-                            <input type="password" name="password" onChange={handleChange}/><br/>
+                            <TextField id="outlined-basic" variant="outlined"type="password" name="password" onChange={handleChange}/><br/>
                             {touched.password && errors.password ? <div style={{color: "red"}}>{errors.password}</div> : null}
                         <label>Confirm Password:</label><br/>
-                            <input type="password" name="confirmPassword" onChange={handleChange} /><br/>
-                            {touched.confirmPassword && errors.confirmPassword ? <div style={{color: "red"}}>{errors.confirmPassword}</div> : null}
-                        <button type="submit">Register Now!</button>
+                            <TextField id="outlined-basic" variant="outlined" type="password" name="confirmPassword" onChange={handleChange} /><br/>
+                            {touched.confirmPassword && errors.confirmPassword ? <div style={{color: "red"}}>{errors.confirmPassword}</div> : null}<br/>
+                        <Button type="submit" variant="contained" color="success"> Register Now! </Button>
                     </form>
             </div>
         </>

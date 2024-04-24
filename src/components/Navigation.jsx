@@ -52,10 +52,7 @@ const Navigation = () => {
   ];
 
   const logout = () =>{
-    console.log("auth", auth)
-    console.log("LocalStorage",localStorage)
     localStorage.clear();
-    console.log("LocalStorage post clear",localStorage)
     navigate("/")
   }
 
