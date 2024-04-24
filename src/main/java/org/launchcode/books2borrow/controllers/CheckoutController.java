@@ -38,29 +38,39 @@ public class CheckoutController {
     public  ResponseEntity<?>  checkoutBook(Authentication authentication, @RequestBody CheckoutDTO aCheckoutDTO) {
         LOG.info("Inside Checkout");
         Book book = bookRepository.findById(aCheckoutDTO.getBookId());
-        book.setAvailable(false);
-        String bookTitle = book.getTitle();
-        List<Customer> customer = customerRepository.findByEmail(authentication.getName());
-        int borrowerId = customer.get(0).getId();
-        String borrowerName = customer.get(0).getName();
-        int lenderId = book.getCustomerId();
-        Customer lenders = customerRepository.findById(lenderId);
-        String lenderName = lenders.getName();
-        Checkout newCheckout = createNewCheckout(aCheckoutDTO.getBookId(), bookTitle, lenderId, lenderName, borrowerId, borrowerName);
-        checkoutRepository.save(newCheckout);
-        return new ResponseEntity<>(HttpStatus.OK);
+        if(book.isAvailable()) {
+            book.setAvailable(false);
+            String bookTitle = book.getTitle();
+            List<Customer> customer = customerRepository.findByEmail(authentication.getName());
+            int borrowerId = customer.get(0).getId();
+            String borrowerName = customer.get(0).getName();
+            int lenderId = book.getCustomerId();
+            Customer lenders = customerRepository.findById(lenderId);
+            String lenderName = lenders.getName();
+            Checkout newCheckout = createNewCheckout(aCheckoutDTO.getBookId(), bookTitle, lenderId, lenderName, borrowerId, borrowerName);
+            checkoutRepository.save(newCheckout);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/return")
     public  ResponseEntity<?>  returnBook(Authentication authentication, @RequestBody CheckoutDTO aCheckoutDTO) {
         LOG.info("Inside Checkout return");
         Checkout checkout = checkoutRepository.findById(aCheckoutDTO.getCheckoutId());
+        if(checkout != null && checkout.isCheckedout()){
         checkout.setCheckedout(false);
         checkoutRepository.save(checkout);
         Book book = bookRepository.findById(checkout.getBookId());
         book.setAvailable(true);
         bookRepository.save(book);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+        else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     }
 
     @GetMapping("/lent")
