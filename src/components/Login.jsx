@@ -63,9 +63,13 @@ function LoginForm() {
                         <label>Password:</label><br/>
                         <TextField id="outlined-basic" variant="outlined" type="password" value={password} onChange={e => setPassword(e.target.value)} />
                     </div><br/>
-                    <Button type="submit" variant="contained" color="success"> Login </Button>
+                    <Button type="submit" variant="contained" color="success" minHeight="30vh"> Login </Button>
                 </form>
                 </Box>
+                <br/>
+                <div style={{textAlign: "center"}}>
+                    <p>Need to register? <a href="/register">Click here!</a></p>
+                </div>
         </>
     );
 }

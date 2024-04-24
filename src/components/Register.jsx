@@ -98,6 +98,10 @@ const Register = () => {
                         <Button type="submit" variant="contained" color="success"> Register Now! </Button>
                     </form>
                 </Box>
+                <br/>
+                <div style={{textAlign: "center"}}>
+                    <p>Already registered? <a href="/login">Click here</a> to login</p>
+                </div>
             </div>
         </>
     )
