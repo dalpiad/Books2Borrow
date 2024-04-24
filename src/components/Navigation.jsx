@@ -18,6 +18,8 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { BiSolidBookAdd } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
+import { ReactNotifications } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 
 const Navigation = () => {
@@ -60,6 +62,7 @@ const Navigation = () => {
     <nav>
       <div className="nav-logo-container">
         <img className="bookimg" src={Logo} alt="" />
+        <ReactNotifications />
       </div>
 
 

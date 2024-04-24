@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { useQuery } from "react-query";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,10 +9,8 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 
 const MessageInbox = () => {
-
   const authHeader = localStorage.getItem('jwt');
   const [conversationList, setConversationList]= useState({});
-  const [messageList, setMessageList]= useState({});
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -25,23 +24,28 @@ const MessageInbox = () => {
     fetchData();
   },[]);
   
-  useEffect(() => {
-    async function fetchData() {
+
+  const { data: messageList, isLoading, refetch } = useQuery({
+    queryFn: async () => {
       const response = await axios.get(
-      `http://localhost:8080/api/messages/all`, {
-        headers: {'Authorization': `${authHeader}`}
-      })
-      setMessageList(response.data);
-    };
-    fetchData();
-  },[]);
+        `http://localhost:8080/api/messages/all`, {
+          headers: {'Authorization': `${authHeader}`}
+        })
+      return response.data;
+    },
+    queryKey: ["messageList"]
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const handleSend = (interlocutorId, message) => {
-      axios.post(
+  const handleSubmit = async (event) => {
+    event.preventDefault(); 
+    let message = document.getElementById("message-field").value;
+    let interlocutorId = document.getElementById("message-recipient").value;
+    event.preventDefault(); 
+    await axios.post(
       `http://localhost:8080/api/messages/send`, {
         "recipientId": interlocutorId,
         "content": message
@@ -49,6 +53,7 @@ const MessageInbox = () => {
         headers: {'Authorization': `${authHeader}`}
       })
       document.getElementById("message-field").value = '';
+      await refetch();
   };
 
   function TabContentPanel(props) {
@@ -73,6 +78,10 @@ const MessageInbox = () => {
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
 
@@ -112,12 +121,13 @@ const MessageInbox = () => {
                 )
               }
             })}
+            <form onSubmit={handleSubmit}>
             <Box className="messageInput">
-              <TextField id="message-field" label="Type your message here" variant="outlined" ></TextField>
-              <Button id="send-button" variant='contained' color='success' onClick={() => {
-                handleSend(key, document.getElementById("message-field").value)}}>Send
-              </Button>
+              <TextField id="message-field" label="Type your message here" variant="outlined" />
+              <input id="message-recipient" type="hidden" value={key} /> 
+              <Button id="send-button" variant='contained' color='success' type="submit" >Send</Button>
             </Box>
+            </form>
           </TabContentPanel>
         ))}
       </Box>
