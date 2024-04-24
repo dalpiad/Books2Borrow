@@ -5,6 +5,7 @@ import axios from 'axios';
 import Navigation from './Navigation';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { Box } from '@mui/material';
 
 function LoginForm() {
     let navigate = useNavigate();
@@ -50,8 +51,8 @@ function LoginForm() {
     return (
         <>
             <Navigation />
-            <h2>Login</h2>
-            <div className="form">
+            <h1 style={{textAlign: "center"}}>Login</h1>
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="30vh">
                 <form onSubmit={handleSubmit}>
                     <div>
                     {error && <p style={{color : "red"}}>{error}</p>}
@@ -64,7 +65,7 @@ function LoginForm() {
                     </div><br/>
                     <Button type="submit" variant="contained" color="success"> Login </Button>
                 </form>
-            </div>
+                </Box>
         </>
     );
 }

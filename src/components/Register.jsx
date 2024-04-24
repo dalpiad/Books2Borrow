@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField"
 import { Store } from 'react-notifications-component';
+import { Box } from '@mui/material';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -79,7 +80,8 @@ const Register = () => {
                 <Navigation />
             </div>
             <div>
-                <h2 >Please enter your information below:</h2>
+                    <h1 style={{textAlign: "center"}}>Register Below:</h1>
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
                     <form onSubmit={handleSubmit}>
                         <label>First Name:</label><br/>
                             <TextField id="outlined-basic" variant="outlined" type="text" name="firstName" onChange={handleChange}/><br/>
@@ -95,6 +97,7 @@ const Register = () => {
                             {touched.confirmPassword && errors.confirmPassword ? <div style={{color: "red"}}>{errors.confirmPassword}</div> : null}<br/>
                         <Button type="submit" variant="contained" color="success"> Register Now! </Button>
                     </form>
+                </Box>
             </div>
         </>
     )
