@@ -9,16 +9,11 @@ public class CheckoutDTO {
 
     private int bookId;
 
-    private int customerId;
-    private LocalDateTime checkoutDate;
+    private int checkoutId;
 
-    private LocalDateTime dueDate;
-
-    public CheckoutDTO(int bookId, int customerId, LocalDateTime checkoutDate, LocalDateTime dueDate) {
+    public CheckoutDTO(int bookId, int checkoutId) {
         this.bookId =  bookId;
-        this.customerId = customerId;
-        this.checkoutDate = checkoutDate;
-        this.dueDate = dueDate;
+        this.checkoutId = checkoutId;
     }
 
     public int getBookId() {
@@ -29,27 +24,11 @@ public class CheckoutDTO {
         this.bookId = bookId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getCheckoutId() {
+        return checkoutId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public LocalDateTime getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public void setCheckoutDate(LocalDateTime checkoutDate) {
-        this.checkoutDate = checkoutDate;
-    }
-
-    public LocalDateTime getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDateTime dueDate) {
-        this.dueDate = dueDate;
+    public void setCheckoutId(int checkoutId) {
+        this.checkoutId = checkoutId;
     }
 }

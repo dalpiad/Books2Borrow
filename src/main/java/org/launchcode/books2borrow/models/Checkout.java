@@ -12,16 +12,35 @@ public class Checkout  extends AbstractEntity{
 
     private int bookId;
 
-    private int customerId;
+    private String bookTitle;
+    private int lenderId;
+
+    private String lenderName;
+
+    private int borrowerId;
+
+    private String borrowerName;
+
     private LocalDateTime checkoutDate;
 
     private LocalDateTime dueDate;
 
-    public Checkout(int bookId, int customerId,LocalDateTime checkoutDate, LocalDateTime dueDate) {
+    private boolean isCheckedout;
+
+    public Checkout(int bookId, String bookTitle, int lenderId, String lenderName, int borrowerId,
+                    String borrowerName, LocalDateTime checkoutDate, LocalDateTime dueDate,boolean isCheckedout) {
         this.bookId = bookId;
-        this.customerId = customerId;
+        this.bookTitle = bookTitle;
+        this.lenderId = lenderId;
+        this.lenderName = lenderName;
+        this.borrowerId = borrowerId;
+        this.borrowerName = borrowerName;
         this.checkoutDate = checkoutDate;
         this.dueDate = dueDate;
+        this.isCheckedout = isCheckedout;
+    }
+
+    public Checkout() {
     }
 
     public int getBookId() {
@@ -32,12 +51,44 @@ public class Checkout  extends AbstractEntity{
         this.bookId = bookId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public String getBookTitle() {
+        return bookTitle;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public int getLenderId() {
+        return lenderId;
+    }
+
+    public void setLenderId(int lenderId) {
+        this.lenderId = lenderId;
+    }
+
+    public String getLenderName() {
+        return lenderName;
+    }
+
+    public void setLenderName(String lenderName) {
+        this.lenderName = lenderName;
+    }
+
+    public int getBorrowerId() {
+        return borrowerId;
+    }
+
+    public void setBorrowerId(int borrowerId) {
+        this.borrowerId = borrowerId;
+    }
+
+    public String getBorrowerName() {
+        return borrowerName;
+    }
+
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
     }
 
     public LocalDateTime getCheckoutDate() {
@@ -54,5 +105,13 @@ public class Checkout  extends AbstractEntity{
 
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public boolean isCheckedout() {
+        return isCheckedout;
+    }
+
+    public void setCheckedout(boolean checkedout) {
+        isCheckedout = checkedout;
     }
 }
