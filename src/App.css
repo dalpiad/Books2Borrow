@@ -338,3 +338,7 @@ div {
   color: white;
   background-color: #1565c0;
 }
+
+.selected {
+  background-color: lightgray;
+}
