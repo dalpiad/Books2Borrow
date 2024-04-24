@@ -30,12 +30,12 @@ const BorrowButton = (bookKey) => {
         }, {
         headers: {'Authorization': `${localStorage.getItem('jwt')}`}
     })
-  // axios.post(
-  //   `http://localhost:8080/api/borrow/checkout`, {
-  //     "bookId": 2
-  //   }, {
-  //     headers: {'Authorization': `${localStorage.getItem('jwt')}`}
-  //   })
+    axios.post(
+      `http://localhost:8080/api/borrow/checkout`, {
+        "bookId": bookRecord.id
+      }, {
+        headers: {'Authorization': `${localStorage.getItem('jwt')}`}
+    })
     .then (handleNotification( `${bookRecord.title} request is sent.` ));
   };
 
