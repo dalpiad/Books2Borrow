@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react"
-import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Navigation from "./Navigation";
-import { Alert, AlertTitle } from "@mui/material";
 import { useFormik } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField"
+import { Store } from 'react-notifications-component';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -25,7 +23,20 @@ const Register = () => {
             }
         )
 
-        navigate("/login")
+        Store.addNotification({
+            title: 'Success!',
+            message: "Registration Sucessful!",
+            type: 'success',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+                duration: 2000,
+                onScreen: true
+            },
+            onRemoval: () => navigate("/login")
+            });
     }
 
     function validate(values) {
