@@ -6,6 +6,7 @@ import Navigation from './Navigation';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Box } from '@mui/material';
+import { Store } from 'react-notifications-component';
 
 function LoginForm() {
     let navigate = useNavigate();
@@ -45,7 +46,22 @@ function LoginForm() {
             console.error('Response status:', error.response ? error.response.status : 'No response');
             console.error('Response data:', error.response ? error.response.data : 'No response data');
         }
-        navigate("/SimpleUserDashboard")
+
+        Store.addNotification({
+            title: 'Success!',
+            message: `Login Sucessful! Welcome ${email}`,
+            type: 'success',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+                duration: 2000,
+                onScreen: true
+            },
+            onRemoval: () => navigate("/SimpleUserDashboard")
+            });
+        // navigate("/SimpleUserDashboard")
     };
 
     return (
