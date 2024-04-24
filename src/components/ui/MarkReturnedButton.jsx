@@ -3,11 +3,14 @@ import axios from "axios";
 
 const MarkReturnedButton = (props) => {
     const handleClick = () => {
-        confirm(`Mark book ${props.id} as returned? This will close the checkout record`);
-        const data = props.id;
-
-    // update path to send delete request to Checkout Controller once ready. 
-    axios.patch(`http://localhost:8080/${data}`).then(response => {
+    confirm(`Mark book ${props.id} as returned? This will close the checkout record`);
+    const data = props.id;
+    
+    const token = localStorage.getItem('jwt');
+    axios.post(`http://localhost:8080/api/borrow/return`, data, {headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`
+      }}).then(response => {
         if (response.status === 200) {
             alert("Book Returned");
         } else {

@@ -342,3 +342,44 @@ div {
 .selected {
   background-color: lightgray;
 }
+
+.trackerDate {
+  display: flexbox;
+  text-align: center;
+}
+
+.statusBookCard {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  position: relative;
+  width:800px;
+  height: 3em;
+  background-color: green;
+  border-radius: 1.5em;
+  color: white;
+}
+
+.progress-bar::before {
+  position: absolute;
+  content: attr(data-label);
+  display: flex;
+  align-items: center;
+  left: .5em;
+  top: .5em;
+  bottom: .5em;
+  width: calc(var(--width, 14) * 7.14%);
+  min-width: 2rem;
+  max-width: calc(100% - 1em);
+  background-color: #1565c0;
+  border-radius: 1em;
+  padding: 1em;
+}

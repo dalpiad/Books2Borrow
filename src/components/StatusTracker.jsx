@@ -4,15 +4,18 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import moment from 'moment';
+import BookCard from "./ui/BookCard";
+import Tracker from "./ui/Tracker";
 
 
 
 
 const StatusTracker = () => {
   
-    const [selectedId, setSelectedId] = useState(null);
-    const [selectedRecord, setSelectedRecord] =useState(null);
-    const [currentDate, setCurrentDate] = useState(moment().format('MMMM Do YYYY'));
+    const [ selectedId, setSelectedId ] = useState(null);
+    const [ selectedRecord, setSelectedRecord ] =useState(null);
+    const [ currentDate, setCurrentDate ] = useState(moment().format('MMMM Do YYYY'));
+    const [ bookId, setBookId ] = useState(null);
 
     const token = localStorage.getItem('jwt'); 
     const { data: borrowedBooks, isBorrowedBooksLoading} = useQuery({
@@ -54,22 +57,28 @@ const StatusTracker = () => {
 
     const handleClick = (record) => { 
       setSelectedRecord(record);
+      setBookId(record.bookId);
+      console.log(record.bookId);
       }
 
       const handleSelected = (recordId) => {
         setSelectedId(recordId);
       }
 
+
     return (
         <>
 {/* //  on lcick display that displayes a countdown of when the book is due back. Default behavior to show the most recent book due back. 
 //  Can display both books you need to return to others as well as books due back to you and who you lent them out to.  */}
             <div>
-              <div>
+              <div >
                 <h3 className="trackerDate">{currentDate}</h3>
               </div>
               <div>
-                {selectedRecord && <p>{selectedRecord.bookId}</p>}
+                <Tracker />
+              </div>
+              <div className="statusBookCard">
+                <BookCard className="statusBookCard" bookId={bookId}/>
               </div>
             </div>
 {/* //  Table that displays book that you currently have borrowed. Clickable. */}
@@ -120,7 +129,7 @@ const StatusTracker = () => {
                       <td className="myBooksTable">{record.dueDate.slice(0,10)}</td>
                       <td className="myBooksTable">
                         <label>
-                          <input type="checkbox" onChange={()=>{handleSelected(record.recordId)}} />
+                          <input type="checkbox" onChange={()=>{handleSelected(record.id)}} />
                         </label>
                       </td>
                     </tr>
