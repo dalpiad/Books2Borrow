@@ -17,10 +17,10 @@ function LoginForm() {
         const authToken = btoa(`${email}:${password}`);
         try {
 
-          if (!email || !password) {
+        if (!email || !password) {
             setError('Please fill in all fields');
             return
-          }
+        }
 
             const response = await axios.get('http://localhost:8080/user', {
                 headers: {
@@ -61,7 +61,7 @@ function LoginForm() {
                     <div>
                         <label>Password:</label><br/>
                         <TextField id="outlined-basic" variant="outlined" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    </div>
+                    </div><br/>
                     <Button type="submit" variant="contained" color="success"> Login </Button>
                 </form>
             </div>

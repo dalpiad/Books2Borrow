@@ -10,10 +10,7 @@ import TextField from "@mui/material/TextField"
 
 const Register = () => {
     const navigate = useNavigate();
-    const [firstName, setFirstName] = useState('');
-    
-    
-    
+
     const handleSubmitz = async (values) => {
         let something = await axios.post(
             "http://localhost:8080/register",
@@ -59,9 +56,7 @@ const Register = () => {
 
     const {handleSubmit, handleChange, touched, errors} = useFormik({
         initialValues: {firstName: "", email: "", password: "",confirmPassword: ""},
-
         validate,
-        // handleSubmit,
         onSubmit: handleSubmitz
     });
 
