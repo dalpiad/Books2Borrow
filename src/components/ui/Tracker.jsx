@@ -1,12 +1,17 @@
 import React from "react";
+import moment from "moment";
 
-const Tracker = (props) => {
+const Tracker = ({ selectedRecord }) => {
 
-    const daysLeft = 5;
+    const checkoutRecord = selectedRecord;
+    const dueDate = moment().format(checkoutRecord.dueDate);
+    const momentArray = moment(dueDate).toArray();
+    const dueIn = moment(momentArray).fromNow();
+    const newDueIn = parseInt(dueIn.split(" ")[1]);
     
 
 return (
-    <div className="progress-bar" style={{ '--width': `${daysLeft}` }} data-label={`Days Left: ${daysLeft}`}></div>
+    <div className="progress-bar" style={{ '--width': `${newDueIn}` }} data-label={`Days Left: ${newDueIn}`}></div>
 )
 };
 

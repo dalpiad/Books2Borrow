@@ -15,9 +15,19 @@ import DueDateCard from "./ui/DueDateCard";
 const StatusTracker = () => {
   
     const [ selectedId, setSelectedId ] = useState(null);
-    const [ selectedRecord, setSelectedRecord ] =useState(null);
     const [ currentDate, setCurrentDate ] = useState(moment().format('MMMM Do YYYY'));
     const [ bookId, setBookId ] = useState(null);
+    const [selectedRecord, setSelectedRecord] = useState({
+      "id": 0,
+      "bookTitle": "Not Available",
+      "lenderId": 0,
+      "lenderName": "Not Available",
+      "borrowerId": 0,
+      "borrowerName": "Not Available",
+      "checkoutDate": "2024-04-25T08:30:00Z",
+      "dueDate": "2024-04-25T08:30:00Z",
+      "isCheckedout": true
+  });
 
     const token = localStorage.getItem('jwt'); 
     const { data: borrowedBooks, isBorrowedBooksLoading} = useQuery({
@@ -53,9 +63,8 @@ const StatusTracker = () => {
     } else if (selectedRecord === null && !isLentBooksLoading) {
       lentBooks?.map((record)=>{
         setSelectedRecord(record);
-      })
-    }
-  
+      })}
+
 
     const handleClick = (record) => { 
       setSelectedRecord(record);
@@ -68,22 +77,24 @@ const StatusTracker = () => {
       }
 
 
-    return (
-        <>
-{/* //  on lcick display that displayes a countdown of when the book is due back. Default behavior to show the most recent book due back. 
-//  Can display both books you need to return to others as well as books due back to you and who you lent them out to.  */}
+    if (isBorrowedBooksLoading || isBorrowedBooksLoading){
+      return (
+      <div>Loading</div>
+      )} else { 
+        return (
+          <>
             <div className="borderContainer">
               <div className="trackerContainer">
                 <h3 className="trackerDate">{currentDate}</h3>
                 <div className="progressBar-container">
-                  <Tracker />
+                  <Tracker selectedRecord={selectedRecord} />
                 </div>
               </div>
               <br/>
               <div className="displayContainer">
                 <BookCard className="statusBookCard" bookId={bookId} />
                 <CheckoutCard className="checkoutCard" selectedRecord={selectedRecord} />
-                <DueDateCard className="dueDateCard" selectedRecord={{selectedRecord, currentDate}} />
+                <DueDateCard className="dueDateCard" selectedRecord={selectedRecord} />
               </div>
             </div>
 {/* //  Table that displays book that you currently have borrowed. Clickable. */}
@@ -143,8 +154,9 @@ const StatusTracker = () => {
                 </table>
                 <MarkReturnedButton id={selectedId} />
             </div>
-    </>
+      </>
     )
+}
 }
 
 export default StatusTracker;
