@@ -80,7 +80,7 @@ const Register = () => {
                 <Navigation />
             </div>
             <div>
-                    <h1 style={{textAlign: "center"}}>Register Below:</h1>
+                <h1 style={{textAlign: "center"}}>Register Below:</h1>
                     <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
                     <form onSubmit={handleSubmit}>
                         <label>First Name:</label><br/>
