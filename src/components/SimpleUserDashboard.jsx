@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import MyLibrary from './MyLibrary';
 import Wishlist from './Wishlist';
 import StatusTracker from './StatusTracker';
+import MessageInbox from './chatComponents/MessageInbox';
 
 
 function CustomTabPanel(props) {
@@ -87,7 +88,7 @@ const SimpleUserDashboard = () => {
                 <Wishlist />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
-                Chat
+                <MessageInbox />
             </CustomTabPanel>
         </div>
         </>

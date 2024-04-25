@@ -1,33 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "react-query";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorrowButton from '../util/BorrowButton';
 
 const Wishlist = () => {
-  const authHeader = localStorage.getItem('jwt');
-
-  const [wishlist, setWishlist]= useState([]);
-  useEffect(() => {
-      async function fetchData() {
-        const response = await axios.get(
+  const { data: wishlist, isLoading, refetch } = useQuery({
+    queryFn: async () => {
+      const response = await axios.get(
         `http://localhost:8080/wishlist/all`, {
-          headers: {'Authorization': `${authHeader}`}
-      })
-      setWishlist(response.data);
-    };
-    fetchData();
-  },[]);
+          headers: {'Authorization': `${localStorage.getItem('jwt')}`}
+        })
+      return response.data;
+    },
+    queryKey: ["wishlist"]
+  });
+
+  const handleClick = async (wishlistItem) => {
+      if (confirm(`You are about to delete ${wishlistItem.title}`)) {
+          await axios.delete(
+            `http://localhost:8080/wishlist/delete/${wishlistItem.id}`, {
+          headers: {'Authorization': `${localStorage.getItem('jwt')}`}
+        })
+        await refetch();
+      } 
+    }
 
 
-  const handleClick = (wishlistItemId) => {
-      axios.delete(
-        `http://localhost:8080/wishlist/delete/${wishlistItemId}`, {
-      headers: {'Authorization': `${authHeader}`}
-    })
-  }
-    
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
     return (
       <>
-        <table className="myWishlistTableTr" style={{ width: "90%" }}>
+        <table style={{ width: "100%", backgroundColor: "LightGray" }}>
           <thead className="myWishlistTable">
             <tr className="myWishlistTableTr">
               <th></th>  
@@ -43,9 +49,11 @@ const Wishlist = () => {
                     <img className="bookCoverSmall" src={"https://covers.openlibrary.org/b/id/" + wishlistItem.bookCover + "-S.jpg"} alt="Book Cover" height="58" />
                 </td>
                 <td className="myWishlistTableTd" >{wishlistItem.title}</td>
-                <td className="myWishlistTableTd" >Borrow</td>
-                <td className="myWishlistTableTd">
-                  <Button variant="outlined" color="error" onClick={() => handleClick(wishlistItem.id)}> Delete </Button>
+                <td>
+                  <BorrowButton bookKey={wishlistItem.bookKey} />
+                </td>
+                <td>
+                  <Button variant="contained" color="error" onClick={() => handleClick(wishlistItem)} startIcon={<DeleteIcon />}>Delete</Button>
                 </td>
               </tr>
             ))}
@@ -55,5 +63,4 @@ const Wishlist = () => {
     );
 };
 
-        
 export default Wishlist;

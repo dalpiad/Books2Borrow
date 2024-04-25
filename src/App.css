@@ -291,6 +291,17 @@ div {
   overflow: hidden;
 }
 
+/* div.form
+{
+    display: block;
+    text-align: center;
+}
+
+.form { 
+  display: inline-block; 
+  text-align: left; 
+} */
+
 
 .myWishlistTableTr {
   align-items: center;
@@ -298,15 +309,74 @@ div {
 }
 
 .myWishlistTableTd {
+  font-size: 1.2em;
   align-items: center;
   text-align: center;
 }
 
+.sentMessages {
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  padding: 5px;
+  text-align: left;
+  margin-left: 45%;
+  margin-right: 5px;
+  margin-top: 5px;
+  max-width:max-content;
+}
+
+.sentInfo {
+  font-size: 0.7em;
+  text-align: right;
+  margin-right: 15px;
+}
+
+.recievedMessages {
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: mediumseagreen;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 45%;
+  margin-top: 5px;
+  max-width:max-content;
+}
+
+.recievedInfo {
+  font-size: 0.7em;
+  text-align: left;
+  margin-left: 15px;
+}
+
+.messageInput {
+  vertical-align: bottom;
+  align-self: baseline;
+  min-width: 85%;
+}
+
+#message-field {
+  min-width: 70%;
+  width: 530px;
+  
+}
+
+#send-button {
+  align-self: center;
+  margin-left: 2px;
+  margin-top: 10px;
+}
+
+.messageStyle {
+  display: 'flex';
+  min-width: 85%;
+}
 
 .bookCoverSmall {
   align-items: right;
   height: auto;
   width: 30px;
+  background-color: mediumseagreen;
 }
 
 

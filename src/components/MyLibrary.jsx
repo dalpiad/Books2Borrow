@@ -7,7 +7,6 @@ import { Container } from "reactstrap";
 
 const MyLibrary = () => {
   const [clickedBook, setClickedBook] = useState(null);
-
   const token = localStorage.getItem('jwt');
 
 

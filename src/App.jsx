@@ -21,6 +21,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from './components/Login'
+import PrivateRoutes from './util/PrivateRoutes'
 
 
 const queryClient = new QueryClient();
@@ -33,14 +34,16 @@ export default function App() {
       <Router>  
         <div className="App">
         <Routes >
+        <Route element={<PrivateRoutes/>}>
+              <Route exact path="SimpleUserDashboard" element={<SimpleUserDashboard />} />
+              <Route path="/AddBook" element={<AddBook />} />
+              <Route exact path="BookDetails/:id" element={<BookView />} />
+              <Route exact path="Testing" element={<Testing />} />
+              <Route path="/AddBook/book-details/:title" element={<BookDetails />}/>
+          </Route>
           <Route exact path="/" element={<Home />} />
-          <Route path="/AddBook" element={<AddBook />} />
-          <Route exact path="BookDetails/:id" element={<BookView />} />
           <Route exact path="Register" element={<Register />} />
           <Route exact path="Login" element={<Login />} />
-          <Route exact path="Testing" element={<Testing />} />
-          <Route exact path="SimpleUserDashboard" element={<SimpleUserDashboard />} />
-          <Route path="/AddBook/book-details/:title" element={<BookDetails />}/>
         </Routes>
         </div>
       </Router>
