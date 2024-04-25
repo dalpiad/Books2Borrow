@@ -15,7 +15,7 @@ const Register = () => {
             "http://localhost:8080/register",
             {
                 name: values.firstName,
-                email: values.email,
+                email: values.email.toLowerCase(),
                 role: "user",
                 pwd: values.password,
                 createDt: "2024-04-16",
