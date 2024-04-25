@@ -14,8 +14,8 @@ const Register = () => {
         let something = await axios.post(
             "http://localhost:8080/register",
             {
-                name: values.firstName.toLowerCase(),
-                email: values.email.toLowerCase(),
+                name: values.firstName,
+                email: values.email,
                 role: "user",
                 pwd: values.password,
                 createDt: "2024-04-16",

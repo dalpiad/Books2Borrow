@@ -24,6 +24,7 @@ import 'react-notifications-component/dist/theme.css';
 
 const Navigation = () => {
   const auth = localStorage.getItem('jwt')
+  const name = [localStorage.getItem('name')]
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   const menuOptions = [
@@ -72,7 +73,7 @@ const Navigation = () => {
         <div className="navbar-links-container">
           <Link to ="/">Home</Link>
           <Link to="/AddBook">Add Book</Link>
-          <Link to="/SimpleUserDashboard">Profile</Link>
+          <Link to="/SimpleUserDashboard">{[name]}'s Profile</Link>
           <Link onClick={logout} to="/login">Logout</Link>
         </div>
 
