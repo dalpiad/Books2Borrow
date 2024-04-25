@@ -2,13 +2,14 @@ import React from "react";
 import AddBookButton from "./ui/AddBookButton";
 import { useNavigate } from 'react-router-dom';
 import AddWishlistButton from '../util/AddWishlistButton';
+import { ReactNotifications } from "react-notifications-component";
 
-const BookDetails = (clickedBook) => {
+const BookDetails = ({clickedBook, handleClickTwo}) => {
 
    let navigate = useNavigate();
    const authHeader = localStorage.getItem('jwt');
    console.log(authHeader);
-   const book = clickedBook.clickedBook;
+   const book = clickedBook;
 
     function processCleanBook(book) {
         const defaultValues = {
@@ -34,12 +35,14 @@ const BookDetails = (clickedBook) => {
       }
     
    const cleanBook = processCleanBook(book);
-   console.log(book);
-   console.log(cleanBook);
     return(
         <>
             <div>
-
+              <button className="backButton" onClick={handleClickTwo}>Back</button>
+            </div>
+            <br/>
+            <div>
+                <ReactNotifications />
             <div className="book-details">
                             <div >
                            

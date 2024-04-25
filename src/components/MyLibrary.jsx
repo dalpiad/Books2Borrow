@@ -3,10 +3,13 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import DeleteBookButton from "./ui/DeleteBookButton";
 import AvailableToggle from "../util/AvailableToggle";
+import { Container } from "reactstrap";
 
 
 const MyLibrary = () => {
+  const [clickedBook, setClickedBook] = useState(null);
   const token = localStorage.getItem('jwt');
+
 
     const [selectedId, setSelectedId] = useState(null);
     const { data: myBooks, isLoading } = useQuery({
@@ -31,6 +34,10 @@ const MyLibrary = () => {
 
     const handleSelected = (id) => {
       setSelectedId(id);
+    }
+
+    const handleCLick = () => {
+
     }
 
 
