@@ -354,6 +354,12 @@ div {
   text-align: left;
 }
 
+.trackerContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -361,17 +367,20 @@ div {
 
 .progress-bar {
   position: relative;
-  width:800px;
+  width:70%;
   height: 3em;
-  background-color: green;
+  background-color: grey;
   border-radius: 1.5em;
   color: white;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .progress-bar::before {
   position: absolute;
   content: attr(data-label);
   display: flex;
+  justify-content: right;
   align-items: center;
   left: .5em;
   top: .5em;
@@ -382,4 +391,34 @@ div {
   background-color: #1565c0;
   border-radius: 1em;
   padding: 1em;
+  
 }
+
+/* <div className="displayContainer">
+                <BookCard className="statusBookCard" bookId={bookId} />
+                <CheckoutCard className="checkoutCard" selectedRecord={selectedRecord} />
+                <DueDateCard className="dueDateCard" selectedRecord={selectedRecord}></DueDateCard>
+              </div> */
+
+
+.dueDate {
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 5px, 5px, 5px;
+
+}
+
+.borderContainer {
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 5px, 5px, 5px;
+}
+
+.displayContainer{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+

@@ -6,6 +6,8 @@ import axios from "axios";
 import moment from 'moment';
 import BookCard from "./ui/BookCard";
 import Tracker from "./ui/Tracker";
+import CheckoutCard from "./ui/CheckoutCard";
+import DueDateCard from "./ui/DueDateCard";
 
 
 
@@ -70,15 +72,18 @@ const StatusTracker = () => {
         <>
 {/* //  on lcick display that displayes a countdown of when the book is due back. Default behavior to show the most recent book due back. 
 //  Can display both books you need to return to others as well as books due back to you and who you lent them out to.  */}
-            <div>
-              <div >
+            <div className="borderContainer">
+              <div className="trackerContainer">
                 <h3 className="trackerDate">{currentDate}</h3>
+                <div className="progressBar-container">
+                  <Tracker />
+                </div>
               </div>
-              <div>
-                <Tracker />
-              </div>
-              <div className="statusBookCard">
-                <BookCard className="statusBookCard" bookId={bookId}/>
+              <br/>
+              <div className="displayContainer">
+                <BookCard className="statusBookCard" bookId={bookId} />
+                <CheckoutCard className="checkoutCard" selectedRecord={selectedRecord} />
+                <DueDateCard className="dueDateCard" selectedRecord={selectedRecord}></DueDateCard>
               </div>
             </div>
 {/* //  Table that displays book that you currently have borrowed. Clickable. */}
