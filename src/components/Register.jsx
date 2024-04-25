@@ -80,8 +80,8 @@ const Register = () => {
                 <Navigation />
             </div>
             <div>
-                <h1 style={{textAlign: "center"}}>Register Below:</h1>
-                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
+                <h2 style={{textAlign: "center", marginLeft: "10%"}}>Register Below:</h2>
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh" marginLeft="10%">
                     <form onSubmit={handleSubmit}>
                         <label>First Name:</label><br/>
                             <TextField id="outlined-basic" variant="outlined" type="text" name="firstName" onChange={handleChange}/><br/>
@@ -95,12 +95,12 @@ const Register = () => {
                         <label>Confirm Password:</label><br/>
                             <TextField id="outlined-basic" variant="outlined" type="password" name="confirmPassword" onChange={handleChange} /><br/>
                             {touched.confirmPassword && errors.confirmPassword ? <div style={{color: "red"}}>{errors.confirmPassword}</div> : null}<br/>
-                        <Button type="submit" variant="contained" color="success"> Register Now! </Button>
+                        <Button type="submit" size="large" variant="contained" color="success" style={{marginLeft: "50%"}}>Register</Button>
                     </form>
                 </Box>
                 <br/>
-                <div style={{textAlign: "center"}}>
-                    <p>Already registered? <a href="/login">Click here</a> to login</p>
+                <div style={{textAlign: "center", marginLeft:"10%"}}>
+                    <p>Already registered? <a href="/login"> Click here</a> to login!</p>
                 </div>
             </div>
         </>

@@ -66,8 +66,8 @@ function LoginForm() {
     return (
         <>
             <Navigation />
-            <h1 style={{textAlign: "center"}}>Login</h1>
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="30vh">
+            <h2 style={{textAlign: "center", marginLeft: "10%"}}>Login:</h2>
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="30vh" marginLeft="10%">
                 <form onSubmit={handleSubmit}>
                     <div>
                     {error && <p style={{color : "red"}}>{error}</p>}
@@ -78,11 +78,11 @@ function LoginForm() {
                         <label>Password:</label><br/>
                         <TextField id="outlined-basic" variant="outlined" type="password" value={password} onChange={e => setPassword(e.target.value)} />
                     </div><br/>
-                    <Button type="submit" variant="contained" color="success" > Login </Button>
+                    <Button type="submit" size="large" variant="contained" color="success" style={{marginLeft: "60%"}}> Login </Button>
                 </form>
                 </Box>
                 <br/>
-                <div style={{textAlign: "center"}}>
+                <div style={{textAlign: "center", marginLeft: "10%"}}>
                     <p>Need to register? <a href="/register">Click here!</a></p>
                 </div>
         </>
