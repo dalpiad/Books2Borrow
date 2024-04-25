@@ -1,10 +1,10 @@
 import React from "react"
 import axios from "axios";
 
-const MarkReturnedButton = (props) => {
+const MarkReturnedButton = ({selectedId}) => {
     const handleClick = () => {
-    confirm(`Mark book ${props.id} as returned? This will close the checkout record`);
-    const data = props.id;
+    confirm(`Mark checkout record ${selectedId} as returned? This will close the checkout record`);
+    const data = {"checkoutId": selectedId};
     
     const token = localStorage.getItem('jwt');
     axios.post(`http://localhost:8080/api/borrow/return`, data, {headers: {

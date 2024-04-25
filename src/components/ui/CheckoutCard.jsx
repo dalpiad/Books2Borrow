@@ -3,7 +3,6 @@ import React from "react";
 const CheckoutCard = ({ selectedRecord }) => {
 
     const checkoutRecord = selectedRecord;
-    console.log(checkoutRecord);
 
 
     return (

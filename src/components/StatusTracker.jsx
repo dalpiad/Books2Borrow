@@ -69,7 +69,6 @@ const StatusTracker = () => {
     const handleClick = (record) => { 
       setSelectedRecord(record);
       setBookId(record.bookId);
-      console.log(record.bookId);
       }
 
       const handleSelected = (recordId) => {
@@ -131,7 +130,7 @@ const StatusTracker = () => {
                     <th className="myBooksTable">Lent To</th>
                     <th className="myBooksTable">Checkout Date</th>
                     <th className="myBooksTable">Due Date</th>
-                    <th className="myBooksTable">Delete</th>
+                    <th className="myBooksTable">Select</th>
                   </tr>
                 </thead >
                 <tbody className="myBooksTable">
@@ -151,7 +150,7 @@ const StatusTracker = () => {
                   ))}
                 </tbody>
                 </table>
-                <MarkReturnedButton id={selectedId} />
+                <MarkReturnedButton selectedId={selectedId} />
             </div>
       </>
     )
