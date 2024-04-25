@@ -34,7 +34,9 @@ function LoginForm() {
 
             if (authHeader) {
                 localStorage.setItem('jwt', authHeader);
+                localStorage.setItem('name', response.data.name)
                 console.log('JWT saved to local storage:');
+                
             } else {
                 setError('Error logging in. Please try again')
                 console.error('Authorization header is missing or improperly formatted.');
@@ -49,7 +51,7 @@ function LoginForm() {
 
         Store.addNotification({
             title: 'Success!',
-            message: `Welcome to Books2Borrow ${email}!`,
+            message: `Welcome to Books2Borrow ${localStorage.getItem('name')}!`,
             type: 'success',
             insert: 'top',
             container: 'top-right',
