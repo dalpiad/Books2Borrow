@@ -2,7 +2,7 @@ import React from "react";
 
 const Tracker = (props) => {
 
-    const daysLeft = 4;
+    const daysLeft = 5;
     
 
 return (

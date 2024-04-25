@@ -83,7 +83,7 @@ const StatusTracker = () => {
               <div className="displayContainer">
                 <BookCard className="statusBookCard" bookId={bookId} />
                 <CheckoutCard className="checkoutCard" selectedRecord={selectedRecord} />
-                <DueDateCard className="dueDateCard" selectedRecord={selectedRecord}></DueDateCard>
+                <DueDateCard className="dueDateCard" selectedRecord={{selectedRecord, currentDate}} />
               </div>
             </div>
 {/* //  Table that displays book that you currently have borrowed. Clickable. */}
