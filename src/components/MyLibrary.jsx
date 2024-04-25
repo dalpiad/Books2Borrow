@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import DeleteBookButton from "./ui/DeleteBookButton";
+import { Container } from "reactstrap";
 
 
 const MyLibrary = () => {
+  const [clickedBook, setClickedBook] = useState(null);
   const token = localStorage.getItem('jwt');
+
 
     const [selectedId, setSelectedId] = useState(null);
     const { data: myBooks, isLoading } = useQuery({
@@ -32,6 +35,10 @@ const MyLibrary = () => {
       setSelectedId(id);
     }
 
+    const handleCLick = () => {
+
+    }
+
 
       if (isLoading) {
         return <div>Loading...</div>;
@@ -55,7 +62,7 @@ const MyLibrary = () => {
           </thead >
           <tbody className="myBooksTable">
             {myBooks?.map((book) => (
-              <tr className="myBooksTable" key={book.id}>
+              <tr className="myBooksTable" onClick={handleCLick} key={book.id}>
                 <td className="myBooksTable">
                   <label>
                   <input type="checkbox" checked={book.available} />

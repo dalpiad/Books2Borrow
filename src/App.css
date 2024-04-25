@@ -271,18 +271,18 @@ div {
   border: 1px solid #dddddd;
   padding: 8px;
   text-align: left;
-} 
+}  
 
-.myBooksTable td {
+.myBooksTable .myBooksTable td {
   border: 1px solid #dddddd;
   padding: 8px;
-} 
+}  
 
-.myBooksTable tr:nth-child(odd) {
+.myBooksTable .myBooksTable tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
 
-.myBooksTable tbody {
+.myBooksTable .myBooksTable tbody {
   border: 1px solid #dddddd;
 }
 
@@ -373,3 +373,110 @@ div {
   width: 30px;
   background-color: mediumseagreen;
 }
+
+
+
+
+.containerBookReturnedButton {
+  display: flex;
+}
+
+.bookReturnedtButton {
+  margin-left: auto;
+  margin-right: 0px;
+  margin-top: 10px;
+  padding: 0.9rem 1.75rem;
+  color: white;
+  background-color: green;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.backButton {
+  margin-left: 10px;
+  margin-top: 10px;
+  color: white;
+  background-color: #1565c0;
+}
+
+.selected {
+  background-color: lightgray;
+}
+
+.trackerDate {
+  display: flexbox;
+  text-align: center;
+}
+
+.statusBookCard {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.trackerContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  position: relative;
+  width:70%;
+  height: 3em;
+  background-color: grey;
+  border-radius: 1.5em;
+  color: white;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.progress-bar::before {
+  position: absolute;
+  content: attr(data-label);
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  left: .5em;
+  top: .5em;
+  bottom: .5em;
+  width: calc(var(--width, 14) * 7.14%);
+  min-width: 2rem;
+  max-width: calc(100% - 1em);
+  background-color: #1565c0;
+  border-radius: 1em;
+  padding: 1em;
+  
+}
+
+.dueDate {
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 5px, 5px, 5px;
+
+}
+
+.borderContainer {
+  border: 1px solid hsl(0, 0%, 80%);
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 5px, 5px, 5px;
+}
+
+.displayContainer{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+

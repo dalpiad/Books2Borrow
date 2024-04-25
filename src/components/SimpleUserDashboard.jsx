@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Navigation from './Navigation';
 import MyLibrary from './MyLibrary';
 import Wishlist from './Wishlist';
+import StatusTracker from './StatusTracker';
 import MessageInbox from './chatComponents/MessageInbox';
 
 
@@ -78,7 +79,7 @@ const SimpleUserDashboard = () => {
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                Status Tracker
+                <StatusTracker />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <MyLibrary />
