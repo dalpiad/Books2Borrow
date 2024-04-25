@@ -54,10 +54,7 @@ const Navigation = () => {
   ];
 
   const logout = () =>{
-    console.log("auth", auth)
-    console.log("LocalStorage",localStorage)
     localStorage.clear();
-    console.log("LocalStorage post clear",localStorage)
     navigate("/")
   }
 
@@ -65,6 +62,7 @@ const Navigation = () => {
     <nav>
       <div className="nav-logo-container">
         <img className="bookimg" src={Logo} alt="" />
+        <h1 style={{marginLeft: "20%", marginTop: "-11%", color: "purple"}}>Books 2 Borrow</h1>
         <ReactNotifications />
       </div>
 
