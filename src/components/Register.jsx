@@ -1,45 +1,107 @@
-import { useEffect, useState } from "react"
-import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Navigation from "./Navigation";
-import { Alert, AlertTitle } from "@mui/material";
+import { useFormik } from "formik";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField"
+import { Store } from 'react-notifications-component';
+import { Box } from '@mui/material';
 
 const Register = () => {
-    const navigate = useNavigate()
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const navigate = useNavigate();
+
+    const handleSubmitz = async (values) => {
         let something = await axios.post(
             "http://localhost:8080/register",
             {
-                name: event.target.firstName.value.toLowerCase(),
-                email: event.target.email.value.toLowerCase(),
+                name: values.firstName.toLowerCase(),
+                email: values.email.toLowerCase(),
                 role: "user",
-                pwd: event.target.password.value,
+                pwd: values.password,
                 createDt: "2024-04-16",
                 bookLibrary: null,
                 wishlist: null
             }
         )
-        console.log(something.data);
-        navigate("/");
+
+        Store.addNotification({
+            title: 'Success!',
+            message: "Registration Sucessful!",
+            type: 'success',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+                duration: 2000,
+                onScreen: true
+            },
+            onRemoval: () => navigate("/login")
+            });
     }
+
+    function validate(values) {
+        const errors = {};
+        
+        if (!values.firstName) {
+            errors.firstName = "First name is required"
+        }
+
+        if (!values.email) {
+            errors.email = "Email address is required"
+        }
+
+        if (!values.password) {
+            errors.password = "Password is required"
+        } else if (values.confirmPassword !== values.password){
+            errors.password = "Passwords need to match"
+
+        }
+        if (!values.confirmPassword) {
+            errors.confirmPassword = "Please re-type password"
+        } else if (values.confirmPassword !== values.password){
+            errors.confirmPassword = "Passwords need to match"
+        }
+
+        return errors;
+    }
+
+    const {handleSubmit, handleChange, touched, errors} = useFormik({
+        initialValues: {firstName: "", email: "", password: "",confirmPassword: ""},
+        validate,
+        onSubmit: handleSubmitz
+    });
+
+
+
     return (
         <>
             <div>
                 <Navigation />
             </div>
             <div>
-                <h2 >Please enter registration information:</h2>
+                <h2 style={{textAlign: "center", marginLeft: "10%"}}>Register Below:</h2><br />
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh" marginLeft="10%">
                     <form onSubmit={handleSubmit}>
                         <label>First Name:</label><br/>
-                            <input type="text" name="firstName" /><br/>
+                            <TextField id="outlined-basic" variant="outlined" type="text" name="firstName" onChange={handleChange}/><br/>
+                            {touched.firstName && errors.firstName ? <div style={{color: "red"}}>{errors.firstName}</div> : null}
                         <label>Email:</label><br/>
-                            <input type="text" name="email" /><br/>
+                            <TextField id="outlined-basic" variant="outlined" type="text" name="email" onChange={handleChange} /><br/>
+                            {touched.email && errors.email ? <div style={{color: "red"}}>{errors.email}</div> : null}
                         <label>Password:</label><br/>
-                            <input type="password" name="password" /><br/>
-                        <input type="submit" />
+                            <TextField id="outlined-basic" variant="outlined"type="password" name="password" onChange={handleChange}/><br/>
+                            {touched.password && errors.password ? <div style={{color: "red"}}>{errors.password}</div> : null}
+                        <label>Confirm Password:</label><br/>
+                            <TextField id="outlined-basic" variant="outlined" type="password" name="confirmPassword" onChange={handleChange} /><br/>
+                            {touched.confirmPassword && errors.confirmPassword ? <div style={{color: "red"}}>{errors.confirmPassword}</div> : null}<br/>
+                        <Button type="submit" size="large" variant="contained" color="success" style={{marginLeft: "50%"}}>Register</Button>
                     </form>
+                </Box>
+                <br/>
+                <div style={{textAlign: "center", marginLeft:"10%"}}>
+                    <p>Already registered? <a href="/login"> Click here</a> to login!</p>
+                </div>
             </div>
         </>
     )
