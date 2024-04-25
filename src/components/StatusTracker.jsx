@@ -97,7 +97,6 @@ const StatusTracker = () => {
                 <DueDateCard className="dueDateCard" selectedRecord={selectedRecord} />
               </div>
             </div>
-{/* //  Table that displays book that you currently have borrowed. Clickable. */}
             <div>
             <table>
                 <thead className="myBooksTable">
