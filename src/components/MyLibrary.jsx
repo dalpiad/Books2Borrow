@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import DeleteBookButton from "./ui/DeleteBookButton";
+import AvailableToggle from "../util/AvailableToggle";
 
 
 const MyLibrary = () => {
@@ -42,9 +43,9 @@ const MyLibrary = () => {
         <table className="myBooksTable" style={{ width: "100%" }}>
           <thead className="myBooksTable">
             <tr className="myBooksTable">
-              <th className="myBooksTable">isAvailable</th>
-              <th className="myBooksTable">Book ID</th>
-              <th className="myBooksTable">Title</th>
+              <th className="myBooksTable" id="myBooksTableAvailable">Available to Lend</th>
+              {/* <th className="myBooksTable">Book ID</th> */}
+              <th className="myBooksTable" id="myBooksTableTitle" >Title</th>
               <th className="myBooksTable">Author</th>
               <th className="myBooksTable">Published</th>
               <th className="myBooksTable">Rating</th>
@@ -55,14 +56,14 @@ const MyLibrary = () => {
           </thead >
           <tbody className="myBooksTable">
             {myBooks?.map((book) => (
-              <tr className="myBooksTable" key={book.id}>
+              <tr className="myBooksTable" id="myBooksTableRow" key={book.id}>
                 <td className="myBooksTable">
                   <label>
-                  <input type="checkbox" checked={book.available} />
+                  <AvailableToggle book={book} />
                 </label>
                 </td>
-                <td className="myBooksTable">{book.id}</td>
-                <td className="myBooksTable">{book.title}</td>
+                {/* <td className="myBooksTable">{book.id}</td> */}
+                <td className="myBooksTable" >{book.title}</td>
                 <td className="myBooksTable">{book.author}</td>
                 <td className="myBooksTable">{book.firstPublishYear}</td>
                 <td className="myBooksTable">{book.averageRating}</td>
