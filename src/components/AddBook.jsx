@@ -52,29 +52,16 @@ const AddBook = () =>{
         <>
             <Navigation />
             <br/>
-            <div>
-            <TextField
+            <form onSubmit={handleClick} style={{ display: "flex", columnGap: '20px', marginLeft: '20px' }}>
+            <TextField style={{ flexGrow: 4 }}
               id="outlined-basic"
               label="Search"
               variant="outlined"
-              style={{
-                  position: "absolute",
-                  top: 100,
-                  left: 100,
-                  right: 350,
-                  }}
             />
-            </div>
-            <div>
-                <Button variant="contained" onClick={handleClick} style={{
-                  position: "right",
-                  top: -15,
-                  left: 1210,
-                  right: 250,
-                  }}>
+            <Button type='submit' variant="contained" onClick={handleClick} style={{ marginLeft: "auto" }}>
               Search
             </Button>
-            </div>
+            </form>
             <div>
                 <h1>Loading...</h1>
             </div>
@@ -89,29 +76,16 @@ const AddBook = () =>{
             <Navigation />
             <br/>
             <>
-        <div>
-            <TextField
+            <form onSubmit={handleClick} style={{ display: "flex", columnGap: '20px', marginLeft: '20px' }}>
+            <TextField style={{ flexGrow: 4 }}
               id="outlined-basic"
               label="Search"
               variant="outlined"
-              style={{
-                  position: "absolute",
-                  top: 100,
-                  left: 100,
-                  right: 350,
-                  }}
             />
-          </div>
-          <div>
-            <Button variant="contained" onClick={handleClick} style={{
-                  position: "right",
-                  top: -15,
-                  left: 1210,
-                  right: 250,
-                  }}>
+            <Button type='submit' variant="contained" onClick={handleClick} style={{ marginLeft: "auto" }}>
               Search
             </Button>
-          </div>
+            </form>
 
       <div className="wrapper">
         <ul className="card-grid">
